@@ -44,7 +44,7 @@
     <script src="<?= base_url() ?>assets/js/demo.js"></script>
 </head>
 
-<body>
+<body style="background-color: #f5f5f5;">
     <div class="wrapper">
         <div class="sidebar" data-color="orange" data-image="../assets/img/sidebar-1.jpg">
             <!--

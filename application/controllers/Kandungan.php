@@ -10,12 +10,16 @@ class Kandungan extends CI_Controller
         parent::__construct();
         $this->load->model('Kandungan_model');
         $this->load->library('form_validation');        
-	$this->load->library('datatables');
+        $this->load->library('datatables');
+        
+        $this->render['page_title'] = 'Kandungan';
+        $this->render['menus'] = 'kandungan';
     }
 
     public function index()
     {
-        $this->load->view('kandungan/kandungan_list');
+        $this->render['content']= $this->load->view('kandungan/kandungan_list', array(), TRUE);
+        $this->load->view('template', $this->render);
     } 
     
     public function json() {
@@ -28,10 +32,12 @@ class Kandungan extends CI_Controller
         $row = $this->Kandungan_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'id' => $row->id,
-		'nama' => $row->nama,
-	    );
-            $this->load->view('kandungan/kandungan_read', $data);
+            'id' => $row->id,
+            'nama' => $row->nama,
+            );
+
+            $this->render['content']= $this->load->view('kandungan/kandungan_read', $data, TRUE);
+            $this->load->view('template', $this->render);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('kandungan'));
@@ -43,10 +49,11 @@ class Kandungan extends CI_Controller
         $data = array(
             'button' => 'Create',
             'action' => site_url('kandungan/create_action'),
-	    'id' => set_value('id'),
-	    'nama' => set_value('nama'),
-	);
-        $this->load->view('kandungan/kandungan_form', $data);
+            'id' => set_value('id'),
+            'nama' => set_value('nama'),
+        );
+        $this->render['content']= $this->load->view('kandungan/kandungan_form', $data, TRUE);
+        $this->load->view('template', $this->render);
     }
     
     public function create_action() 
@@ -74,10 +81,11 @@ class Kandungan extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('kandungan/update_action'),
-		'id' => set_value('id', $row->id),
-		'nama' => set_value('nama', $row->nama),
-	    );
-            $this->load->view('kandungan/kandungan_form', $data);
+                'id' => set_value('id', $row->id),
+                'nama' => set_value('nama', $row->nama),
+            );
+            $this->render['content']= $this->load->view('kandungan/kandungan_form', $data, TRUE);
+            $this->load->view('template', $this->render);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('kandungan'));

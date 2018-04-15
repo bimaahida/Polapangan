@@ -1,24 +1,24 @@
-<!doctype html>
-<html>
-    <head>
-        <title>harviacode.com - codeigniter crud generator</title>
-        <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>"/>
-        <style>
-            body{
-                padding: 15px;
-            }
-        </style>
-    </head>
-    <body>
-        <h2 style="margin-top:0px">Jenis_pangan <?php echo $button ?></h2>
-        <form action="<?php echo $action; ?>" method="post">
-	    <div class="form-group">
-            <label for="varchar">Nama <?php echo form_error('nama') ?></label>
-            <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama" value="<?php echo $nama; ?>" />
+<div class="col-md-10">
+    <div class="card">
+        <div class="card-header" data-background-color="orange">
+            <h4 class="title">Edit Jenis Pangan</h4>
+            <p class="category"><?= $nama?></p>
         </div>
-	    <input type="hidden" name="id" value="<?php echo $id; ?>" /> 
-	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
-	    <a href="<?php echo site_url('jenis_pangan') ?>" class="btn btn-default">Cancel</a>
-	</form>
-    </body>
-</html>
+        <div class="card-content">
+            <form action="<?php echo $action; ?>" method="post">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group label-floating">
+                            <label for="varchar" class="control-label">Nama <?php echo form_error('nama') ?></label>
+                            <input type="text" class="form-control" name="nama" id="nama" value="<?php echo $nama; ?>" />
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="id" value="<?php echo $id; ?>" /> 
+                <button type="submit" class="btn btn-warning pull-right"><?php echo $button ?></button> 
+                <a href="<?php echo site_url('jenis_pangan') ?>" class="btn btn-default pull-right">Cancel</a>
+                <div class="clearfix"></div>
+            </form>
+        </div>
+    </div>
+</div>

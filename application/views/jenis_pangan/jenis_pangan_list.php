@@ -24,7 +24,7 @@
     </div>
     <div class="col-md-12 text-right">
         <?php echo anchor(site_url('jenis_pangan/create'), 'Create', 'class="btn btn-warning"'); ?>
-        <?php echo anchor(site_url('jenis_pangan/excel'), 'Excel', 'class="btn btn-warning"'); ?>
+        <?php echo anchor(site_url('jenis_pangan/excel'), 'Excel', 'class="btn btn-default"'); ?>
     </div>
 </div>
 <script type="text/javascript">

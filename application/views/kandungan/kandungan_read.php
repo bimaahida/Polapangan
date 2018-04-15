@@ -1,19 +1,20 @@
-<!doctype html>
-<html>
-    <head>
-        <title>harviacode.com - codeigniter crud generator</title>
-        <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>"/>
-        <style>
-            body{
-                padding: 15px;
-            }
-        </style>
-    </head>
-    <body>
-        <h2 style="margin-top:0px">Kandungan Read</h2>
-        <table class="table">
-	    <tr><td>Nama</td><td><?php echo $nama; ?></td></tr>
-	    <tr><td></td><td><a href="<?php echo site_url('kandungan') ?>" class="btn btn-default">Cancel</a></td></tr>
-	</table>
-        </body>
-</html>
+<div class="col-md-10">
+<div class="card">
+    <div class="card-header" data-background-color="orange">
+        <h4 class="title">Detail Kandungan</h4>
+        <p class="category"><?= $nama ?></p>
+    </div>
+    <div class="card-content">
+    <table class="table">
+        <tr>
+            <td>Nama</td>
+            <td><?php echo $nama; ?></td>
+        </tr>
+    </table>
+    <div class="text-right">
+        <a href="<?php echo site_url('kandungan') ?>" class="btn btn-warning">Cancel</a>
+    </div>
+    
+    </div>
+</div>
+</div>

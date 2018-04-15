@@ -50,10 +50,11 @@ class Jenis_pangan extends CI_Controller
         $data = array(
             'button' => 'Create',
             'action' => site_url('jenis_pangan/create_action'),
-	    'id' => set_value('id'),
-	    'nama' => set_value('nama'),
-	);
-        $this->load->view('jenis_pangan/jenis_pangan_form', $data);
+            'id' => set_value('id'),
+            'nama' => set_value('nama'),
+        );
+        $this->render['content']= $this->load->view('jenis_pangan/jenis_pangan_form', $data, TRUE);
+        $this->load->view('template', $this->render);
     }
     
     public function create_action() 
@@ -81,10 +82,11 @@ class Jenis_pangan extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('jenis_pangan/update_action'),
-		'id' => set_value('id', $row->id),
-		'nama' => set_value('nama', $row->nama),
-	    );
-            $this->load->view('jenis_pangan/jenis_pangan_form', $data);
+                'id' => set_value('id', $row->id),
+                'nama' => set_value('nama', $row->nama),
+                );
+                $this->render['content']= $this->load->view('jenis_pangan/jenis_pangan_form', $data, TRUE);
+                $this->load->view('template', $this->render);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('jenis_pangan'));

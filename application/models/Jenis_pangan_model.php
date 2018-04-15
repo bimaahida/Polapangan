@@ -75,6 +75,12 @@ class Jenis_pangan_model extends CI_Model
         $this->db->where($this->id, $id);
         $this->db->delete($this->table);
     }
+    function autocomplate($nama){
+        $this->db->like('nama', $nama , 'both');
+        $this->db->order_by($this->id, $this->order);
+        $this->db->limit(10);
+        return $this->db->get($this->table)->result();
+    }
 
 }
 

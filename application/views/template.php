@@ -18,6 +18,7 @@
     <!--     Fonts and icons     -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons" rel='stylesheet'>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="<?= base_url() ?>assets/datatables/dataTables.bootstrap.css"/>
     <link rel="stylesheet" href="<?= base_url() ?>assets/datatables/dataTables.bootstrap.css"/>
@@ -25,6 +26,7 @@
     <!--   Core JS Files   -->
     <script src="<?= base_url() ?>assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="<?= base_url() ?>assets/datatables/jquery.dataTables.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="<?= base_url() ?>assets/datatables/dataTables.bootstrap.js"></script>
     <script src="<?= base_url() ?>assets/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="<?= base_url() ?>assets/js/material.min.js" type="text/javascript"></script>
@@ -37,7 +39,7 @@
     <!--  Notifications Plugin    -->
     <script src="<?= base_url() ?>assets/js/bootstrap-notify.js"></script>
     <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+    
     <!-- Material Dashboard javascript methods -->
     <script src="<?= base_url() ?>assets/js/material-dashboard.js?v=1.2.0"></script>
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->

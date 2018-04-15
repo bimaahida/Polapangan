@@ -12,6 +12,22 @@ class Keluarga extends CI_Controller
         $this->load->library('form_validation');        
 	$this->load->library('datatables');
     }
+    function test(){
+        $this->load->library('googlemaps');
+        
+        $config['center'] = '37.4419, -122.1419';
+        $config['zoom'] = 'auto';
+        $config['places'] = TRUE;
+        $config['placesAutocompleteInputID'] = 'myPlaceTextBox';
+        $config['placesAutocompleteBoundsMap'] = TRUE; // set results biased towards the maps viewport
+        //$config['placesAutocompleteOnChange'] = 'alert(\'You selected a place\');';
+        $this->googlemaps->initialize($config);
+        $data['map'] = $this->googlemaps->create_map();
+        
+        $this->load->view('view_file', $data);
+        //var_dump($data);
+        
+    }
 
     public function index()
     {

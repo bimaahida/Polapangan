@@ -1,7 +1,7 @@
 <div class="col-md-10">
     <div class="card">
         <div class="card-header" data-background-color="orange">
-            <h4 class="title">Edit Jenis Pangan</h4>
+            <h4 class="title"><?php echo $button ?> Jenis Pangan</h4>
             <p class="category"><?= $nama?></p>
         </div>
         <div class="card-content">

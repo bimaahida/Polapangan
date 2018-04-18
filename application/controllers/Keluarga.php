@@ -10,28 +10,16 @@ class Keluarga extends CI_Controller
         parent::__construct();
         $this->load->model('Keluarga_model');
         $this->load->library('form_validation');        
-	$this->load->library('datatables');
-    }
-    function test(){
-        $this->load->library('googlemaps');
+        $this->load->library('datatables');
         
-        $config['center'] = '37.4419, -122.1419';
-        $config['zoom'] = 'auto';
-        $config['places'] = TRUE;
-        $config['placesAutocompleteInputID'] = 'myPlaceTextBox';
-        $config['placesAutocompleteBoundsMap'] = TRUE; // set results biased towards the maps viewport
-        //$config['placesAutocompleteOnChange'] = 'alert(\'You selected a place\');';
-        $this->googlemaps->initialize($config);
-        $data['map'] = $this->googlemaps->create_map();
-        
-        $this->load->view('view_file', $data);
-        //var_dump($data);
-        
+        $this->render['page_title'] = 'Keluarga';
+        $this->render['menus'] = 'keluarga';
     }
 
     public function index()
     {
-        $this->load->view('keluarga/keluarga_list');
+        $this->render['content']= $this->load->view('keluarga/keluarga_list', array(), TRUE);
+        $this->load->view('template', $this->render);
     } 
     
     public function json() {
@@ -42,21 +30,34 @@ class Keluarga extends CI_Controller
     public function read($id) 
     {
         $row = $this->Keluarga_model->get_by_id($id);
+        $this->load->library('googlemaps');
+
         if ($row) {
             $data = array(
-		'id' => $row->id,
-		'no_keluarga' => $row->no_keluarga,
-		'kepala_keluarga' => $row->kepala_keluarga,
-		'alamat' => $row->alamat,
-		'provinsi' => $row->provinsi,
-		'kab' => $row->kab,
-		'kec' => $row->kec,
-		'desa' => $row->desa,
-		'rt' => $row->rt,
-		'rw' => $row->rw,
-		'kode_pos' => $row->kode_pos,
-	    );
-            $this->load->view('keluarga/keluarga_read', $data);
+            'id' => $row->id,
+            'no_keluarga' => $row->no_keluarga,
+            'kepala_keluarga' => $row->kepala_keluarga,
+            'alamat' => $row->alamat,
+            'provinsi' => $row->provinsi,
+            'kab' => $row->kab,
+            'kec' => $row->kec,
+            'desa' => $row->desa,
+            'rt' => $row->rt,
+            'rw' => $row->rw,
+            'kode_pos' => $row->kode_pos,
+            );
+            
+            $config['center'] = "$row->latitude,$row->longitude";
+            $config['zoom'] = '18';
+            $this->googlemaps->initialize($config);
+            
+            $marker = array();
+            $marker['position'] = "$row->latitude,$row->longitude";
+            $this->googlemaps->add_marker($marker);
+            $data['map'] = $this->googlemaps->create_map();
+
+            $this->render['content']= $this->load->view('keluarga/keluarga_read', $data, TRUE);
+            $this->load->view('template', $this->render);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('keluarga'));
@@ -68,40 +69,54 @@ class Keluarga extends CI_Controller
         $data = array(
             'button' => 'Create',
             'action' => site_url('keluarga/create_action'),
-	    'id' => set_value('id'),
-	    'no_keluarga' => set_value('no_keluarga'),
-	    'kepala_keluarga' => set_value('kepala_keluarga'),
-	    'alamat' => set_value('alamat'),
-	    'provinsi' => set_value('provinsi'),
-	    'kab' => set_value('kab'),
-	    'kec' => set_value('kec'),
-	    'desa' => set_value('desa'),
-	    'rt' => set_value('rt'),
-	    'rw' => set_value('rw'),
-	    'kode_pos' => set_value('kode_pos'),
-	);
-        $this->load->view('keluarga/keluarga_form', $data);
+            'id' => set_value('id'),
+            'no_keluarga' => set_value('no_keluarga'),
+            'kepala_keluarga' => set_value('kepala_keluarga'),
+            'alamat' => set_value('alamat'),
+            'provinsi' => set_value('provinsi'),
+            'kab' => set_value('kab'),
+            'kec' => set_value('kec'),
+            'desa' => set_value('desa'),
+            'rt' => set_value('rt'),
+            'rw' => set_value('rw'),
+            'kode_pos' => set_value('kode_pos'),
+            'latitude' => set_value('latitude'),
+            'longitude' => set_value('longitude'),
+        );
+        $this->render['content']= $this->load->view('keluarga/keluarga_form', $data, TRUE);
+        $this->load->view('template', $this->render);
     }
     
     public function create_action() 
     {
         $this->_rules();
 
+        $alamat = str_replace(' ', '+', $this->input->post('alamat',TRUE));
+        $geocode=file_get_contents("https://maps.google.com/maps/api/geocode/json?key=AIzaSyBmBY0nTDRelXLlNUei_0SVEuogGzhQrvE&address=$alamat&sensor=false");
+        
+        $output= json_decode($geocode);
+        var_dump($output);
+        
+        $lat = $output->results[0]->geometry->location->lat;
+        $long = $output->results[0]->geometry->location->lng;
+
         if ($this->form_validation->run() == FALSE) {
             $this->create();
         } else {
             $data = array(
-		'no_keluarga' => $this->input->post('no_keluarga',TRUE),
-		'kepala_keluarga' => $this->input->post('kepala_keluarga',TRUE),
-		'alamat' => $this->input->post('alamat',TRUE),
-		'provinsi' => $this->input->post('provinsi',TRUE),
-		'kab' => $this->input->post('kab',TRUE),
-		'kec' => $this->input->post('kec',TRUE),
-		'desa' => $this->input->post('desa',TRUE),
-		'rt' => $this->input->post('rt',TRUE),
-		'rw' => $this->input->post('rw',TRUE),
-		'kode_pos' => $this->input->post('kode_pos',TRUE),
-	    );
+            'no_keluarga' => $this->input->post('no_keluarga',TRUE),
+            'kepala_keluarga' => $this->input->post('kepala_keluarga',TRUE),
+            'alamat' => $this->input->post('alamat',TRUE),
+            'provinsi' => $this->input->post('provinsi',TRUE),
+            'kab' => $this->input->post('kab',TRUE),
+            'kec' => $this->input->post('kec',TRUE),
+            'desa' => $this->input->post('desa',TRUE),
+            'rt' => $this->input->post('rt',TRUE),
+            'rw' => $this->input->post('rw',TRUE),
+            'kode_pos' => $this->input->post('kode_pos',TRUE),
+            'latitude' => $lat,
+            'longitude' => $long,
+            );
 
             $this->Keluarga_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
@@ -117,19 +132,22 @@ class Keluarga extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('keluarga/update_action'),
-		'id' => set_value('id', $row->id),
-		'no_keluarga' => set_value('no_keluarga', $row->no_keluarga),
-		'kepala_keluarga' => set_value('kepala_keluarga', $row->kepala_keluarga),
-		'alamat' => set_value('alamat', $row->alamat),
-		'provinsi' => set_value('provinsi', $row->provinsi),
-		'kab' => set_value('kab', $row->kab),
-		'kec' => set_value('kec', $row->kec),
-		'desa' => set_value('desa', $row->desa),
-		'rt' => set_value('rt', $row->rt),
-		'rw' => set_value('rw', $row->rw),
-		'kode_pos' => set_value('kode_pos', $row->kode_pos),
-	    );
-            $this->load->view('keluarga/keluarga_form', $data);
+                'id' => set_value('id', $row->id),
+                'no_keluarga' => set_value('no_keluarga', $row->no_keluarga),
+                'kepala_keluarga' => set_value('kepala_keluarga', $row->kepala_keluarga),
+                'alamat' => set_value('alamat', $row->alamat),
+                'provinsi' => set_value('provinsi', $row->provinsi),
+                'kab' => set_value('kab', $row->kab),
+                'kec' => set_value('kec', $row->kec),
+                'desa' => set_value('desa', $row->desa),
+                'rt' => set_value('rt', $row->rt),
+                'rw' => set_value('rw', $row->rw),
+                'kode_pos' => set_value('kode_pos', $row->kode_pos),
+                'latitude' => set_value('latitude', $row->latitude),
+                'longitude' => set_value('longitude', $row->longitude),
+                );
+            $this->render['content']= $this->load->view('keluarga/keluarga_form', $data, TRUE);
+            $this->load->view('template', $this->render);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('keluarga'));
@@ -139,6 +157,16 @@ class Keluarga extends CI_Controller
     public function update_action() 
     {
         $this->_rules();
+
+        $alamat = str_replace(' ', '+', $this->input->post('alamat',TRUE));
+        $geocode=file_get_contents("https://maps.google.com/maps/api/geocode/json?key=AIzaSyBmBY0nTDRelXLlNUei_0SVEuogGzhQrvE&address=$alamat&sensor=false");
+        
+        $output= json_decode($geocode);
+        var_dump($output);
+        
+        $lat = $output->results[0]->geometry->location->lat;
+        $long = $output->results[0]->geometry->location->lng;
+
 
         if ($this->form_validation->run() == FALSE) {
             $this->update($this->input->post('id', TRUE));
@@ -154,6 +182,8 @@ class Keluarga extends CI_Controller
 		'rt' => $this->input->post('rt',TRUE),
 		'rw' => $this->input->post('rw',TRUE),
 		'kode_pos' => $this->input->post('kode_pos',TRUE),
+		'latitude' =>  $lat,
+		'longitude' => $long,
 	    );
 
             $this->Keluarga_model->update($this->input->post('id', TRUE), $data);
@@ -188,6 +218,8 @@ class Keluarga extends CI_Controller
 	$this->form_validation->set_rules('rt', 'rt', 'trim|required');
 	$this->form_validation->set_rules('rw', 'rw', 'trim|required');
 	$this->form_validation->set_rules('kode_pos', 'kode pos', 'trim|required');
+	$this->form_validation->set_rules('latitude', 'latitude', 'trim|required');
+	$this->form_validation->set_rules('longitude', 'longitude', 'trim|required');
 
 	$this->form_validation->set_rules('id', 'id', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
@@ -225,6 +257,8 @@ class Keluarga extends CI_Controller
 	xlsWriteLabel($tablehead, $kolomhead++, "Rt");
 	xlsWriteLabel($tablehead, $kolomhead++, "Rw");
 	xlsWriteLabel($tablehead, $kolomhead++, "Kode Pos");
+	xlsWriteLabel($tablehead, $kolomhead++, "Latitude");
+	xlsWriteLabel($tablehead, $kolomhead++, "Longitude");
 
 	foreach ($this->Keluarga_model->get_all() as $data) {
             $kolombody = 0;
@@ -241,6 +275,8 @@ class Keluarga extends CI_Controller
 	    xlsWriteLabel($tablebody, $kolombody++, $data->rt);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->rw);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->kode_pos);
+	    xlsWriteNumber($tablebody, $kolombody++, $data->latitude);
+	    xlsWriteNumber($tablebody, $kolombody++, $data->longitude);
 
 	    $tablebody++;
             $nourut++;
@@ -255,5 +291,5 @@ class Keluarga extends CI_Controller
 /* End of file Keluarga.php */
 /* Location: ./application/controllers/Keluarga.php */
 /* Please DO NOT modify this information : */
-/* Generated by Harviacode Codeigniter CRUD Generator 2018-04-15 10:06:14 */
+/* Generated by Harviacode Codeigniter CRUD Generator 2018-04-16 16:10:52 */
 /* http://harviacode.com */

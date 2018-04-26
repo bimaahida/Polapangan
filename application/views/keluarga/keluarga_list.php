@@ -25,8 +25,8 @@
     </div>
 </div>
 <div class="col-md-12 text-right">
-    <?php echo anchor(site_url('keluarga/create'), 'Create', 'class="btn btn-warning"'); ?>
-    <?php echo anchor(site_url('keluarga/excel'), 'Excel', 'class="btn btn-default"'); ?>
+    <?php echo anchor(base_url('keluarga/create'), 'Create', 'class="btn btn-warning"'); ?>
+    <?php echo anchor(base_url('keluarga/excel'), 'Excel', 'class="btn btn-default"'); ?>
 </div>
 </div>
 <script type="text/javascript">

@@ -10,12 +10,15 @@ class User extends CI_Controller
         parent::__construct();
         $this->load->model('User_model');
         $this->load->library('form_validation');        
-	$this->load->library('datatables');
+        $this->load->library('datatables');
+        $this->render['page_title'] = 'User';
+        $this->render['menus'] = 'user';
     }
 
     public function index()
     {
-        $this->load->view('user/user_list');
+        $this->render['content']= $this->load->view('user/user_list', array(), TRUE);
+        $this->load->view('template', $this->render);
     } 
     
     public function json() {
@@ -28,19 +31,20 @@ class User extends CI_Controller
         $row = $this->User_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'id' => $row->id,
-		'nik' => $row->nik,
-		'nama' => $row->nama,
-		'password' => $row->password,
-		'tempat_lahir' => $row->tempat_lahir,
-		'tgl_lahir' => $row->tgl_lahir,
-		'jk' => $row->jk,
-		'agama' => $row->agama,
-		'pendidikan' => $row->pendidikan,
-		'pekerjaan' => $row->pekerjaan,
-		'status_id' => $row->status_id,
-	    );
-            $this->load->view('user/user_read', $data);
+            'id' => $row->id,
+            'nik' => $row->nik,
+            'nama' => $row->nama,
+            'password' => $row->password,
+            'tempat_lahir' => $row->tempat_lahir,
+            'tgl_lahir' => $row->tgl_lahir,
+            'jk' => $row->jk,
+            'agama' => $row->agama,
+            'pendidikan' => $row->pendidikan,
+            'pekerjaan' => $row->pekerjaan,
+            'status_id' => $row->status_id,
+            );
+            $this->render['content']= $this->load->view('user/user_read', $data, TRUE);
+            $this->load->view('template', $this->render);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('user'));
@@ -52,19 +56,20 @@ class User extends CI_Controller
         $data = array(
             'button' => 'Create',
             'action' => site_url('user/create_action'),
-	    'id' => set_value('id'),
-	    'nik' => set_value('nik'),
-	    'nama' => set_value('nama'),
-	    'password' => set_value('password'),
-	    'tempat_lahir' => set_value('tempat_lahir'),
-	    'tgl_lahir' => set_value('tgl_lahir'),
-	    'jk' => set_value('jk'),
-	    'agama' => set_value('agama'),
-	    'pendidikan' => set_value('pendidikan'),
-	    'pekerjaan' => set_value('pekerjaan'),
-	    'status_id' => set_value('status_id'),
-	);
-        $this->load->view('user/user_form', $data);
+            'id' => set_value('id'),
+            'nik' => set_value('nik'),
+            'nama' => set_value('nama'),
+            'password' => set_value('password'),
+            'tempat_lahir' => set_value('tempat_lahir'),
+            'tgl_lahir' => set_value('tgl_lahir'),
+            'jk' => set_value('jk'),
+            'agama' => set_value('agama'),
+            'pendidikan' => set_value('pendidikan'),
+            'pekerjaan' => set_value('pekerjaan'),
+            'status_id' => set_value('status_id'),
+        );
+        $this->render['content']= $this->load->view('user/user_form', $data, TRUE);
+        $this->load->view('template', $this->render);
     }
     
     public function create_action() 

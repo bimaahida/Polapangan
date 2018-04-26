@@ -1,69 +1,36 @@
-<!doctype html>
-<html>
-    <head>
-        <title>harviacode.com - codeigniter crud generator</title>
-        <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>"/>
-        <link rel="stylesheet" href="<?php echo base_url('assets/datatables/dataTables.bootstrap.css') ?>"/>
-        <link rel="stylesheet" href="<?php echo base_url('assets/datatables/dataTables.bootstrap.css') ?>"/>
-        <style>
-            .dataTables_wrapper {
-                min-height: 500px
-            }
-            
-            .dataTables_processing {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                width: 100%;
-                margin-left: -50%;
-                margin-top: -25px;
-                padding-top: 20px;
-                text-align: center;
-                font-size: 1.2em;
-                color:grey;
-            }
-            body{
-                padding: 15px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="row" style="margin-bottom: 10px">
-            <div class="col-md-4">
-                <h2 style="margin-top:0px">User List</h2>
-            </div>
-            <div class="col-md-4 text-center">
-                <div style="margin-top: 4px"  id="message">
-                    <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
-                </div>
-            </div>
-            <div class="col-md-4 text-right">
-                <?php echo anchor(site_url('user/create'), 'Create', 'class="btn btn-primary"'); ?>
-		<?php echo anchor(site_url('user/excel'), 'Excel', 'class="btn btn-primary"'); ?>
-	    </div>
-        </div>
-        <table class="table table-bordered table-striped" id="mytable">
-            <thead>
+<div class="col-md-12">
+<?php
+    if ($this->session->userdata('message') !== null) {
+        echo '<div class="alert alert-info alert-with-icon" data-notify="container">
+        <i data-notify="icon" class="material-icons">add_alert</i>
+        <span data-notify="message"> '.$this->session->userdata("message").' </span></div>';  
+    }
+?>
+<div class="card">
+    <div class="card-header" data-background-color="orange">
+        <h4 class="title">Pangan List</h4>
+    </div>
+    <div class="card-content table-responsive">
+        <table class="table" id="mytable">
+            <thead class="text-primary">
                 <tr>
                     <th width="80px">No</th>
-		    <th>Nik</th>
-		    <th>Nama</th>
-		    <th>Password</th>
-		    <th>Tempat Lahir</th>
-		    <th>Tgl Lahir</th>
-		    <th>Jk</th>
-		    <th>Agama</th>
-		    <th>Pendidikan</th>
-		    <th>Pekerjaan</th>
-		    <th>Status Id</th>
-		    <th width="200px">Action</th>
+                    <th>Nik</th>
+                    <th>Nama</th>
+                    <th>Tempat Lahir</th>
+                    <th>Tanggal Lahir</th>
+                    <th>Jenis Kelamin</th>
+                    <th width="200px">Action</th>
                 </tr>
             </thead>
-	    
         </table>
-        <script src="<?php echo base_url('assets/js/jquery-1.11.2.min.js') ?>"></script>
-        <script src="<?php echo base_url('assets/datatables/jquery.dataTables.js') ?>"></script>
-        <script src="<?php echo base_url('assets/datatables/dataTables.bootstrap.js') ?>"></script>
+    </div>
+</div>
+<div class="col-md-12 text-right">
+    <?php echo anchor(base_url('user/create'), 'Create', 'class="btn btn-warning"'); ?>
+    <?php echo anchor(base_url('user/excel'), 'Excel', 'class="btn btn-default"'); ?>
+</div>
+</div>
         <script type="text/javascript">
             $(document).ready(function() {
                 $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings)
@@ -100,7 +67,7 @@
                         {
                             "data": "id",
                             "orderable": false
-                        },{"data": "nik"},{"data": "nama"},{"data": "password"},{"data": "tempat_lahir"},{"data": "tgl_lahir"},{"data": "jk"},{"data": "agama"},{"data": "pendidikan"},{"data": "pekerjaan"},{"data": "status_id"},
+                        },{"data": "nik"},{"data": "nama"},{"data": "tempat_lahir"},{"data": "tgl_lahir"},{"data": "jk"},
                         {
                             "data" : "action",
                             "orderable": false,

@@ -46,8 +46,13 @@
             <thead>
                 <tr>
                     <th width="80px">No</th>
+		    <th>Nama</th>
 		    <th>Tgl</th>
 		    <th>Keterangan</th>
+		    <th>Urt</th>
+		    <th>Gram</th>
+		    <th>Asal</th>
+		    <th>Jumlah Pemakan</th>
 		    <th>Keluarga Id</th>
 		    <th>Pangan Id</th>
 		    <th width="200px">Action</th>
@@ -94,7 +99,7 @@
                         {
                             "data": "id",
                             "orderable": false
-                        },{"data": "tgl"},{"data": "keterangan"},{"data": "keluarga_id"},{"data": "pangan_id"},
+                        },{"data": "nama"},{"data": "tgl"},{"data": "keterangan"},{"data": "urt"},{"data": "gram"},{"data": "asal"},{"data": "jumlah_pemakan"},{"data": "keluarga_id"},{"data": "pangan_id"},
                         {
                             "data" : "action",
                             "orderable": false,

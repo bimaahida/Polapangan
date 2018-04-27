@@ -30,7 +30,7 @@
     <body>
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
-                <h2 style="margin-top:0px">Status List</h2>
+                <h2 style="margin-top:0px">Survei List</h2>
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 4px"  id="message">
@@ -38,15 +38,20 @@
                 </div>
             </div>
             <div class="col-md-4 text-right">
-                <?php echo anchor(site_url('status/create'), 'Create', 'class="btn btn-primary"'); ?>
-		<?php echo anchor(site_url('status/excel'), 'Excel', 'class="btn btn-primary"'); ?>
+                <?php echo anchor(site_url('survei/create'), 'Create', 'class="btn btn-primary"'); ?>
+		<?php echo anchor(site_url('survei/excel'), 'Excel', 'class="btn btn-primary"'); ?>
 	    </div>
         </div>
         <table class="table table-bordered table-striped" id="mytable">
             <thead>
                 <tr>
                     <th width="80px">No</th>
-		    <th>Nama</th>
+		    <th>Sayur</th>
+		    <th>Buah</th>
+		    <th>Umbi-umbian</th>
+		    <th>Hewani</th>
+		    <th>Kacang-kacangan</th>
+		    <th>Keluarga Id</th>
 		    <th width="200px">Action</th>
                 </tr>
             </thead>
@@ -86,12 +91,12 @@
                     },
                     processing: true,
                     serverSide: true,
-                    ajax: {"url": "status/json", "type": "POST"},
+                    ajax: {"url": "survei/json", "type": "POST"},
                     columns: [
                         {
                             "data": "id",
                             "orderable": false
-                        },{"data": "nama"},
+                        },{"data": "sayur"},{"data": "buah"},{"data": "umbi-umbian"},{"data": "hewani"},{"data": "kacang-kacangan"},{"data": "keluarga_id"},
                         {
                             "data" : "action",
                             "orderable": false,

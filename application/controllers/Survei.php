@@ -3,40 +3,43 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class User_keluarga extends CI_Controller
+class Survei extends CI_Controller
 {
     function __construct()
     {
         parent::__construct();
-        $this->load->model('User_keluarga_model');
+        $this->load->model('Survei_model');
         $this->load->library('form_validation');        
 	$this->load->library('datatables');
     }
 
     public function index()
     {
-        $this->load->view('user_keluarga/user_keluarga_list');
+        $this->load->view('survei/survei_list');
     } 
     
     public function json() {
         header('Content-Type: application/json');
-        echo $this->User_keluarga_model->json();
+        echo $this->Survei_model->json();
     }
 
     public function read($id) 
     {
-        $row = $this->User_keluarga_model->get_by_id($id);
+        $row = $this->Survei_model->get_by_id($id);
         if ($row) {
             $data = array(
 		'id' => $row->id,
-		'user_id' => $row->user_id,
+		'sayur' => $row->sayur,
+		'buah' => $row->buah,
+		'umbi-umbian' => $row->umbi-umbian,
+		'hewani' => $row->hewani,
+		'kacang-kacangan' => $row->kacang-kacangan,
 		'keluarga_id' => $row->keluarga_id,
-		'hubungan' => $row->hubungan,
 	    );
-            $this->load->view('user_keluarga/user_keluarga_read', $data);
+            $this->load->view('survei/survei_read', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('user_keluarga'));
+            redirect(site_url('survei'));
         }
     }
 
@@ -44,13 +47,16 @@ class User_keluarga extends CI_Controller
     {
         $data = array(
             'button' => 'Create',
-            'action' => site_url('user_keluarga/create_action'),
+            'action' => site_url('survei/create_action'),
 	    'id' => set_value('id'),
-	    'user_id' => set_value('user_id'),
+	    'sayur' => set_value('sayur'),
+	    'buah' => set_value('buah'),
+	    'umbi-umbian' => set_value('umbi-umbian'),
+	    'hewani' => set_value('hewani'),
+	    'kacang-kacangan' => set_value('kacang-kacangan'),
 	    'keluarga_id' => set_value('keluarga_id'),
-	    'hubungan' => set_value('hubungan'),
 	);
-        $this->load->view('user_keluarga/user_keluarga_form', $data);
+        $this->load->view('survei/survei_form', $data);
     }
     
     public function create_action() 
@@ -61,34 +67,40 @@ class User_keluarga extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'user_id' => $this->input->post('user_id',TRUE),
+		'sayur' => $this->input->post('sayur',TRUE),
+		'buah' => $this->input->post('buah',TRUE),
+		'umbi-umbian' => $this->input->post('umbi-umbian',TRUE),
+		'hewani' => $this->input->post('hewani',TRUE),
+		'kacang-kacangan' => $this->input->post('kacang-kacangan',TRUE),
 		'keluarga_id' => $this->input->post('keluarga_id',TRUE),
-		'hubungan' => $this->input->post('hubungan',TRUE),
 	    );
 
-            $this->User_keluarga_model->insert($data);
+            $this->Survei_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('user_keluarga'));
+            redirect(site_url('survei'));
         }
     }
     
     public function update($id) 
     {
-        $row = $this->User_keluarga_model->get_by_id($id);
+        $row = $this->Survei_model->get_by_id($id);
 
         if ($row) {
             $data = array(
                 'button' => 'Update',
-                'action' => site_url('user_keluarga/update_action'),
+                'action' => site_url('survei/update_action'),
 		'id' => set_value('id', $row->id),
-		'user_id' => set_value('user_id', $row->user_id),
+		'sayur' => set_value('sayur', $row->sayur),
+		'buah' => set_value('buah', $row->buah),
+		'umbi-umbian' => set_value('umbi-umbian', $row->umbi-umbian),
+		'hewani' => set_value('hewani', $row->hewani),
+		'kacang-kacangan' => set_value('kacang-kacangan', $row->kacang-kacangan),
 		'keluarga_id' => set_value('keluarga_id', $row->keluarga_id),
-		'hubungan' => set_value('hubungan', $row->hubungan),
 	    );
-            $this->load->view('user_keluarga/user_keluarga_form', $data);
+            $this->load->view('survei/survei_form', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('user_keluarga'));
+            redirect(site_url('survei'));
         }
     }
     
@@ -100,36 +112,42 @@ class User_keluarga extends CI_Controller
             $this->update($this->input->post('id', TRUE));
         } else {
             $data = array(
-		'user_id' => $this->input->post('user_id',TRUE),
+		'sayur' => $this->input->post('sayur',TRUE),
+		'buah' => $this->input->post('buah',TRUE),
+		'umbi-umbian' => $this->input->post('umbi-umbian',TRUE),
+		'hewani' => $this->input->post('hewani',TRUE),
+		'kacang-kacangan' => $this->input->post('kacang-kacangan',TRUE),
 		'keluarga_id' => $this->input->post('keluarga_id',TRUE),
-		'hubungan' => $this->input->post('hubungan',TRUE),
 	    );
 
-            $this->User_keluarga_model->update($this->input->post('id', TRUE), $data);
+            $this->Survei_model->update($this->input->post('id', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('user_keluarga'));
+            redirect(site_url('survei'));
         }
     }
     
     public function delete($id) 
     {
-        $row = $this->User_keluarga_model->get_by_id($id);
+        $row = $this->Survei_model->get_by_id($id);
 
         if ($row) {
-            $this->User_keluarga_model->delete($id);
+            $this->Survei_model->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('user_keluarga'));
+            redirect(site_url('survei'));
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('user_keluarga'));
+            redirect(site_url('survei'));
         }
     }
 
     public function _rules() 
     {
-	$this->form_validation->set_rules('user_id', 'user id', 'trim|required');
+	$this->form_validation->set_rules('sayur', 'sayur', 'trim|required');
+	$this->form_validation->set_rules('buah', 'buah', 'trim|required');
+	$this->form_validation->set_rules('umbi-umbian', 'umbi-umbian', 'trim|required');
+	$this->form_validation->set_rules('hewani', 'hewani', 'trim|required');
+	$this->form_validation->set_rules('kacang-kacangan', 'kacang-kacangan', 'trim|required');
 	$this->form_validation->set_rules('keluarga_id', 'keluarga id', 'trim|required');
-	$this->form_validation->set_rules('hubungan', 'hubungan', 'trim|required');
 
 	$this->form_validation->set_rules('id', 'id', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
@@ -138,8 +156,8 @@ class User_keluarga extends CI_Controller
     public function excel()
     {
         $this->load->helper('exportexcel');
-        $namaFile = "user_keluarga.xls";
-        $judul = "user_keluarga";
+        $namaFile = "survei.xls";
+        $judul = "survei";
         $tablehead = 0;
         $tablebody = 1;
         $nourut = 1;
@@ -157,18 +175,24 @@ class User_keluarga extends CI_Controller
 
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
-	xlsWriteLabel($tablehead, $kolomhead++, "User Id");
+	xlsWriteLabel($tablehead, $kolomhead++, "Sayur");
+	xlsWriteLabel($tablehead, $kolomhead++, "Buah");
+	xlsWriteLabel($tablehead, $kolomhead++, "Umbi-umbian");
+	xlsWriteLabel($tablehead, $kolomhead++, "Hewani");
+	xlsWriteLabel($tablehead, $kolomhead++, "Kacang-kacangan");
 	xlsWriteLabel($tablehead, $kolomhead++, "Keluarga Id");
-	xlsWriteLabel($tablehead, $kolomhead++, "Hubungan");
 
-	foreach ($this->User_keluarga_model->get_all() as $data) {
+	foreach ($this->Survei_model->get_all() as $data) {
             $kolombody = 0;
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->user_id);
+	    xlsWriteNumber($tablebody, $kolombody++, $data->sayur);
+	    xlsWriteNumber($tablebody, $kolombody++, $data->buah);
+	    xlsWriteNumber($tablebody, $kolombody++, $data->umbi-umbian);
+	    xlsWriteNumber($tablebody, $kolombody++, $data->hewani);
+	    xlsWriteNumber($tablebody, $kolombody++, $data->kacang-kacangan);
 	    xlsWriteNumber($tablebody, $kolombody++, $data->keluarga_id);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->hubungan);
 
 	    $tablebody++;
             $nourut++;
@@ -180,8 +204,8 @@ class User_keluarga extends CI_Controller
 
 }
 
-/* End of file User_keluarga.php */
-/* Location: ./application/controllers/User_keluarga.php */
+/* End of file Survei.php */
+/* Location: ./application/controllers/Survei.php */
 /* Please DO NOT modify this information : */
-/* Generated by Harviacode Codeigniter CRUD Generator 2018-04-27 07:43:00 */
+/* Generated by Harviacode Codeigniter CRUD Generator 2018-04-27 07:43:12 */
 /* http://harviacode.com */

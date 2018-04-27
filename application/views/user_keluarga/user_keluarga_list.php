@@ -48,6 +48,7 @@
                     <th width="80px">No</th>
 		    <th>User Id</th>
 		    <th>Keluarga Id</th>
+		    <th>Hubungan</th>
 		    <th width="200px">Action</th>
                 </tr>
             </thead>
@@ -92,7 +93,7 @@
                         {
                             "data": "id",
                             "orderable": false
-                        },{"data": "user_id"},{"data": "keluarga_id"},
+                        },{"data": "user_id"},{"data": "keluarga_id"},{"data": "hubungan"},
                         {
                             "data" : "action",
                             "orderable": false,

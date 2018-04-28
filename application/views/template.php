@@ -77,10 +77,10 @@
                             <p>Jenis Pangan</p>
                         </a>
                     </li>
-                    <li <?php if ($menus == 'kandungan') {echo 'class="active"';}?>>
-                        <a href="<?= base_url()?>kandungan">
+                    <li <?php if ($menus == 'survei') {echo 'class="active"';}?>>
+                        <a href="<?= base_url()?>survei">
                             <i class="material-icons">location_on</i>
-                            <p>Kandungan</p>
+                            <p>Survei</p>
                         </a>
                     </li>
                     <li <?php if ($menus == 'pangan_keluarga') {echo 'class="active"';}?>>

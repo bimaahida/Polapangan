@@ -31,6 +31,12 @@ class Keluarga_model extends CI_Model
         $this->db->order_by($this->id, $this->order);
         return $this->db->get($this->table)->result();
     }
+    function autocomplate($params){
+        $this->db->like('kepala_keluarga', $params , 'both');
+        $this->db->order_by($this->id, $this->order);
+        $this->db->limit(10);
+        return $this->db->get($this->table)->result();
+    }
 
     // get data by id
     function get_by_id($id)

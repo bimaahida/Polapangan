@@ -10,12 +10,16 @@ class Pangan extends CI_Controller
         parent::__construct();
         $this->load->model('Pangan_model');
         $this->load->library('form_validation');        
-	$this->load->library('datatables');
+        $this->load->library('datatables');
+        $this->render['page_title'] = 'Pangan';
+        $this->render['menus'] = 'pangan';
+        
     }
 
     public function index()
     {
-        $this->load->view('pangan/pangan_list');
+        $this->render['content']= $this->load->view('pangan/pangan_list',array(), TRUE);
+        $this->load->view('template', $this->render);
     } 
     
     public function json() {
@@ -28,18 +32,19 @@ class Pangan extends CI_Controller
         $row = $this->Pangan_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'id' => $row->id,
-		'nama' => $row->nama,
-		'takaran' => $row->takaran,
-		'urt' => $row->urt,
-		'gram' => $row->gram,
-		'kalori' => $row->kalori,
-		'lemak' => $row->lemak,
-		'karbohidrat' => $row->karbohidrat,
-		'protein' => $row->protein,
-		'jenis_pangan_id' => $row->jenis_pangan_id,
-	    );
-            $this->load->view('pangan/pangan_read', $data);
+            'id' => $row->id,
+            'nama' => $row->nama,
+            'takaran' => $row->takaran,
+            'urt' => $row->urt,
+            'gram' => $row->gram,
+            'kalori' => $row->kalori,
+            'lemak' => $row->lemak,
+            'karbohidrat' => $row->karbohidrat,
+            'protein' => $row->protein,
+            'jenis_pangan' => $row->jenis_pangan,
+            );
+            $this->render['content']= $this->load->view('pangan/pangan_read', $data, TRUE);
+            $this->load->view('template', $this->render);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('pangan'));
@@ -48,21 +53,25 @@ class Pangan extends CI_Controller
 
     public function create() 
     {
+        $this->load->model('Jenis_pangan_model');
         $data = array(
             'button' => 'Create',
             'action' => site_url('pangan/create_action'),
-	    'id' => set_value('id'),
-	    'nama' => set_value('nama'),
-	    'takaran' => set_value('takaran'),
-	    'urt' => set_value('urt'),
-	    'gram' => set_value('gram'),
-	    'kalori' => set_value('kalori'),
-	    'lemak' => set_value('lemak'),
-	    'karbohidrat' => set_value('karbohidrat'),
-	    'protein' => set_value('protein'),
-	    'jenis_pangan_id' => set_value('jenis_pangan_id'),
-	);
-        $this->load->view('pangan/pangan_form', $data);
+            'id' => set_value('id'),
+            'nama' => set_value('nama'),
+            'takaran' => set_value('takaran'),
+            'urt' => set_value('urt'),
+            'gram' => set_value('gram'),
+            'kalori' => set_value('kalori'),
+            'lemak' => set_value('lemak'),
+            'karbohidrat' => set_value('karbohidrat'),
+            'protein' => set_value('protein'),
+            'jenis_pangan_id' => set_value('jenis_pangan_id'),
+        );
+        
+        $data['jenis'] = $this->Jenis_pangan_model->get_all();
+        $this->render['content']= $this->load->view('pangan/pangan_form', $data, TRUE);
+        $this->load->view('template', $this->render);
     }
     
     public function create_action() 
@@ -92,24 +101,28 @@ class Pangan extends CI_Controller
     
     public function update($id) 
     {
+        $this->load->model('Jenis_pangan_model');
         $row = $this->Pangan_model->get_by_id($id);
 
         if ($row) {
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('pangan/update_action'),
-		'id' => set_value('id', $row->id),
-		'nama' => set_value('nama', $row->nama),
-		'takaran' => set_value('takaran', $row->takaran),
-		'urt' => set_value('urt', $row->urt),
-		'gram' => set_value('gram', $row->gram),
-		'kalori' => set_value('kalori', $row->kalori),
-		'lemak' => set_value('lemak', $row->lemak),
-		'karbohidrat' => set_value('karbohidrat', $row->karbohidrat),
-		'protein' => set_value('protein', $row->protein),
-		'jenis_pangan_id' => set_value('jenis_pangan_id', $row->jenis_pangan_id),
-	    );
-            $this->load->view('pangan/pangan_form', $data);
+                'id' => set_value('id', $row->id),
+                'nama' => set_value('nama', $row->nama),
+                'takaran' => set_value('takaran', $row->takaran),
+                'urt' => set_value('urt', $row->urt),
+                'gram' => set_value('gram', $row->gram),
+                'kalori' => set_value('kalori', $row->kalori),
+                'lemak' => set_value('lemak', $row->lemak),
+                'karbohidrat' => set_value('karbohidrat', $row->karbohidrat),
+                'protein' => set_value('protein', $row->protein),
+                'jenis_pangan_id' => set_value('jenis_pangan_id', $row->jenis_pangan_id),
+                );
+            
+            $data['jenis'] = $this->Jenis_pangan_model->get_all();
+            $this->render['content']= $this->load->view('pangan/pangan_form', $data, TRUE);
+            $this->load->view('template', $this->render);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('pangan'));
@@ -193,32 +206,32 @@ class Pangan extends CI_Controller
 
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
-	xlsWriteLabel($tablehead, $kolomhead++, "Nama");
-	xlsWriteLabel($tablehead, $kolomhead++, "Takaran");
-	xlsWriteLabel($tablehead, $kolomhead++, "Urt");
-	xlsWriteLabel($tablehead, $kolomhead++, "Gram");
-	xlsWriteLabel($tablehead, $kolomhead++, "Kalori");
-	xlsWriteLabel($tablehead, $kolomhead++, "Lemak");
-	xlsWriteLabel($tablehead, $kolomhead++, "Karbohidrat");
-	xlsWriteLabel($tablehead, $kolomhead++, "Protein");
-	xlsWriteLabel($tablehead, $kolomhead++, "Jenis Pangan Id");
+        xlsWriteLabel($tablehead, $kolomhead++, "Nama");
+        xlsWriteLabel($tablehead, $kolomhead++, "Takaran");
+        xlsWriteLabel($tablehead, $kolomhead++, "Urt");
+        xlsWriteLabel($tablehead, $kolomhead++, "Gram");
+        xlsWriteLabel($tablehead, $kolomhead++, "Kalori");
+        xlsWriteLabel($tablehead, $kolomhead++, "Lemak");
+        xlsWriteLabel($tablehead, $kolomhead++, "Karbohidrat");
+        xlsWriteLabel($tablehead, $kolomhead++, "Protein");
+        xlsWriteLabel($tablehead, $kolomhead++, "Jenis Pangan Id");
 
-	foreach ($this->Pangan_model->get_all() as $data) {
-            $kolombody = 0;
+        foreach ($this->Pangan_model->get_all() as $data) {
+                $kolombody = 0;
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->nama);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->takaran);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->urt);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->gram);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->kalori);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->lemak);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->karbohidrat);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->protein);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->jenis_pangan_id);
+            xlsWriteLabel($tablebody, $kolombody++, $data->nama);
+            xlsWriteLabel($tablebody, $kolombody++, $data->takaran);
+            xlsWriteNumber($tablebody, $kolombody++, $data->urt);
+            xlsWriteNumber($tablebody, $kolombody++, $data->gram);
+            xlsWriteNumber($tablebody, $kolombody++, $data->kalori);
+            xlsWriteNumber($tablebody, $kolombody++, $data->lemak);
+            xlsWriteNumber($tablebody, $kolombody++, $data->karbohidrat);
+            xlsWriteNumber($tablebody, $kolombody++, $data->protein);
+            xlsWriteNumber($tablebody, $kolombody++, $data->jenis_pangan_id);
 
-	    $tablebody++;
+	        $tablebody++;
             $nourut++;
         }
 

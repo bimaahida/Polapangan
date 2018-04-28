@@ -34,14 +34,12 @@ class User extends CI_Controller
             'id' => $row->id,
             'nik' => $row->nik,
             'nama' => $row->nama,
-            'password' => $row->password,
             'tempat_lahir' => $row->tempat_lahir,
             'tgl_lahir' => $row->tgl_lahir,
             'jk' => $row->jk,
             'agama' => $row->agama,
             'pendidikan' => $row->pendidikan,
             'pekerjaan' => $row->pekerjaan,
-            'status_id' => $row->status_id,
             );
             $this->render['content']= $this->load->view('user/user_read', $data, TRUE);
             $this->load->view('template', $this->render);

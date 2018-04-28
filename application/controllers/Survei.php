@@ -10,12 +10,15 @@ class Survei extends CI_Controller
         parent::__construct();
         $this->load->model('Survei_model');
         $this->load->library('form_validation');        
-	$this->load->library('datatables');
+        $this->load->library('datatables');
+        $this->render['page_title'] = 'Survei';
+        $this->render['menus'] = 'survei';
     }
 
     public function index()
     {
-        $this->load->view('survei/survei_list');
+        $this->render['content']= $this->load->view('survei/survei_list',array(), TRUE);
+        $this->load->view('template', $this->render);
     } 
     
     public function json() {
@@ -28,21 +31,47 @@ class Survei extends CI_Controller
         $row = $this->Survei_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'id' => $row->id,
-		'sayur' => $row->sayur,
-		'buah' => $row->buah,
-		'umbi-umbian' => $row->umbi-umbian,
-		'hewani' => $row->hewani,
-		'kacang-kacangan' => $row->kacang-kacangan,
-		'keluarga_id' => $row->keluarga_id,
-	    );
-            $this->load->view('survei/survei_read', $data);
+            'id' => $row->id,
+            'sayur' => $this->cek_status($row->sayur),
+            'buah' => $this->cek_status($row->buah),
+            'umbi' => $this->cek_status($row->umbi),
+            'hewani' => $this->cek_status($row->hewani),
+            'kacang' => $this->cek_status($row->kacang),
+            'keluarga_id' => $row->keluarga_id,
+            );
+            $this->render['content']= $this->load->view('survei/survei_read',$data, TRUE);
+            $this->load->view('template', $this->render);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('survei'));
         }
     }
-
+    private function cek_status($params){
+        if($params == 1){
+            return '< 3 Kali';
+        }else if ($params == 2) {
+            return '2 - 3 Kali';
+        }elseif ($params == 3) {
+            return '6 - 10 Kali';
+        }else{ 
+            return '> 10 Kali';
+        }
+    }
+    public function getKeluargaAutoComplate(){
+        $this->load->model('Keluarga_model');
+        if (isset($_GET['term'])) {
+            $result = $this->Keluarga_model->autocomplate($_GET['term']);
+            if (count($result) > 0) {
+                //echo json_encode($result);
+                foreach ($result as $row)
+                $data[] = array(
+                    'label' => $row->kepala_keluarga,
+                    'value' => $row->id
+                );
+                echo json_encode($data);
+           }
+        }
+    }
     public function create() 
     {
         $data = array(
@@ -51,12 +80,14 @@ class Survei extends CI_Controller
 	    'id' => set_value('id'),
 	    'sayur' => set_value('sayur'),
 	    'buah' => set_value('buah'),
-	    'umbi-umbian' => set_value('umbi-umbian'),
+	    'umbi' => set_value('umbi'),
 	    'hewani' => set_value('hewani'),
-	    'kacang-kacangan' => set_value('kacang-kacangan'),
-	    'keluarga_id' => set_value('keluarga_id'),
-	);
-        $this->load->view('survei/survei_form', $data);
+	    'kacang' => set_value('kacang'),
+        'keluarga_id' => set_value('keluarga_id'),
+        'keluarga' => set_value('keluarga'),
+    );
+        $this->render['content']= $this->load->view('survei/survei_form',$data, TRUE);
+        $this->load->view('template', $this->render);
     }
     
     public function create_action() 
@@ -69,9 +100,9 @@ class Survei extends CI_Controller
             $data = array(
 		'sayur' => $this->input->post('sayur',TRUE),
 		'buah' => $this->input->post('buah',TRUE),
-		'umbi-umbian' => $this->input->post('umbi-umbian',TRUE),
+		'umbi' => $this->input->post('umbi',TRUE),
 		'hewani' => $this->input->post('hewani',TRUE),
-		'kacang-kacangan' => $this->input->post('kacang-kacangan',TRUE),
+		'kacang' => $this->input->post('kacang',TRUE),
 		'keluarga_id' => $this->input->post('keluarga_id',TRUE),
 	    );
 
@@ -89,15 +120,17 @@ class Survei extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('survei/update_action'),
-		'id' => set_value('id', $row->id),
-		'sayur' => set_value('sayur', $row->sayur),
-		'buah' => set_value('buah', $row->buah),
-		'umbi-umbian' => set_value('umbi-umbian', $row->umbi-umbian),
-		'hewani' => set_value('hewani', $row->hewani),
-		'kacang-kacangan' => set_value('kacang-kacangan', $row->kacang-kacangan),
-		'keluarga_id' => set_value('keluarga_id', $row->keluarga_id),
-	    );
-            $this->load->view('survei/survei_form', $data);
+                'id' => set_value('id', $row->id),
+                'sayur' => set_value('sayur', $row->sayur),
+                'buah' => set_value('buah', $row->buah),
+                'umbi' => set_value('umbi', $row->umbi),
+                'hewani' => set_value('hewani', $row->hewani),
+                'kacang' => set_value('kacang', $row->kacang),
+                'keluarga_id' => set_value('keluarga_id', $row->keluarga_id),
+                'keluarga' => set_value('keluarga', $row->kepala_keluarga),
+	         );
+            $this->render['content']= $this->load->view('survei/survei_form',$data, TRUE);
+            $this->load->view('template', $this->render);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('survei'));
@@ -114,9 +147,9 @@ class Survei extends CI_Controller
             $data = array(
 		'sayur' => $this->input->post('sayur',TRUE),
 		'buah' => $this->input->post('buah',TRUE),
-		'umbi-umbian' => $this->input->post('umbi-umbian',TRUE),
+		'umbi' => $this->input->post('umbi',TRUE),
 		'hewani' => $this->input->post('hewani',TRUE),
-		'kacang-kacangan' => $this->input->post('kacang-kacangan',TRUE),
+		'kacang' => $this->input->post('kacang',TRUE),
 		'keluarga_id' => $this->input->post('keluarga_id',TRUE),
 	    );
 
@@ -144,9 +177,9 @@ class Survei extends CI_Controller
     {
 	$this->form_validation->set_rules('sayur', 'sayur', 'trim|required');
 	$this->form_validation->set_rules('buah', 'buah', 'trim|required');
-	$this->form_validation->set_rules('umbi-umbian', 'umbi-umbian', 'trim|required');
+	$this->form_validation->set_rules('umbi', 'umbi', 'trim|required');
 	$this->form_validation->set_rules('hewani', 'hewani', 'trim|required');
-	$this->form_validation->set_rules('kacang-kacangan', 'kacang-kacangan', 'trim|required');
+	$this->form_validation->set_rules('kacang', 'kacang', 'trim|required');
 	$this->form_validation->set_rules('keluarga_id', 'keluarga id', 'trim|required');
 
 	$this->form_validation->set_rules('id', 'id', 'trim');
@@ -177,9 +210,9 @@ class Survei extends CI_Controller
         xlsWriteLabel($tablehead, $kolomhead++, "No");
 	xlsWriteLabel($tablehead, $kolomhead++, "Sayur");
 	xlsWriteLabel($tablehead, $kolomhead++, "Buah");
-	xlsWriteLabel($tablehead, $kolomhead++, "Umbi-umbian");
+	xlsWriteLabel($tablehead, $kolomhead++, "Umbi");
 	xlsWriteLabel($tablehead, $kolomhead++, "Hewani");
-	xlsWriteLabel($tablehead, $kolomhead++, "Kacang-kacangan");
+	xlsWriteLabel($tablehead, $kolomhead++, "Kacang");
 	xlsWriteLabel($tablehead, $kolomhead++, "Keluarga Id");
 
 	foreach ($this->Survei_model->get_all() as $data) {
@@ -189,9 +222,9 @@ class Survei extends CI_Controller
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
 	    xlsWriteNumber($tablebody, $kolombody++, $data->sayur);
 	    xlsWriteNumber($tablebody, $kolombody++, $data->buah);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->umbi-umbian);
+	    xlsWriteNumber($tablebody, $kolombody++, $data->umbi);
 	    xlsWriteNumber($tablebody, $kolombody++, $data->hewani);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->kacang-kacangan);
+	    xlsWriteNumber($tablebody, $kolombody++, $data->kacang);
 	    xlsWriteNumber($tablebody, $kolombody++, $data->keluarga_id);
 
 	    $tablebody++;
@@ -207,5 +240,5 @@ class Survei extends CI_Controller
 /* End of file Survei.php */
 /* Location: ./application/controllers/Survei.php */
 /* Please DO NOT modify this information : */
-/* Generated by Harviacode Codeigniter CRUD Generator 2018-04-27 07:43:12 */
+/* Generated by Harviacode Codeigniter CRUD Generator 2018-04-28 16:17:59 */
 /* http://harviacode.com */

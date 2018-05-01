@@ -16,12 +16,13 @@ class User_keluarga_model extends CI_Model
     }
 
     // datatables
-    function json() {
-        $this->datatables->select('id,user_id,keluarga_id,hubungan');
+    function json($id) {
+        $this->datatables->select('user_keluarga.id,user_id,user.nama,user.nik,TIMESTAMPDIFF(YEAR, user.tgl_lahir, CURDATE()) AS age,keluarga_id,hubungan,user.pendidikan,user.pekerjaan,user.jk,user.agama');
         $this->datatables->from('user_keluarga');
+        $this->datatables->where('keluarga_id',$id);
         //add this line for join
-        //$this->datatables->join('table2', 'user_keluarga.field = table2.field');
-        $this->datatables->add_column('action', anchor(site_url('user_keluarga/read/$1'),'Read')." | ".anchor(site_url('user_keluarga/update/$1'),'Update')." | ".anchor(site_url('user_keluarga/delete/$1'),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
+        $this->datatables->join('user', 'user_keluarga.user_id = user.id');
+        $this->datatables->add_column('action', anchor(site_url('user_keluarga/delete/$1/'.$id),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
         return $this->datatables->generate();
     }
 

@@ -8,7 +8,7 @@
 ?>
 <div class="card">
     <div class="card-header" data-background-color="orange">
-        <h4 class="title">Pangan List</h4>
+        <h4 class="title">Keluarga List</h4>
     </div>
     <div class="card-content table-responsive">
         <table class="table" id="mytable">
@@ -18,7 +18,7 @@
                 <th>No Keluarga</th>
                 <th>Kepala Keluarga</th>
                 <th>Alamat</th>
-                <th width="200px">Action</th>
+                <th width="250px">Action</th>
             </tr>
             </thead>
         </table>

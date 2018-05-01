@@ -10,17 +10,37 @@ class User_keluarga extends CI_Controller
         parent::__construct();
         $this->load->model('User_keluarga_model');
         $this->load->library('form_validation');        
-	$this->load->library('datatables');
+        $this->load->library('datatables');
+        
+        $this->render['page_title'] = 'User Keluarga';
+        $this->render['menus'] = 'keluarga';
+        
     }
 
-    public function index()
+    public function index($id)
     {
-        $this->load->view('user_keluarga/user_keluarga_list');
+        $this->render['content']= $this->load->view('user_keluarga/user_keluarga_list', array('id'=> $id), TRUE);
+        $this->load->view('template', $this->render);
     } 
+
+    function get_autocomplete(){
+        $this->load->model('User_model');
+        if (isset($_GET['term'])) {
+            $result = $this->User_model->get_by_name($_GET['term']);
+            if (count($result) > 0) {
+                foreach ($result as $row)
+                    $arr_result[] = array(
+                        'label'         => $row->nama,
+                        'id'   => $row->id,
+                 );
+                    echo json_encode($arr_result);
+            }
+        }
+    }
     
-    public function json() {
+    public function json($id) {
         header('Content-Type: application/json');
-        echo $this->User_keluarga_model->json();
+        echo $this->User_keluarga_model->json($id);
     }
 
     public function read($id) 
@@ -40,35 +60,36 @@ class User_keluarga extends CI_Controller
         }
     }
 
-    public function create() 
+    public function create($keluarga) 
     {
         $data = array(
             'button' => 'Create',
-            'action' => site_url('user_keluarga/create_action'),
-	    'id' => set_value('id'),
-	    'user_id' => set_value('user_id'),
-	    'keluarga_id' => set_value('keluarga_id'),
-	    'hubungan' => set_value('hubungan'),
-	);
-        $this->load->view('user_keluarga/user_keluarga_form', $data);
+            'action' => site_url('user_keluarga/create_action/'.$keluarga),
+            'id' => set_value('id'),
+            'user_id' => set_value('user_id'),
+            'keluarga_id' => $keluarga,
+            'hubungan' => set_value('hubungan'),
+        );
+        $this->render['content']= $this->load->view('user_keluarga/user_keluarga_form', $data, TRUE);
+        $this->load->view('template', $this->render);
     }
     
-    public function create_action() 
+    public function create_action($keluarga) 
     {
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
-            $this->create();
+            $this->create($keluarga);
         } else {
             $data = array(
-		'user_id' => $this->input->post('user_id',TRUE),
-		'keluarga_id' => $this->input->post('keluarga_id',TRUE),
-		'hubungan' => $this->input->post('hubungan',TRUE),
-	    );
+            'user_id' => $this->input->post('user_id',TRUE),
+            'keluarga_id' => $this->input->post('keluarga_id',TRUE),
+            'hubungan' => $this->input->post('hubungan',TRUE),
+            );
 
             $this->User_keluarga_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('user_keluarga'));
+            redirect(site_url('user_keluarga/index/').$keluarga);
         }
     }
     
@@ -111,17 +132,17 @@ class User_keluarga extends CI_Controller
         }
     }
     
-    public function delete($id) 
+    public function delete($id,$keluarga) 
     {
         $row = $this->User_keluarga_model->get_by_id($id);
 
         if ($row) {
             $this->User_keluarga_model->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('user_keluarga'));
+            redirect(site_url('user_keluarga/index/').$keluarga);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('user_keluarga'));
+            redirect(site_url('user_keluarga/index/').$keluarga);
         }
     }
 

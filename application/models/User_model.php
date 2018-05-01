@@ -31,8 +31,16 @@ class User_model extends CI_Model
         $this->db->order_by($this->id, $this->order);
         return $this->db->get($this->table)->result();
     }
+
+    function get_by_name($params)
+    {
+        $this->db->like('nama', $params);
+        $this->db->order_by($this->id, $this->order);
+        return $this->db->get($this->table)->result();
+    }
+
     function get_user_by_auth($nik,$password){
-        $this->db->where('nik', $nik    );
+        $this->db->where('nik', $nik);
         $this->db->where('password',md5($password));
         return $this->db->get($this->table)->row();
     }

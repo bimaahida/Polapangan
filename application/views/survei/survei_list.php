@@ -63,7 +63,7 @@
                 {
                     "data": "id",
                     "orderable": false
-                },{"data": "keluarga_id"},
+                },{"data": "kepala_keluarga"},
                 {
                     "data" : "action",
                     "orderable": false,

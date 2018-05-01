@@ -21,7 +21,7 @@ class Keluarga_model extends CI_Model
         $this->datatables->from('keluarga');
         //add this line for join
         //$this->datatables->join('table2', 'keluarga.field = table2.field');
-        $this->datatables->add_column('action', anchor(base_url('keluarga/read/$1'),'Read')." | ".anchor(site_url('keluarga/update/$1'),'Update')." | ".anchor(site_url('keluarga/delete/$1'),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
+        $this->datatables->add_column('action', anchor(base_url('user_keluarga/index/$1'),'Anggota')." | ".anchor(base_url('keluarga/read/$1'),'Read')." | ".anchor(site_url('keluarga/update/$1'),'Update')." | ".anchor(site_url('keluarga/delete/$1'),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
         return $this->datatables->generate();
     }
 

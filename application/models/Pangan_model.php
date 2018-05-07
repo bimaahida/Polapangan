@@ -24,6 +24,14 @@ class Pangan_model extends CI_Model
         $this->datatables->add_column('action', anchor(site_url('pangan/read/$1'),'Read')." | ".anchor(site_url('pangan/update/$1'),'Update')." | ".anchor(site_url('pangan/delete/$1'),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
         return $this->datatables->generate();
     }
+    function json_penyuluh() {
+        $this->datatables->select('pangan.id,pangan.nama,takaran,urt,gram,kalori,lemak,karbohidrat,protein,jenis_pangan.nama as jenis_pangan');
+        $this->datatables->from('pangan');
+        //add this line for join
+        $this->datatables->join('jenis_pangan', 'pangan.jenis_pangan_id = jenis_pangan.id');
+        $this->datatables->add_column('action', anchor(site_url('pangan/read/$1'),'Read'), 'id');
+        return $this->datatables->generate();
+    }
 
     // get all
     function get_all()

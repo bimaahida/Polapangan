@@ -21,8 +21,8 @@
                         <input type="text" class="form-control" name="tempat_lahir" id="tempat_lahir"  value="<?php echo $tempat_lahir; ?>" />
                     </div>
                     <div class="form-group label-floating">
-                        <label for="date" class="control-label">Tgl Lahir <?php echo form_error('tgl_lahir') ?></label>
-                        <input type="text" class="form-control" name="tgl_lahir" id="tgl_lahir" value="<?php echo $tgl_lahir; ?>" />
+                        <label for="date" >Tanggal Lahir <?php echo form_error('tgl_lahir') ?></label>
+                        <input type="date" class="form-control" name="tgl_lahir" id="tgl_lahir" value="<?php echo $tgl_lahir; ?>" />
                     </div>
                     <div class="form-group label-floating">
                         <label for="varchar" class="control-label">Jenis Kelamin <?php echo form_error('jk') ?></label>
@@ -60,10 +60,12 @@
                         <label for="varchar" class="control-label">Pekerjaan <?php echo form_error('pekerjaan') ?></label>
                         <input type="text" class="form-control" name="pekerjaan" id="pekerjaan" value="<?php echo $pekerjaan; ?>" />
                     </div>
-                    <div class="form-group label-floating">
-                        <label for="int">Status Id <?php echo form_error('status_id') ?></label>
-                        <input type="text" class="form-control" name="status_id" id="status_id" value="<?php echo $status_id; ?>" />
-                    </div>
+                    <?php if ($this->session->userdata('auth')['status'] == 1) { ?>
+                        <div class="form-group label-floating">
+                            <label for="int">Status Id <?php echo form_error('status_id') ?></label>
+                            <input type="text" class="form-control" name="status_id" id="status_id" value="<?php echo $status_id; ?>" />
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
             <input type="hidden" name="id" value="<?php echo $id; ?>" /> 

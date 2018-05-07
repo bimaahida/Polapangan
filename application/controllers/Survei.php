@@ -23,7 +23,11 @@ class Survei extends CI_Controller
     
     public function json() {
         header('Content-Type: application/json');
-        echo $this->Survei_model->json();
+        if ($this->session->userdata('auth')['status'] == 1) {
+            echo $this->Survei_model->json();
+        }else{
+            echo $this->Survei_model->json_penyuluh($this->session->userdata('auth')['id']);
+        }
     }
 
     public function read($id) 

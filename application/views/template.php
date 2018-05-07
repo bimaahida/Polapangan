@@ -71,22 +71,18 @@
                             <p>Pangan</p>
                         </a>
                     </li>
-                    <li <?php if ($menus == 'jenis_pangan') {echo 'class="active"';}?>>
-                        <a href="<?= base_url()?>jenis_pangan">
-                            <i class="material-icons">bubble_chart</i>
-                            <p>Jenis Pangan</p>
-                        </a>
-                    </li>
+                    <?php if ($this->session->userdata('auth')['status'] == 1) { ?>
+                        <li <?php if ($menus == 'jenis_pangan') {echo 'class="active"';}?>>
+                            <a href="<?= base_url()?>jenis_pangan">
+                                <i class="material-icons">bubble_chart</i>
+                                <p>Jenis Pangan</p>
+                            </a>
+                        </li>
+                    <?php }?>
                     <li <?php if ($menus == 'survei') {echo 'class="active"';}?>>
                         <a href="<?= base_url()?>survei">
                             <i class="material-icons">location_on</i>
                             <p>Survei</p>
-                        </a>
-                    </li>
-                    <li <?php if ($menus == 'pangan_keluarga') {echo 'class="active"';}?>>
-                        <a href="<?= base_url()?>pangan_keluarga">
-                            <i class="material-icons text-gray">notifications</i>
-                            <p>Pangan Keluarga</p>
                         </a>
                     </li>
                 </ul>

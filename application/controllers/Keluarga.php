@@ -18,13 +18,18 @@ class Keluarga extends CI_Controller
 
     public function index()
     {
+        // var_dump($this->session->userdata('auth'));
         $this->render['content']= $this->load->view('keluarga/keluarga_list', array(), TRUE);
         $this->load->view('template', $this->render);
     } 
     
     public function json() {
         header('Content-Type: application/json');
-        echo $this->Keluarga_model->json();
+        if ($this->session->userdata('auth')['status'] == 1) {
+            echo $this->Keluarga_model->json();   
+        }else{
+            echo $this->Keluarga_model->json_penyuluh($this->session->userdata('auth')['id']);
+        }
     }
 
     public function read($id) 

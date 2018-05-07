@@ -17,8 +17,17 @@ class Survei_model extends CI_Model
 
     // datatables
     function json() {
-        $this->datatables->select('survei.id,keluarga.kepala_keluarga');
+        $this->datatables->select('survei.id,keluarga.kepala_keluarga,keluarga.penyuluh_id');
         $this->datatables->from('survei');
+        //add this line for join
+        $this->datatables->join('keluarga', 'survei.keluarga_id = keluarga.id');
+        $this->datatables->add_column('action', anchor(site_url('survei/read/$1'),'Read')." | ".anchor(site_url('survei/update/$1'),'Update')." | ".anchor(site_url('survei/delete/$1'),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
+        return $this->datatables->generate();
+    }
+    function json_penyuluh($penyuluh) {
+        $this->datatables->select('survei.id,keluarga.kepala_keluarga,keluarga.penyuluh_id');
+        $this->datatables->from('survei');
+        $this->datatables->where('keluarga.penyuluh_id',$penyuluh);
         //add this line for join
         $this->datatables->join('keluarga', 'survei.keluarga_id = keluarga.id');
         $this->datatables->add_column('action', anchor(site_url('survei/read/$1'),'Read')." | ".anchor(site_url('survei/update/$1'),'Update')." | ".anchor(site_url('survei/delete/$1'),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');

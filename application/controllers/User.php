@@ -23,7 +23,11 @@ class User extends CI_Controller
     
     public function json() {
         header('Content-Type: application/json');
-        echo $this->User_model->json();
+        if ($this->session->userdata('auth')['status'] == 1) {
+            echo $this->User_model->json();   
+        }else{
+            echo $this->User_model->json_penyuluh();
+        }
     }
 
     public function read($id) 
@@ -57,7 +61,6 @@ class User extends CI_Controller
             'id' => set_value('id'),
             'nik' => set_value('nik'),
             'nama' => set_value('nama'),
-            'password' => set_value('password'),
             'tempat_lahir' => set_value('tempat_lahir'),
             'tgl_lahir' => set_value('tgl_lahir'),
             'jk' => set_value('jk'),
@@ -77,18 +80,24 @@ class User extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->create();
         } else {
+            if ($this->session->userdata('auth')['status'] == 1) {
+                $status = $this->input->post('status_id',TRUE);
+            }else{
+                $status = 3;
+            }
+
             $data = array(
-		'nik' => $this->input->post('nik',TRUE),
-		'nama' => $this->input->post('nama',TRUE),
-		'password' => $this->input->post('password',TRUE),
-		'tempat_lahir' => $this->input->post('tempat_lahir',TRUE),
-		'tgl_lahir' => $this->input->post('tgl_lahir',TRUE),
-		'jk' => $this->input->post('jk',TRUE),
-		'agama' => $this->input->post('agama',TRUE),
-		'pendidikan' => $this->input->post('pendidikan',TRUE),
-		'pekerjaan' => $this->input->post('pekerjaan',TRUE),
-		'status_id' => $this->input->post('status_id',TRUE),
-	    );
+            'nik' => $this->input->post('nik',TRUE),
+            'nama' => $this->input->post('nama',TRUE),
+            'password' => md5($this->input->post('nik',TRUE)),
+            'tempat_lahir' => $this->input->post('tempat_lahir',TRUE),
+            'tgl_lahir' => $this->input->post('tgl_lahir',TRUE),
+            'jk' => $this->input->post('jk',TRUE),
+            'agama' => $this->input->post('agama',TRUE),
+            'pendidikan' => $this->input->post('pendidikan',TRUE),
+            'pekerjaan' => $this->input->post('pekerjaan',TRUE),
+            'status_id' => $status,
+            );
 
             $this->User_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
@@ -167,15 +176,12 @@ class User extends CI_Controller
     {
 	$this->form_validation->set_rules('nik', 'nik', 'trim|required');
 	$this->form_validation->set_rules('nama', 'nama', 'trim|required');
-	$this->form_validation->set_rules('password', 'password', 'trim|required');
 	$this->form_validation->set_rules('tempat_lahir', 'tempat lahir', 'trim|required');
 	$this->form_validation->set_rules('tgl_lahir', 'tgl lahir', 'trim|required');
 	$this->form_validation->set_rules('jk', 'jk', 'trim|required');
 	$this->form_validation->set_rules('agama', 'agama', 'trim|required');
 	$this->form_validation->set_rules('pendidikan', 'pendidikan', 'trim|required');
 	$this->form_validation->set_rules('pekerjaan', 'pekerjaan', 'trim|required');
-	$this->form_validation->set_rules('status_id', 'status id', 'trim|required');
-
 	$this->form_validation->set_rules('id', 'id', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }

@@ -24,6 +24,15 @@ class User_model extends CI_Model
         $this->datatables->add_column('action', anchor(site_url('user/read/$1'),'Read')." | ".anchor(site_url('user/update/$1'),'Update')." | ".anchor(site_url('user/delete/$1'),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
         return $this->datatables->generate();
     }
+    function json_penyuluh() {
+        $this->datatables->select('id,nik,nama,password,tempat_lahir,DATE_FORMAT(tgl_lahir, "%a %D %M %Y") as tgl_lahir,jk,agama,pendidikan,pekerjaan,status_id');
+        $this->datatables->from('user');
+        $this->datatables->where('status_id','3');
+        //add this line for join
+        //$this->datatables->join('table2', 'user.field = table2.field');
+        $this->datatables->add_column('action', anchor(site_url('user/read/$1'),'Read')." | ".anchor(site_url('user/update/$1'),'Update')." | ".anchor(site_url('user/delete/$1'),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
+        return $this->datatables->generate();
+    }
 
     // get all
     function get_all()

@@ -25,7 +25,9 @@
         </div>
     </div>
     <div class="col-md-12 text-right">
-        <?php echo anchor(site_url('pangan/create'), 'Create', 'class="btn btn-warning"'); ?>
+        <?php if ($this->session->userdata('auth')['status'] == 1) { ?>
+            <?php echo anchor(site_url('pangan/create'), 'Create', 'class="btn btn-warning"'); ?>
+        <?php } ?>
         <?php echo anchor(site_url('pangan/excel'), 'Excel', 'class="btn btn-default"'); ?>
     </div>
 </div>

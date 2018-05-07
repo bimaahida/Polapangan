@@ -24,7 +24,11 @@ class Pangan extends CI_Controller
     
     public function json() {
         header('Content-Type: application/json');
-        echo $this->Pangan_model->json();
+        if ($this->session->userdata('auth')['status'] == 1) {
+            echo $this->Pangan_model->json();   
+        }else{
+            echo $this->Pangan_model->json_penyuluh();
+        }
     }
 
     public function read($id) 

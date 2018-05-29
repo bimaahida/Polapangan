@@ -26,12 +26,10 @@ class Auth extends CI_Controller
 				'nama' => $auth->nama,
 				'status' => $auth->status_id
 				);
-
             $this->session->set_userdata('auth',$data_session);
             
             redirect('keluarga','refresh');
         }else{
-            
             redirect('auth','refresh');
             
         }

@@ -25,7 +25,9 @@
     </div>
 </div>
 <div class="col-md-12 text-right">
-    <?php echo anchor(base_url('keluarga/create'), 'Create', 'class="btn btn-warning"'); ?>
+    <?php if ($this->session->userdata('auth')['status'] == 2) { ?>
+        <?php echo anchor(base_url('keluarga/create'), 'Create', 'class="btn btn-warning"'); ?>
+    <?php } ?>
     <?php echo anchor(base_url('keluarga/excel'), 'Excel', 'class="btn btn-default"'); ?>
 </div>
 </div>

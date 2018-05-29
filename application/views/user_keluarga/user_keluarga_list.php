@@ -30,7 +30,9 @@
     </div>
 </div>
 <div class="col-md-12 text-right">
-    <?php echo anchor(base_url('user_keluarga/create/').$id, 'Create', 'class="btn btn-warning"'); ?>
+    <?php if ($this->session->userdata('auth')['status'] == 2) { ?>
+        <?php echo anchor(base_url('user_keluarga/create/').$id, 'Create', 'class="btn btn-warning"'); ?>
+    <?php } ?>
 </div>
 </div>
 <script type="text/javascript">

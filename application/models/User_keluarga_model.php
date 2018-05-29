@@ -7,7 +7,7 @@ class User_keluarga_model extends CI_Model
 {
 
     public $table = 'user_keluarga';
-    public $id = 'id';
+    public $id = 'user_keluarga.id';
     public $order = 'DESC';
 
     function __construct()
@@ -30,6 +30,16 @@ class User_keluarga_model extends CI_Model
     function get_all()
     {
         $this->db->order_by($this->id, $this->order);
+        return $this->db->get($this->table)->result();
+    }
+
+    
+    function get_relasion_keluarga($keluarga){
+        $this->db->select('kepala_keluarga,alamat,nama as penyuluh,desa,kec,kab,no_keluarga');
+        $this->db->order_by($this->id, $this->order);
+        $this->db->where('keluarga_id',$keluarga);
+        $this->db->join('keluarga','user_keluarga.keluarga_id = keluarga.id');
+        $this->db->join('user','keluarga.penyuluh_id = user.id');
         return $this->db->get($this->table)->result();
     }
 

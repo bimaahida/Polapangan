@@ -56,7 +56,7 @@
                     <li <?php if ($menus == 'user') {echo 'class="active"';}?>>
                         <a href="<?= base_url()?>user">
                             <i class="material-icons">person</i>
-                            <p>User</p>
+                            <p>Masyarakat</p>
                         </a>
                     </li>
                     <li <?php if ($menus == 'keluarga') {echo 'class="active"';}?>>

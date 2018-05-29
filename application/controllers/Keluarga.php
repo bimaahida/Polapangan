@@ -22,6 +22,42 @@ class Keluarga extends CI_Controller
         $this->render['content']= $this->load->view('keluarga/keluarga_list', array(), TRUE);
         $this->load->view('template', $this->render);
     } 
+    public function rekap(){
+        $data = array(
+            'button' => 'Find',
+            'action' => site_url('keluarga/rekap_action'),
+            'desa' => $this->Keluarga_model->get_desa($this->session->userdata('auth')['id'])
+        );
+        $this->render['content']= $this->load->view('keluarga/rekap_form', $data, TRUE);
+        $this->load->view('template', $this->render);
+    }
+
+    public function DataAsalBahanPangan(){
+        $this->load->model('Detail_pangan_keluarga_model');
+        $data=array(
+            'beli' => $this->Detail_pangan_keluarga_model->get_bahan_pangan_report('beli'),
+            'pekarangan' => $this->Detail_pangan_keluarga_model->get_bahan_pangan_report('pekarangan'),
+            'diberi' => $this->Detail_pangan_keluarga_model->get_bahan_pangan_report('diberi'),
+        );
+        $lengths = count(max($data));
+        $this->load->view('keluarga/pangan_asal_laporan', array('data' => $data, 'length' => $lengths));
+    }
+    public function rekap_action(){
+        $this->form_validation->set_rules('desa', 'Desa', 'trim|required');
+        $this->form_validation->set_rules('tgl', 'Tanggal', 'trim|required');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->rekap();
+        } else {
+           $tgl_select = $this->input->post('tgl',TRUE);
+           $tgl_after = date('Y-m-d', strtotime($tgl_select. ' + 2 days'));
+           $desa = $this->input->post('desa',TRUE);
+
+            // $this->Keluarga_model->insert($data);
+            // $this->session->set_flashdata('message', 'Create Record Success');
+            // redirect(site_url('keluarga'));
+        }
+    }
     
     public function json() {
         header('Content-Type: application/json');

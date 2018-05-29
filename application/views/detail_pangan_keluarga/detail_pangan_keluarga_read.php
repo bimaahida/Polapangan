@@ -15,7 +15,6 @@
 	    <tr><td>Urt</td><td><?php echo $urt; ?></td></tr>
 	    <tr><td>Berat</td><td><?php echo $berat; ?></td></tr>
 	    <tr><td>Asal</td><td><?php echo $asal; ?></td></tr>
-	    <tr><td>Jumlah Pemakan</td><td><?php echo $jumlah_pemakan; ?></td></tr>
 	    <tr><td>Rata Rata Berat</td><td><?php echo $rata_rata_berat; ?></td></tr>
 	    <tr><td>Pangan Keluarga Id</td><td><?php echo $pangan_keluarga_id; ?></td></tr>
 	    <tr><td>Pangan Id</td><td><?php echo $pangan_id; ?></td></tr>

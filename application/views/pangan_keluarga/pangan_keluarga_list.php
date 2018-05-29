@@ -8,7 +8,7 @@
     ?>
     <div class="card">
         <div class="card-header" data-background-color="orange">
-            <h4 class="title">Jenis Pangan List</h4>
+            <h4 class="title">Pangan List</h4>
         </div>
         <div class="card-content table-responsive">
             <table class="table" id="mytable">
@@ -18,6 +18,7 @@
                     <th>Nama</th>
                     <th>Tgl</th>
                     <th>Keterangan</th>
+                    <th>Jumlah Pemakan</th>
                     <th width="200px">Action</th>
                 </tr>
                 </thead>
@@ -25,8 +26,10 @@
         </div>
     </div>
     <div class="col-md-12 text-right">
-        <?php echo anchor(site_url('pangan_keluarga/create/'.$id), 'Create', 'class="btn btn-warning"'); ?>
-        <?php echo anchor(site_url('pangan_keluarga/excel'), 'Excel', 'class="btn btn-default"'); ?>
+        <?php if ($this->session->userdata('auth')['status'] == 2) { ?>
+            <?php echo anchor(site_url('pangan_keluarga/create/'.$id), 'Create', 'class="btn btn-warning"'); ?>
+        <?php } ?>
+        <a class="btn btn-success" href="<?php echo site_url('pangan_keluarga/laporan/'.$id) ?>" target="_blank">Print</a>
     </div>
 </div>
 <script type="text/javascript">
@@ -65,7 +68,7 @@
                 {
                     "data": "id",
                     "orderable": false
-                },{"data": "nama"},{"data": "tgl"},{"data": "keterangan"},
+                },{"data": "nama"},{"data": "tgl"},{"data": "keterangan"},{"data": "jumlah_pemakan"},
                 {
                     "data" : "action",
                     "orderable": false,

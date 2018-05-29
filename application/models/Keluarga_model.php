@@ -7,7 +7,7 @@ class Keluarga_model extends CI_Model
 {
 
     public $table = 'keluarga';
-    public $id = 'id';
+    public $id = 'keluarga.id';
     public $order = 'DESC';
 
     function __construct()
@@ -21,7 +21,7 @@ class Keluarga_model extends CI_Model
         $this->datatables->from('keluarga');
         //add this line for join
         //$this->datatables->join('table2', 'keluarga.field = table2.field');
-        $this->datatables->add_column('action', anchor(base_url('pangan_keluarga/index/$1'),'Pangan')." | ".anchor(base_url('user_keluarga/index/$1'),'Anggota')." | ".anchor(base_url('keluarga/read/$1'),'Read')." | ".anchor(site_url('keluarga/update/$1'),'Update')." | ".anchor(site_url('keluarga/delete/$1'),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
+        $this->datatables->add_column('action', anchor(base_url('pangan_keluarga/list/$1'),'Pangan')." | ".anchor(base_url('user_keluarga/index/$1'),'Anggota')." | ".anchor(base_url('keluarga/read/$1'),'Read')." | ".anchor(site_url('keluarga/update/$1'),'Update')." | ".anchor(site_url('keluarga/delete/$1'),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
         return $this->datatables->generate();
     }
     function json_penyuluh($penyuluh) {
@@ -30,7 +30,7 @@ class Keluarga_model extends CI_Model
         $this->datatables->where('penyuluh_id',$penyuluh);
         //add this line for join
         //$this->datatables->join('table2', 'keluarga.field = table2.field');
-        $this->datatables->add_column('action', anchor(base_url('pangan_keluarga/index/$1'),'Pangan')." | ".anchor(base_url('user_keluarga/index/$1'),'Anggota')." | ".anchor(base_url('keluarga/read/$1'),'Read')." | ".anchor(site_url('keluarga/update/$1'),'Update')." | ".anchor(site_url('keluarga/delete/$1'),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
+        $this->datatables->add_column('action', anchor(base_url('pangan_keluarga/list/$1'),'Pangan')." | ".anchor(base_url('user_keluarga/index/$1'),'Anggota')." | ".anchor(base_url('keluarga/read/$1'),'Read')." | ".anchor(site_url('keluarga/update/$1'),'Update')." | ".anchor(site_url('keluarga/delete/$1'),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
         return $this->datatables->generate();
     }
 
@@ -40,6 +40,15 @@ class Keluarga_model extends CI_Model
         $this->db->order_by($this->id, $this->order);
         return $this->db->get($this->table)->result();
     }
+
+    function get_desa($penyuluh){
+        $this->db->select('desa');
+        $this->db->distinct();
+        $this->db->where('penyuluh_id',$penyuluh);
+        $this->db->order_by('desa', $this->order);
+        return $this->db->get($this->table)->result();
+    }
+    
     function autocomplate($params){
         $this->db->like('kepala_keluarga', $params , 'both');
         $this->db->order_by($this->id, $this->order);

@@ -52,6 +52,8 @@ class Jenis_pangan extends CI_Controller
             'action' => site_url('jenis_pangan/create_action'),
             'id' => set_value('id'),
             'nama' => set_value('nama'),
+            'bobot' => set_value('bobot'),
+            'skor' => set_value('skor'),
         );
         $this->render['content']= $this->load->view('jenis_pangan/jenis_pangan_form', $data, TRUE);
         $this->load->view('template', $this->render);
@@ -65,8 +67,10 @@ class Jenis_pangan extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'nama' => $this->input->post('nama',TRUE),
-	    );
+                'nama' => $this->input->post('nama',TRUE),
+                'bobot' => $this->input->post('bobot',TRUE),
+                'skor_max' => $this->input->post('skor',TRUE),
+            );
 
             $this->Jenis_pangan_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
@@ -84,6 +88,8 @@ class Jenis_pangan extends CI_Controller
                 'action' => site_url('jenis_pangan/update_action'),
                 'id' => set_value('id', $row->id),
                 'nama' => set_value('nama', $row->nama),
+                'bobot' => set_value('bobot',$row->bobot),
+                'skor' => set_value('skor',$row->skor_max),
                 );
                 $this->render['content']= $this->load->view('jenis_pangan/jenis_pangan_form', $data, TRUE);
                 $this->load->view('template', $this->render);
@@ -101,8 +107,10 @@ class Jenis_pangan extends CI_Controller
             $this->update($this->input->post('id', TRUE));
         } else {
             $data = array(
-		'nama' => $this->input->post('nama',TRUE),
-	    );
+                'nama' => $this->input->post('nama',TRUE),
+                'bobot' => $this->input->post('bobot',TRUE),
+                'skor_max' => $this->input->post('skor',TRUE),
+	        );
 
             $this->Jenis_pangan_model->update($this->input->post('id', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');

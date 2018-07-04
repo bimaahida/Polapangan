@@ -62,13 +62,19 @@
                     </div>
                     <?php if ($this->session->userdata('auth')['status'] == 1) { ?>
                         <div class="form-group label-floating">
-                            <label for="int">Status Id <?php echo form_error('status_id') ?></label>
-                            <input type="text" class="form-control" name="status_id" id="status_id" value="<?php echo $status_id; ?>" />
+                            <label for="int">Status<?php echo form_error('status_id') ?></label>
+                            <select name="status_id" id="status_id"  class="form-control" >
+                                <option value="1" <?php if ($status_id == 1) echo 'selected'; ?>>ADMIN</option>
+                                <option value="2" <?php if ($status_id == 2) echo 'selected'; ?>>PENYULUH</option>
+                            </select>
                         </div>
                     <?php } ?>
                 </div>
             </div>
             <input type="hidden" name="id" value="<?php echo $id; ?>" /> 
+            <?php if ($button == 'Update' && $this->session->userdata('auth')['status'] != 1) { ?>
+                <input type="hidden" name="status_id" value="<?php echo $status_id; ?>" /> 
+            <?php } ?>
             <button type="submit" class="btn btn-warning pull-right"><?php echo $button ?></button> 
             <a href="<?php echo site_url('user') ?>" class="btn btn-default pull-right">Cancel</a>
             <div class="clearfix"></div>

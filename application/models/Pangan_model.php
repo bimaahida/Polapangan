@@ -43,7 +43,7 @@ class Pangan_model extends CI_Model
     // get data by id
     function get_by_id($id)
     {
-        $this->datatables->select('pangan.id,pangan.nama,takaran,urt,gram,kalori,lemak,karbohidrat,protein,jenis_pangan.nama as jenis_pangan');
+        $this->datatables->select('pangan.id,pangan.nama,takaran,urt,gram,kalori,lemak,karbohidrat,protein,jenis_pangan.nama as jenis_pangan,jenis_pangan_id');
         $this->db->where($this->id, $id);
         $this->db->join('jenis_pangan', 'pangan.jenis_pangan_id = jenis_pangan.id');
         return $this->db->get($this->table)->row();

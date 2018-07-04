@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'polapangan',
+	'hostname' => '35.240.143.30',
+	'username' => 'pola_pangan',
+	'password' => '123456789',
+	'database' => 'pola_pangan',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

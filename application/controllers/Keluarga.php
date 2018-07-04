@@ -123,6 +123,7 @@ class Keluarga extends CI_Controller
             'kode_pos' => set_value('kode_pos'),
             'latitude' => set_value('latitude'),
             'longitude' => set_value('longitude'),
+            'penyuluh_id' =>set_value('penyuluh_id',$this->session->userdata('auth')['id'])
         );
         $this->render['content']= $this->load->view('keluarga/keluarga_form', $data, TRUE);
         $this->load->view('template', $this->render);
@@ -157,6 +158,7 @@ class Keluarga extends CI_Controller
             'kode_pos' => $this->input->post('kode_pos',TRUE),
             'latitude' => $lat,
             'longitude' => $long,
+            'penyuluh_id' => $this->input->post('penyuluh_id',TRUE),
             );
 
             $this->Keluarga_model->insert($data);

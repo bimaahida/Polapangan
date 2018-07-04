@@ -61,6 +61,7 @@
             <input type="hidden" name="longitude" id="longitude"  value="<?php echo $longitude; ?>" />
             <input type="hidden" name="latitude"  id="latitude" value="<?php echo $latitude; ?>" />
             <input type="hidden" name="id" value="<?php echo $id; ?>" /> 
+            <input type="hidden" name="penyuluh_id" value="<?php echo $penyuluh_id; ?>" /> 
             <button type="submit" class="btn btn-primary pull-right"><?php echo $button ?></button> 
             <a href="<?php echo site_url('keluarga') ?>" class="btn btn-default pull-right">Cancel</a>
             <div class="clearfix"></div>

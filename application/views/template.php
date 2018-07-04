@@ -41,7 +41,7 @@
         Tip 2: you can also add an image using data-image tag
     -->
             <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
+                <a href="<?= base_url()?>">" class="simple-text">
                     Pola Pangan
                 </a>
             </div>
@@ -55,36 +55,42 @@
                     </li>
                     <li <?php if ($menus == 'user') {echo 'class="active"';}?>>
                         <a href="<?= base_url()?>user">
-                            <i class="material-icons">person</i>
+                            <i class="material-icons">how_to_reg</i>
                             <p>Masyarakat</p>
                         </a>
                     </li>
                     <li <?php if ($menus == 'keluarga') {echo 'class="active"';}?>>
                         <a href="<?= base_url()?>keluarga">
-                            <i class="material-icons">content_paste</i>
+                            <i class="material-icons">contacts</i>
                             <p>Keluarga</p>
                         </a>
                     </li>
                     <li <?php if ($menus == 'pangan') {echo 'class="active"';}?>>
                         <a href="<?= base_url()?>pangan">
-                            <i class="material-icons">library_books</i>
+                            <i class="material-icons">local_dining</i>
                             <p>Pangan</p>
                         </a>
                     </li>
                     <?php if ($this->session->userdata('auth')['status'] == 1) { ?>
                         <li <?php if ($menus == 'jenis_pangan') {echo 'class="active"';}?>>
                             <a href="<?= base_url()?>jenis_pangan">
-                                <i class="material-icons">bubble_chart</i>
+                                <i class="material-icons">restaurant</i>
                                 <p>Jenis Pangan</p>
                             </a>
                         </li>
+                        <li <?php if ($menus == 'pangan_harapan') {echo 'class="active"';}?>>
+                            <a href="<?= base_url()?>Detail_pangan_keluarga" target="_blank">
+                                <i class="material-icons">print</i>
+                                <p>Pangan Harapan</p>
+                            </a>
+                        </li>
                     <?php }?>
-                    <li <?php if ($menus == 'survei') {echo 'class="active"';}?>>
+                    <!-- <li <?php if ($menus == 'survei') {echo 'class="active"';}?>>
                         <a href="<?= base_url()?>survei">
                             <i class="material-icons">location_on</i>
                             <p>Survei</p>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>

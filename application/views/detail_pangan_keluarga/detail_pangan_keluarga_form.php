@@ -7,9 +7,9 @@
         <div class="card-content">
             <form action="<?php echo $action; ?>" method="post">
             <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group label-floating">
-                        <label for="varchar">Pangan <?php echo form_error('pangan_id') ?></label>
+                    <div class="col-md-6">
+                        <div class="form-group label-floating">
+                            <label for="varchar">Pangan <?php echo form_error('pangan_id') ?></label>
                             <select class="form-control" name="pangan_id" id="pangan_id" >
                                 <?php foreach ($pangan as $key) { ?>
                                     <option value="<?= $key->id?>" <?php if($pangan_id == $key->id ){echo 'selected';} ?>><?= $key->nama ?></option>
@@ -17,18 +17,10 @@
                             </select>
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group label-floating">
-                            <label for="double" class="control-label">Urt <?php echo form_error('urt') ?></label>
+                            <label for="double" >Urt <?php echo form_error('urt') ?></label>
                             <input type="text" class="form-control" name="urt" id="urt" value="<?php echo $urt; ?>" />
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group label-floating">
-                            <label for="double" class="control-label">Berat <?php echo form_error('berat') ?></label>
-                            <input type="text" class="form-control" name="berat" id="berat" value="<?php echo $berat; ?>" />
                         </div>
                     </div>
                 </div>

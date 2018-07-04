@@ -27,8 +27,8 @@
     </div>
 </div>
 <div class="col-md-12 text-right">
-    <?php echo anchor(base_url('user/create'), 'Create', 'class="btn btn-warning"'); ?>
-    <?php echo anchor(base_url('user/excel'), 'Excel', 'class="btn btn-default"'); ?>
+    <?php echo anchor(base_url('user/create'), ' <i class="material-icons">add_box</i> Create', 'class="btn btn-warning"'); ?>
+    <?php echo anchor(base_url('user/excel'), ' <i class="material-icons">cloud_download</i> Excel', 'class="btn btn-default"'); ?>
 </div>
 </div>
         <script type="text/javascript">

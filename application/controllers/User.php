@@ -113,19 +113,19 @@ class User extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('user/update_action'),
-		'id' => set_value('id', $row->id),
-		'nik' => set_value('nik', $row->nik),
-		'nama' => set_value('nama', $row->nama),
-		'password' => set_value('password', $row->password),
-		'tempat_lahir' => set_value('tempat_lahir', $row->tempat_lahir),
-		'tgl_lahir' => set_value('tgl_lahir', $row->tgl_lahir),
-		'jk' => set_value('jk', $row->jk),
-		'agama' => set_value('agama', $row->agama),
-		'pendidikan' => set_value('pendidikan', $row->pendidikan),
-		'pekerjaan' => set_value('pekerjaan', $row->pekerjaan),
-		'status_id' => set_value('status_id', $row->status_id),
-	    );
-            $this->load->view('user/user_form', $data);
+                'id' => set_value('id', $row->id),
+                'nik' => set_value('nik', $row->nik),
+                'nama' => set_value('nama', $row->nama),
+                'tempat_lahir' => set_value('tempat_lahir', $row->tempat_lahir),
+                'tgl_lahir' => set_value('tgl_lahir', $row->lahir),
+                'jk' => set_value('jk', $row->jk),
+                'agama' => set_value('agama', $row->agama),
+                'pendidikan' => set_value('pendidikan', $row->pendidikan),
+                'pekerjaan' => set_value('pekerjaan', $row->pekerjaan),
+                'status_id' => set_value('status_id',$row->status_id),
+            );
+            $this->render['content']= $this->load->view('user/user_form', $data, TRUE);
+        $this->load->view('template', $this->render);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('user'));

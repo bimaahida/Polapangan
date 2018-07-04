@@ -15,13 +15,12 @@ class Detail_pangan_keluarga extends CI_Controller
         $this->render['menus'] = 'keluarga';
     }
 
-    public function list($pangan)
-    {
+    public function detail_pangan($pangan){
         $this->render['content']= $this->load->view('detail_pangan_keluarga/detail_pangan_keluarga_list', array('id'=>$pangan), TRUE);
         $this->load->view('template', $this->render);
     } 
 
-    public function pph(){
+    public function index(){
         $data = $this->Detail_pangan_keluarga_model->pph();
         $this->load->view('pangan_keluarga/pph', array('data'=> $data));
         
@@ -60,7 +59,6 @@ class Detail_pangan_keluarga extends CI_Controller
             'action' => site_url('detail_pangan_keluarga/create_action/'.$pangan),
             'id' => set_value('id'),
             'urt' => set_value('urt'),
-            'berat' => set_value('berat'),
             'asal' => set_value('asal'),
             'pangan_keluarga_id' => set_value('pangan_keluarga_id',$pangan),
             'pangan_id' => set_value('pangan_id'),
@@ -73,17 +71,18 @@ class Detail_pangan_keluarga extends CI_Controller
     public function create_action($pangan) 
     {
         $this->load->model('Pangan_keluarga_model');
+        $this->load->model('Pangan_model');
         $pangan_detail = $this->Pangan_keluarga_model->get_by_id($this->input->post('pangan_keluarga_id',TRUE));
-        $rata =  $this->input->post('berat',TRUE) / $pangan_detail->jumlah_pemakan;
-
+        $pangan_data = $this->Pangan_model->get_by_id($this->input->post('pangan_id',TRUE));
+        $rata =  ( $pangan_data->gram * $this->input->post('urt',TRUE))  / $pangan_detail->jumlah_pemakan;
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
-            $this->create();
+            $this->create($pangan);
         } else {
             $data = array(
             'urt' => $this->input->post('urt',TRUE),
-            'berat' => $this->input->post('berat',TRUE),
+            'berat' => $pangan_data->gram * $this->input->post('urt',TRUE),
             'asal' => $this->input->post('asal',TRUE),
             'rata_rata_berat' => $rata,
             'pangan_keluarga_id' => $this->input->post('pangan_keluarga_id',TRUE),
@@ -92,7 +91,8 @@ class Detail_pangan_keluarga extends CI_Controller
 
             $this->Detail_pangan_keluarga_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('detail_pangan_keluarga/list/'.$pangan));
+            var_dump($pangan);
+            redirect(site_url('detail_pangan_keluarga/detail_pangan/'.$pangan));
         }
     }
     
@@ -118,7 +118,7 @@ class Detail_pangan_keluarga extends CI_Controller
                 $this->load->view('template', $this->render);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('detail_pangan_keluarga/list/'.$pangan));
+            redirect(site_url('detail_pangan_keluarga/detail_pangan/'.$pangan));
         }
     }
     
@@ -144,7 +144,7 @@ class Detail_pangan_keluarga extends CI_Controller
 
             $this->Detail_pangan_keluarga_model->update($this->input->post('id', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('detail_pangan_keluarga/list/'.$pangan));
+            redirect(site_url('detail_pangan_keluarga/detail_pangan/'.$pangan));
         }
     }
     
@@ -155,17 +155,16 @@ class Detail_pangan_keluarga extends CI_Controller
         if ($row) {
             $this->Detail_pangan_keluarga_model->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('detail_pangan_keluarga/list/'.$pangan));
+            redirect(site_url('detail_pangan_keluarga/detail_pangan/'.$pangan));
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('detail_pangan_keluarga/list/'.$pangan));
+            redirect(site_url('detail_pangan_keluarga/detail_pangan/'.$pangan));
         }
     }
 
     public function _rules() 
     {
 	$this->form_validation->set_rules('urt', 'urt', 'trim|required|numeric');
-	$this->form_validation->set_rules('berat', 'berat', 'trim|required|numeric');
 	$this->form_validation->set_rules('asal', 'asal', 'trim|required');
 	$this->form_validation->set_rules('pangan_keluarga_id', 'pangan keluarga id', 'trim|required');
 	$this->form_validation->set_rules('pangan_id', 'pangan id', 'trim|required');

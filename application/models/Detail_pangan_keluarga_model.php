@@ -7,7 +7,7 @@ class Detail_pangan_keluarga_model extends CI_Model
 {
 
     public $table = 'detail_pangan_keluarga';
-    public $id = 'detail_pangan_keluargaid';
+    public $id = 'detail_pangan_keluarga.id';
     public $order = 'DESC';
 
     function __construct()

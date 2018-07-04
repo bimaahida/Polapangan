@@ -68,7 +68,7 @@
                             <label for="int">Jenis Pangan<?php echo form_error('jenis_pangan_id') ?></label>
                             <select class="form-control" name="jenis_pangan_id" id="jenis_pangan_id">
                                 <?php foreach ($jenis as $key => $value) { ?>
-                                    <option value="<?= $value->id?>" <?php if($jenis_pangan_id == $value){echo 'selected';}?>><?= $value->nama?></option>
+                                    <option value="<?= $value->id?>" <?php if($jenis_pangan_id == $value->id){echo 'selected';}?>><?= $value->nama?></option>
                                 <?php } ?>
                             </select>
                         </div>

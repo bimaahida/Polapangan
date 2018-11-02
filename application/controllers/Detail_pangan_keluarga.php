@@ -20,15 +20,48 @@ class Detail_pangan_keluarga extends CI_Controller
         $this->load->view('template', $this->render);
     } 
 
-    public function index(){
-        $data = $this->Detail_pangan_keluarga_model->pph();
+    public function index($tahun){
+        $tahun_awal = ($tahun+0) - 1;
+        $start = $tahun_awal."-01-01";
+        $end = $tahun."-12-31";
+        $data = $this->Detail_pangan_keluarga_model->pph($start,$end);
         $this->load->view('pangan_keluarga/pph', array('data'=> $data));
         
+    }
+    public function detail_view(){
+        $tahun = $this->input->post('tahun',TRUE);
+        $tahun_awal = ($tahun+0) - 1;
+        $start = $tahun_awal."-01-01";
+        $end = $tahun."-12-31";
+        // var_dump($start);
+        $data = $this->Detail_pangan_keluarga_model->pph($start,$end);
+        $this->render['page_title'] = 'Pangan Harapan';
+        $this->render['menus'] = 'pangan_harapan';
+        $this->render['content']= $this->load->view('pangan_keluarga/pph_view',array('data'=> $data,'tahun' => $tahun), TRUE);
+        $this->load->view('template', $this->render);
+        
+    }
+    public function form_pph(){
+        $data = array(
+            'button' => 'Find',
+            'action' => site_url('Detail_pangan_keluarga/detail_view'),
+            'id' => set_value('id'),
+        );
+        $this->render['page_title'] = 'Pangan Harapan';
+        $this->render['menus'] = 'pangan_harapan';
+        $this->render['content']= $this->load->view('pangan_keluarga/form_pph',$data, TRUE);
+        $this->load->view('template', $this->render);
     }
     
     public function json($pangan) {
         header('Content-Type: application/json');
         echo $this->Detail_pangan_keluarga_model->json($pangan);
+    }
+
+    public function get_urt($id){
+        $this->load->model('Pangan_model');
+        $result = $this->Pangan_model->get_by_id($id);
+        echo json_encode($result);
     }
 
     public function read($id) 

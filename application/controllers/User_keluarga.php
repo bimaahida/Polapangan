@@ -29,8 +29,10 @@ class User_keluarga extends CI_Controller
             $result = $this->User_model->get_by_name($_GET['term']);
             if (count($result) > 0) {
                 foreach ($result as $row)
+                $date_now = new DateTime();
+                $diff = $date_now->diff(new DateTime($row->tgl_lahir));
                     $arr_result[] = array(
-                        'label'         => $row->nama,
+                        'label' => $row->nama . ' | '. $diff->y .' Tahun',
                         'id'   => $row->id,
                  );
                     echo json_encode($arr_result);

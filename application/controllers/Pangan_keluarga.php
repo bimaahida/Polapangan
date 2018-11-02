@@ -15,7 +15,7 @@ class Pangan_keluarga extends CI_Controller
         $this->render['menus'] = 'keluarga';
     }
 
-    public function list($id)
+    public function data_pangan($id)
     {
         $this->render['content']= $this->load->view('pangan_keluarga/pangan_keluarga_list', array('id'=>$id), TRUE);
         $this->load->view('template', $this->render);
@@ -68,6 +68,53 @@ class Pangan_keluarga extends CI_Controller
         $this->render['content']= $this->load->view('pangan_keluarga/pangan_keluarga_form', $data, TRUE);
         $this->load->view('template', $this->render);
     }
+    public function insert_auto(){
+        $this->load->model('Pangan_model');
+        $this->load->model('Detail_pangan_keluarga_model');
+        $keterangan = array('Makan Siang','Makan Pagi','Makan Malam');
+        $asal = array('Pekarangan','Beli','Diberi');
+        $makanan = array('Mie aceh','Sie itek','Karee kameng','Keumamah','Gulai kepala ikan','Ayam tangkap','Nasi guri','Soto Medan','Kwetiau kerang','Bihun kari','Gurame kencong','Gulai ikan salai','Anyang','Ikan tombur','Arsik ikan mas','Ikan asam pedas','Sop ikan',' Nasi ulam','Nasi uduk','Soto betawi','Gado gado','Gurame pecak','Gabus pucung','Nasi ganduk','Mangut','Ayam lodho','Rawon','Rujak cingur','Lawar kenus','Ayam plecingan','Srombotan','Ikan jelawat kukus','Goropa woku blanga',' Sambal raja','Daging Sei','Nasi goreng piritan','Gurame pesmol','Sangu tutug oncom','Gudeg mangar','Mangut','Lontong opor','Sate bandeng','Gabus pucung','Ikan kuah asam','Sogili woku daun','Tinutuan','Nasi kuning','Binte biluhuta','Kaledo','Bebek betutu');
+        $hasil_pangan = array();
+        $hasil_detail = array();
+        
+        for ($i=0; $i < 5 ; $i++) { 
+            $start = strtotime("1 January 2014");
+            $end = strtotime("31 December 2018");
+            
+            $timestamp = mt_rand($start, $end);
+            $pemakan = rand(1,4);
+
+            $data = array(
+                'nama' => $makanan[rand(0,49)],
+                'tgl' => date("Y-m-d", $timestamp),
+                'keterangan' => $keterangan[rand(0,2)],
+                'jumlah_pemakan' => $pemakan,
+                'keluarga_id' => rand(1,25),
+            );
+            $inser_pangan_keluarga =  $this->Pangan_keluarga_model->insert($data);
+            array_push($hasil_pangan,$inser_pangan_keluarga);
+
+            for ($i=0; $i < 3; $i++) { 
+                $pangan_id = rand(1,142);
+                $pangan_data = $this->Pangan_model->get_by_id($pangan_id);
+                $urt = rand(1,5);
+                $rata =  ( $pangan_data->gram * $urt)  / $pemakan;
+                $data_detail = array(
+                    'urt' => $urt,
+                    'berat' => $pangan_data->gram * $urt,
+                    'asal' => $asal[rand(0,2)],
+                    'rata_rata_berat' => $rata,
+                    'pangan_keluarga_id' =>  $inser_pangan_keluarga,
+                    'pangan_id' => $pangan_id,
+                );
+                $this->Detail_pangan_keluarga_model->insert($data_detail);
+                array_push($hasil_detail,$inser_pangan_keluarga);
+            }
+        }
+        print_r($hasil_pangan);
+        print_r($hasil_detail);
+        
+    }
     
     public function create_action($keluarga) 
     {
@@ -86,7 +133,7 @@ class Pangan_keluarga extends CI_Controller
 
             $this->Pangan_keluarga_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('pangan_keluarga/list/'.$keluarga));
+            redirect(site_url('pangan_keluarga/data_pangan/'.$keluarga));
         }
     }
     
@@ -109,7 +156,7 @@ class Pangan_keluarga extends CI_Controller
             $this->load->view('template', $this->render);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('pangan_keluarga/list/'.$keluarga));
+            redirect(site_url('pangan_keluarga/data_pangan/'.$keluarga));
         }
     }
     
@@ -145,7 +192,7 @@ class Pangan_keluarga extends CI_Controller
 
             $this->Pangan_keluarga_model->update($this->input->post('id', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('pangan_keluarga/list/'.$keluarga));
+            redirect(site_url('pangan_keluarga/data_pangan/'.$keluarga));
         }
     }
     
@@ -156,10 +203,10 @@ class Pangan_keluarga extends CI_Controller
         if ($row) {
             $this->Pangan_keluarga_model->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('pangan_keluarga/list/'.$keluarga));
+            redirect(site_url('pangan_keluarga/data_pangan/'.$keluarga));
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('pangan_keluarga/list/'.$keluarga));
+            redirect(site_url('pangan_keluarga/data_pangan/'.$keluarga));
         }
     }
 

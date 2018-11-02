@@ -86,16 +86,16 @@ class Pangan extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'nama' => $this->input->post('nama',TRUE),
-		'takaran' => $this->input->post('takaran',TRUE),
-		'urt' => $this->input->post('urt',TRUE),
-		'gram' => $this->input->post('gram',TRUE),
-		'kalori' => $this->input->post('kalori',TRUE),
-		'lemak' => $this->input->post('lemak',TRUE),
-		'karbohidrat' => $this->input->post('karbohidrat',TRUE),
-		'protein' => $this->input->post('protein',TRUE),
-		'jenis_pangan_id' => $this->input->post('jenis_pangan_id',TRUE),
-	    );
+            'nama' => $this->input->post('nama',TRUE),
+            'takaran' => $this->input->post('takaran',TRUE),
+            'urt' => $this->input->post('urt',TRUE),
+            'gram' => $this->input->post('gram',TRUE),
+            'kalori' => $this->input->post('kalori',TRUE),
+            'lemak' => $this->input->post('lemak',TRUE),
+            'karbohidrat' => $this->input->post('karbohidrat',TRUE),
+            'protein' => $this->input->post('protein',TRUE),
+            'jenis_pangan_id' => $this->input->post('jenis_pangan_id',TRUE),
+            );
 
             $this->Pangan_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');

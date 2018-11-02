@@ -59,6 +59,7 @@
                 </div>
             </div>
             <input type="hidden" name="longitude" id="longitude"  value="<?php echo $longitude; ?>" />
+            <input type="hidden" name="kepala_id" id="kepala_id"/>
             <input type="hidden" name="latitude"  id="latitude" value="<?php echo $latitude; ?>" />
             <input type="hidden" name="id" value="<?php echo $id; ?>" /> 
             <input type="hidden" name="penyuluh_id" value="<?php echo $penyuluh_id; ?>" /> 
@@ -69,6 +70,18 @@
     </div>
 </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#kepala_keluarga').autocomplete({
+            source: "<?php echo base_url('Keluarga/get_autocomplete');?>",
+            select: function (event, ui) {
+                $('#kepala_keluarga').val(ui.item.label); 
+                $('#kepala_id').val(ui.item.id); 
+            }
+        });
+
+    });
+</script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmBY0nTDRelXLlNUei_0SVEuogGzhQrvE&libraries=places&callback=initAutocomplete" async defer></script>
 <script>
       // This example displays an address form, using the autocomplete feature

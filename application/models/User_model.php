@@ -47,6 +47,12 @@ class User_model extends CI_Model
         $this->db->order_by($this->id, $this->order);
         return $this->db->get($this->table)->result();
     }
+    function get_kepalaKeluarga($params){
+        $this->db->like('nama', $params);
+        $this->db->where('jk','PRIA');
+        $this->db->order_by($this->id, $this->order);
+        return $this->db->get($this->table)->result();
+    }
 
     function get_user_by_auth($nik,$password){
         $this->db->where('nik', $nik);

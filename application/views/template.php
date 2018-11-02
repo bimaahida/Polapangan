@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="<?= base_url() ?>assets/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="<?= base_url() ?>assets/datatables/dataTables.bootstrap.css"/>
     <link rel="stylesheet" href="<?= base_url() ?>assets/datatables/dataTables.bootstrap.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
     <!--   Core JS Files   -->
     <script src="<?= base_url() ?>assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
@@ -30,6 +32,8 @@
     <script src="<?= base_url() ?>assets/datatables/dataTables.bootstrap.js"></script>
     <script src="<?= base_url() ?>assets/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="<?= base_url() ?>assets/js/material.min.js" type="text/javascript"></script>
+    <script src="<?= base_url() ?>assets/js/Chart.js"></script>
+    <script src="<?= base_url() ?>assets/js/Chart.min.js"></script>
 </head>
 
 <body style="background-color: #f5f5f5;">
@@ -41,18 +45,20 @@
         Tip 2: you can also add an image using data-image tag
     -->
             <div class="logo">
-                <a href="<?= base_url()?>">" class="simple-text">
+                <a href="<?= base_url()?>" class="simple-text">
                     Pola Pangan
                 </a>
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
-                    <li <?php if ($menus == 'dashboard') {echo 'class="active"';}?>>
-                        <a href="dashboard.html">
-                            <i class="material-icons">dashboard</i>
-                            <p>Dashboard</p>
-                        </a>
-                    </li>
+                    <?php if ($this->session->userdata('auth')['status'] == 1) { ?>
+                        <li <?php if ($menus == 'dashboard') {echo 'class="active"';}?>>
+                            <a href="<?= base_url()?>dashboard">
+                                <i class="material-icons">dashboard</i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                    <?php }?>
                     <li <?php if ($menus == 'user') {echo 'class="active"';}?>>
                         <a href="<?= base_url()?>user">
                             <i class="material-icons">how_to_reg</i>
@@ -79,7 +85,7 @@
                             </a>
                         </li>
                         <li <?php if ($menus == 'pangan_harapan') {echo 'class="active"';}?>>
-                            <a href="<?= base_url()?>Detail_pangan_keluarga" target="_blank">
+                            <a href="<?= base_url()?>Detail_pangan_keluarga/form_pph">
                                 <i class="material-icons">print</i>
                                 <p>Pangan Harapan</p>
                             </a>

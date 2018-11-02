@@ -30,8 +30,8 @@ class Auth extends CI_Controller
             
             redirect('keluarga','refresh');
         }else{
+            // var_dump($auth);
             redirect('auth','refresh');
-            
         }
     }
     public function logout(){

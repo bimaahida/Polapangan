@@ -22,6 +22,24 @@ class Keluarga extends CI_Controller
         $this->render['content']= $this->load->view('keluarga/keluarga_list', array(), TRUE);
         $this->load->view('template', $this->render);
     } 
+
+    function get_autocomplete(){
+        $this->load->model('User_model');
+        if (isset($_GET['term'])) {
+            $result = $this->User_model->get_kepalaKeluarga($_GET['term']);
+            if (count($result) > 0) {
+                foreach ($result as $row)
+                $date_now = new DateTime();
+                $diff = $date_now->diff(new DateTime($row->tgl_lahir));
+                    $arr_result[] = array(
+                        'label' => $row->nama . ' | '. $diff->y .' Tahun',
+                        'id'   => $row->id,
+                 );
+                    echo json_encode($arr_result);
+            }
+        }
+    }
+
     public function rekap(){
         $data = array(
             'button' => 'Find',
@@ -137,17 +155,18 @@ class Keluarga extends CI_Controller
         $geocode=file_get_contents("https://maps.google.com/maps/api/geocode/json?key=AIzaSyBmBY0nTDRelXLlNUei_0SVEuogGzhQrvE&address=$alamat&sensor=false");
         
         $output= json_decode($geocode);
-        var_dump($output);
+        //var_dump($output);
         
         $lat = $output->results[0]->geometry->location->lat;
         $long = $output->results[0]->geometry->location->lng;
+        $kepala = explode('|',$this->input->post('kepala_keluarga',TRUE));
 
         if ($this->form_validation->run() == FALSE) {
             $this->create();
         } else {
             $data = array(
             'no_keluarga' => $this->input->post('no_keluarga',TRUE),
-            'kepala_keluarga' => $this->input->post('kepala_keluarga',TRUE),
+            'kepala_keluarga' => $kepala[0],
             'alamat' => $this->input->post('alamat',TRUE),
             'provinsi' => $this->input->post('provinsi',TRUE),
             'kab' => $this->input->post('kab',TRUE),
@@ -261,8 +280,6 @@ class Keluarga extends CI_Controller
 	$this->form_validation->set_rules('rt', 'rt', 'trim|required');
 	$this->form_validation->set_rules('rw', 'rw', 'trim|required');
 	$this->form_validation->set_rules('kode_pos', 'kode pos', 'trim|required');
-	$this->form_validation->set_rules('latitude', 'latitude', 'trim|required');
-	$this->form_validation->set_rules('longitude', 'longitude', 'trim|required');
 
 	$this->form_validation->set_rules('id', 'id', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');

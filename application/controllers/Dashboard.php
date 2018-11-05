@@ -107,6 +107,7 @@ class Dashboard extends CI_Controller
             array_push($samples,[$key['tahun']]);
             array_push($targets,$key['data']);
         }
+        // var_dump($targets);
 
         $regression = new LeastSquares();
         $regression->train($samples, $targets);

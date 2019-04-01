@@ -48,7 +48,7 @@ class Jenis_pangan extends CI_Controller
     public function create() 
     {
         $data = array(
-            'button' => 'Create',
+            'button' => 'Tambah',
             'action' => site_url('jenis_pangan/create_action'),
             'id' => set_value('id'),
             'nama' => set_value('nama'),
@@ -84,7 +84,7 @@ class Jenis_pangan extends CI_Controller
 
         if ($row) {
             $data = array(
-                'button' => 'Update',
+                'button' => 'Perbarui',
                 'action' => site_url('jenis_pangan/update_action'),
                 'id' => set_value('id', $row->id),
                 'nama' => set_value('nama', $row->nama),

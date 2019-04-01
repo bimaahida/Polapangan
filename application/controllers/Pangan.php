@@ -59,7 +59,7 @@ class Pangan extends CI_Controller
     {
         $this->load->model('Jenis_pangan_model');
         $data = array(
-            'button' => 'Create',
+            'button' => 'Tambah',
             'action' => site_url('pangan/create_action'),
             'id' => set_value('id'),
             'nama' => set_value('nama'),
@@ -110,7 +110,7 @@ class Pangan extends CI_Controller
 
         if ($row) {
             $data = array(
-                'button' => 'Update',
+                'button' => 'Perbarui',
                 'action' => site_url('pangan/update_action'),
                 'id' => set_value('id', $row->id),
                 'nama' => set_value('nama', $row->nama),

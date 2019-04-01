@@ -46,7 +46,7 @@
                 <input type="hidden" name="jumlah_pemakan_lama" value="<?php echo $jumlah_pemakan; ?>" /> 
                 <input type="hidden" name="keluarga_id" value="<?php echo $keluarga_id; ?>" /> 
                 <button type="submit" class="btn btn-warning pull-right"><?php echo $button ?></button> 
-                <a href="<?php echo site_url('pangan_keluarga/list/'.$keluarga_id) ?>" class="btn btn-default pull-right">Cancel</a>
+                <a href="<?php echo site_url('pangan_keluarga/list/'.$keluarga_id) ?>" class="btn btn-danger pull-right">Batal</a>
                 <div class="clearfix"></div>
             </form>
         </div>

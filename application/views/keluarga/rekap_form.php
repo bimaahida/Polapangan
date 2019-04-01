@@ -26,7 +26,7 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-primary pull-right"><?php echo $button ?></button> 
-            <a href="<?php echo site_url('keluarga') ?>" class="btn btn-default pull-right">Cancel</a>
+            <a href="<?php echo site_url('keluarga') ?>" class="btn btn-danger pull-right"><i class="material-icons">arrow_back</i> Batal</a>
             <div class="clearfix"></div>
         </form>
     </div>

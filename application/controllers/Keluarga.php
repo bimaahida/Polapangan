@@ -42,7 +42,7 @@ class Keluarga extends CI_Controller
 
     public function rekap(){
         $data = array(
-            'button' => 'Find',
+            'button' => 'Cari',
             'action' => site_url('keluarga/rekap_action'),
             'desa' => $this->Keluarga_model->get_desa($this->session->userdata('auth')['id'])
         );
@@ -126,7 +126,7 @@ class Keluarga extends CI_Controller
     public function create() 
     {
         $data = array(
-            'button' => 'Create',
+            'button' => 'Tambah',
             'action' => site_url('keluarga/create_action'),
             'id' => set_value('id'),
             'no_keluarga' => set_value('no_keluarga'),
@@ -192,7 +192,7 @@ class Keluarga extends CI_Controller
 
         if ($row) {
             $data = array(
-                'button' => 'Update',
+                'button' => 'Perbarui',
                 'action' => site_url('keluarga/update_action'),
                 'id' => set_value('id', $row->id),
                 'no_keluarga' => set_value('no_keluarga', $row->no_keluarga),

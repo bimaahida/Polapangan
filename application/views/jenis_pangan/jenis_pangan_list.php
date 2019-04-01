@@ -7,7 +7,7 @@
         }
     ?>
     <div class="col-md-12 text-right">
-        <?php echo anchor(site_url('jenis_pangan/create'), '<i class="material-icons">add_box</i> Create', 'class="btn btn-success"'); ?>
+        <?php echo anchor(site_url('jenis_pangan/create'), '<i class="material-icons">add_box</i> Tambah Data', 'class="btn btn-success"'); ?>
         <?php echo anchor(site_url('jenis_pangan/excel'), '<i class="material-icons">cloud_download</i> Excel', 'class="btn btn-info"'); ?>
     </div>
     <div class="card">
@@ -20,7 +20,7 @@
                 <tr>
                     <th width="80px">No</th>
                     <th>Nama</th>
-                    <th width="200px">Action</th>
+                    <th width="200px">Aksi</th>
                 </tr>
                 </thead>
             </table>

@@ -65,7 +65,7 @@ class User_keluarga extends CI_Controller
     public function create($keluarga) 
     {
         $data = array(
-            'button' => 'Create',
+            'button' => 'Tambah',
             'action' => site_url('user_keluarga/create_action/'.$keluarga),
             'id' => set_value('id'),
             'user_id' => set_value('user_id'),
@@ -101,7 +101,7 @@ class User_keluarga extends CI_Controller
 
         if ($row) {
             $data = array(
-                'button' => 'Update',
+                'button' => 'Perbarui',
                 'action' => site_url('user_keluarga/update_action'),
 		'id' => set_value('id', $row->id),
 		'user_id' => set_value('user_id', $row->user_id),

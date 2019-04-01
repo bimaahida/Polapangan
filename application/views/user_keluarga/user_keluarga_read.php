@@ -15,7 +15,7 @@
 	    <tr><td>User Id</td><td><?php echo $user_id; ?></td></tr>
 	    <tr><td>Keluarga Id</td><td><?php echo $keluarga_id; ?></td></tr>
 	    <tr><td>Hubungan</td><td><?php echo $hubungan; ?></td></tr>
-	    <tr><td></td><td><a href="<?php echo site_url('user_keluarga') ?>" class="btn btn-default">Cancel</a></td></tr>
+	    <tr><td></td><td><a href="<?php echo site_url('user_keluarga') ?>" class="btn btn-danger"><i class="material-icons">arrow_back</i> Batal</a></td></tr>
 	</table>
         </body>
 </html>

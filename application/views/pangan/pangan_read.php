@@ -44,7 +44,7 @@
             </tr>
         </table>
         <div class="text-right">
-            <a href="<?php echo site_url('pangan') ?>" class="btn btn-warning">Cancel</a>
+            <a href="<?php echo site_url('pangan') ?>" class="btn btn-danger"><i class="material-icons">arrow_back</i> Batal</a>
         </div>
         
         </div>

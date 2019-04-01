@@ -43,7 +43,7 @@ class Detail_pangan_keluarga extends CI_Controller
     }
     public function form_pph(){
         $data = array(
-            'button' => 'Find',
+            'button' => 'Cari',
             'action' => site_url('Detail_pangan_keluarga/detail_view'),
             'id' => set_value('id'),
         );
@@ -88,7 +88,7 @@ class Detail_pangan_keluarga extends CI_Controller
     {
         $this->load->model('Pangan_model');
         $data = array(
-            'button' => 'Create',
+            'button' => 'Tambah',
             'action' => site_url('detail_pangan_keluarga/create_action/'.$pangan),
             'id' => set_value('id'),
             'urt' => set_value('urt'),
@@ -136,7 +136,7 @@ class Detail_pangan_keluarga extends CI_Controller
 
         if ($row) {
             $data = array(
-                'button' => 'Update',
+                'button' => 'Perbarui',
                 'action' => site_url('detail_pangan_keluarga/update_action/'.$pangan),
                 'id' => set_value('id', $row->id),
                 'urt' => set_value('urt', $row->urt),

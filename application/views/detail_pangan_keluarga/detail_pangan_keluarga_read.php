@@ -18,7 +18,7 @@
 	    <tr><td>Rata Rata Berat</td><td><?php echo $rata_rata_berat; ?></td></tr>
 	    <tr><td>Pangan Keluarga Id</td><td><?php echo $pangan_keluarga_id; ?></td></tr>
 	    <tr><td>Pangan Id</td><td><?php echo $pangan_id; ?></td></tr>
-	    <tr><td></td><td><a href="<?php echo site_url('detail_pangan_keluarga') ?>" class="btn btn-default">Cancel</a></td></tr>
+	    <tr><td></td><td><a href="<?php echo site_url('detail_pangan_keluarga') ?>" class="btn btn-danger"><i class="material-icons">arrow_back</i> Batal</a></td></tr>
 	</table>
         </body>
 </html>

@@ -48,7 +48,7 @@
                 <input type="hidden" name="id" value="<?php echo $id; ?>" /> 
                 <input type="hidden" name="pangan_keluarga_id" value="<?php echo $pangan_keluarga_id; ?>" /> 
                 <button type="submit" class="btn btn-warning pull-right"><?php echo $button ?></button> 
-                <a href="<?php echo site_url('detail_pangan_keluarga/list/'.$pangan_keluarga_id) ?>" class="btn btn-default pull-right">Cancel</a>
+                <a href="<?php echo site_url('detail_pangan_keluarga/list/'.$pangan_keluarga_id) ?>" class="btn btn-danger pull-right"><i class="material-icons">arrow_back</i> Batal</a>
                 <div class="clearfix"></div>
             </form>
         </div>

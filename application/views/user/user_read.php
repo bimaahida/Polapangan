@@ -40,7 +40,7 @@
             </tr>
         </table>
         <div class="text-right">
-            <a href="<?php echo site_url('user') ?>" class="btn btn-warning"><i class="material-icons">arrow_back</i> Back</a>
+            <a href="<?php echo site_url('user') ?>" class="btn btn-danger"><i class="material-icons">arrow_back</i> Batal</a>
         </div>
         
         </div>

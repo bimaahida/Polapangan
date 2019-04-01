@@ -56,7 +56,7 @@ class User extends CI_Controller
     public function create() 
     {
         $data = array(
-            'button' => 'Create',
+            'button' => 'Tambah',
             'action' => site_url('user/create_action'),
             'id' => set_value('id'),
             'nik' => set_value('nik'),
@@ -111,7 +111,7 @@ class User extends CI_Controller
 
         if ($row) {
             $data = array(
-                'button' => 'Update',
+                'button' => 'Perbarui',
                 'action' => site_url('user/update_action'),
                 'id' => set_value('id', $row->id),
                 'nik' => set_value('nik', $row->nik),

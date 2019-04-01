@@ -8,7 +8,7 @@
     ?>
     <div class="col-md-12 text-right">
         <?php if ($this->session->userdata('auth')['status'] == 2) { ?>
-            <?php echo anchor(site_url('detail_pangan_keluarga/create/'.$id), 'Create', 'class="btn btn-success"'); ?>
+            <?php echo anchor(site_url('detail_pangan_keluarga/create/'.$id), 'Tambah Data', 'class="btn btn-success"'); ?>
         <?php } ?>
     </div>
     <div class="card">
@@ -24,7 +24,7 @@
                     <th>Asal</th>
                     <th>Rata Rata Berat</th>
                     <th>Pangan</th>
-                    <th width="200px">Action</th>
+                    <th width="200px">Aksi</th>
                 </tr>
                 </thead>
             </table>

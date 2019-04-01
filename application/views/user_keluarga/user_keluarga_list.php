@@ -8,7 +8,7 @@
 ?>
 <div class="col-md-12 text-right">
     <?php if ($this->session->userdata('auth')['status'] == 2) { ?>
-        <?php echo anchor(base_url('user_keluarga/create/').$id, 'Create', 'class="btn btn-success"'); ?>
+        <?php echo anchor(base_url('user_keluarga/create/').$id, ' <i class="material-icons">add_box</i> Tambah Data', 'class="btn btn-success"'); ?>
     <?php } ?>
 </div>
 <div class="card">

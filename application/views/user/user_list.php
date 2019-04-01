@@ -7,8 +7,8 @@
     }
 ?>
 <div class="col-md-12 text-right">
-    <?php echo anchor(base_url('user/create'), ' <i class="material-icons">add_box</i> Create', 'class="btn btn-success"'); ?>
-    <?php echo anchor(base_url('user/excel'), ' <i class="material-icons">cloud_download</i> Excel', 'class="btn btn-info"'); ?>
+    <?php echo anchor(base_url('user/create'), '<i class="material-icons">add_box</i> Tambah Data', 'class="btn btn-success"'); ?>
+    <?php echo anchor(base_url('user/excel'), '<i class="material-icons">cloud_download</i> Excel', 'class="btn btn-info"'); ?>
 </div>
 <div class="card">
     <div class="card-header" data-background-color="green">

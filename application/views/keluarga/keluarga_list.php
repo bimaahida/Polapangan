@@ -8,7 +8,7 @@
 ?>
 <div class="col-md-12 text-right">
     <?php if ($this->session->userdata('auth')['status'] == 2) { ?>
-        <?php echo anchor(base_url('keluarga/create'), '<i class="material-icons">add_box</i> Create', 'class="btn btn-success"'); ?>
+        <?php echo anchor(base_url('keluarga/create'), '<i class="material-icons">add_box</i> Tambah Data', 'class="btn btn-success"'); ?>
     <?php } ?>
     <?php echo anchor(base_url('keluarga/excel'), '<i class="material-icons">cloud_download</i> Excel', 'class="btn btn-info"'); ?>
 </div>
@@ -24,7 +24,7 @@
                 <th>No Keluarga</th>
                 <th>Kepala Keluarga</th>
                 <th>Alamat</th>
-                <th width="250px">Action</th>
+                <th width="250px">Aksi</th>
             </tr>
             </thead>
         </table>

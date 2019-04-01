@@ -8,9 +8,9 @@
     ?>
     <div class="col-md-12 text-right">
         <?php if ($this->session->userdata('auth')['status'] == 2) { ?>
-            <?php echo anchor(site_url('pangan_keluarga/create/'.$id), 'Create', 'class="btn btn-success"'); ?>
+            <?php echo anchor(site_url('pangan_keluarga/create/'.$id), '<i class="material-icons">add_box</i> Tambah Data', 'class="btn btn-success"'); ?>
         <?php } ?>
-        <a class="btn btn-warning" href="<?php echo site_url('pangan_keluarga/laporan/'.$id) ?>" target="_blank">Print</a>
+        <a class="btn btn-warning" href="<?php echo site_url('pangan_keluarga/laporan/'.$id) ?>" target="_blank"><i class="material-icons">cloud_download</i> Excel</a>
     </div>
     <div class="card">
         <div class="card-header" data-background-color="green">

@@ -29,7 +29,7 @@
                 <input type="hidden" name="user_id" id="user_id" value="<?php echo $user_id; ?>" />
                 <input type="hidden" name="keluarga_id" id="keluarga_id" value="<?php echo $keluarga_id; ?>" />
                 <button type="submit" class="btn btn-warning pull-right"><?php echo $button ?></button> 
-                <a href="<?php echo site_url('user_keluarga') ?>" class="btn btn-default pull-right">Cancel</a>
+                <a href="<?php echo site_url('user_keluarga') ?>" class="btn btn-danger pull-right"><i class="material-icons">arrow_back</i> Batal</a>
                 <div class="clearfix"></div>
             </form>
         </div>

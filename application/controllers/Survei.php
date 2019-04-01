@@ -79,7 +79,7 @@ class Survei extends CI_Controller
     public function create() 
     {
         $data = array(
-            'button' => 'Create',
+            'button' => 'Tambah',
             'action' => site_url('survei/create_action'),
 	    'id' => set_value('id'),
 	    'sayur' => set_value('sayur'),
@@ -122,7 +122,7 @@ class Survei extends CI_Controller
 
         if ($row) {
             $data = array(
-                'button' => 'Update',
+                'button' => 'Perbarui',
                 'action' => site_url('survei/update_action'),
                 'id' => set_value('id', $row->id),
                 'sayur' => set_value('sayur', $row->sayur),

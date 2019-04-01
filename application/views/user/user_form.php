@@ -76,7 +76,7 @@
                 <input type="hidden" name="status_id" value="<?php echo $status_id; ?>" /> 
             <?php } ?>
             <button type="submit" class="btn btn-warning pull-right"><?php echo $button ?></button> 
-            <a href="<?php echo site_url('user') ?>" class="btn btn-default pull-right">Cancel</a>
+            <a href="<?php echo site_url('user') ?>" class="btn btn-danger pull-right"><i class="material-icons">arrow_back</i> Batal</a>
             <div class="clearfix"></div>
         </form>
     </div>

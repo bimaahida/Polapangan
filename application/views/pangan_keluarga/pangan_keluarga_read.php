@@ -17,7 +17,7 @@
 	    <tr><td>Keterangan</td><td><?php echo $keterangan; ?></td></tr>
 	    <tr><td>Jumlah Pemakan</td><td><?php echo $jumlah_pemakan; ?></td></tr>
 	    <tr><td>Keluarga Id</td><td><?php echo $keluarga_id; ?></td></tr>
-	    <tr><td></td><td><a href="<?php echo site_url('pangan_keluarga') ?>" class="btn btn-default">Cancel</a></td></tr>
+	    <tr><td></td><td><a href="<?php echo site_url('pangan_keluarga') ?>" class="btn btn-danger"><i class="material-icons">arrow_back</i> Batal</a></td></tr>
 	</table>
         </body>
 </html>

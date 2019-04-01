@@ -56,7 +56,7 @@ class Pangan_keluarga extends CI_Controller
     public function create($keluarga) 
     {
         $data = array(
-            'button' => 'Create',
+            'button' => 'Tambah',
             'action' => site_url('pangan_keluarga/create_action/'.$keluarga),
             'id' => set_value('id'),
             'nama' => set_value('nama'),
@@ -143,7 +143,7 @@ class Pangan_keluarga extends CI_Controller
 
         if ($row) {
             $data = array(
-                'button' => 'Update',
+                'button' => 'Perbarui',
                 'action' => site_url('pangan_keluarga/update_action/'.$keluarga),
                 'id' => set_value('id', $row->id),
                 'nama' => set_value('nama', $row->nama),

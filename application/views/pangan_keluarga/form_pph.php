@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-warning pull-right"><i class="material-icons">search</i><?php echo $button ?></button> 
-                <a href="<?php echo site_url('detail_pangan_keluarga/list/') ?>" class="btn btn-danger pull-right">Cancel</a>
+                <a href="<?php echo site_url('detail_pangan_keluarga/list/') ?>" class="btn btn-danger pull-right">Batal</a>
                 <div class="clearfix"></div>
             </form>
         </div>

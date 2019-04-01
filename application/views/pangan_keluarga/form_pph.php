@@ -1,6 +1,6 @@
 <div class="col-md-10">
     <div class="card">
-        <div class="card-header" data-background-color="orange">
+        <div class="card-header" data-background-color="green">
             <h4 class="title"><?php echo $button ?> Pangan</h4>
             <p class="category"><?= $id?></p>
         </div>
@@ -18,8 +18,8 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-warning pull-right"><?php echo $button ?></button> 
-                <a href="<?php echo site_url('detail_pangan_keluarga/list/') ?>" class="btn btn-default pull-right">Cancel</a>
+                <button type="submit" class="btn btn-warning pull-right"><i class="material-icons">search</i><?php echo $button ?></button> 
+                <a href="<?php echo site_url('detail_pangan_keluarga/list/') ?>" class="btn btn-danger pull-right">Cancel</a>
                 <div class="clearfix"></div>
             </form>
         </div>

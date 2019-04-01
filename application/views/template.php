@@ -38,7 +38,7 @@
 
 <body style="background-color: #f5f5f5;">
     <div class="wrapper">
-        <div class="sidebar" data-color="orange" data-image="../assets/img/sidebar-1.jpg">
+        <div class="sidebar" data-color="green" data-image="../assets/img/sidebar-1.jpg">
             <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 

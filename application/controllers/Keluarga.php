@@ -307,38 +307,38 @@ class Keluarga extends CI_Controller
 
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
-	xlsWriteLabel($tablehead, $kolomhead++, "No Keluarga");
-	xlsWriteLabel($tablehead, $kolomhead++, "Kepala Keluarga");
-	xlsWriteLabel($tablehead, $kolomhead++, "Alamat");
-	xlsWriteLabel($tablehead, $kolomhead++, "Provinsi");
-	xlsWriteLabel($tablehead, $kolomhead++, "Kab");
-	xlsWriteLabel($tablehead, $kolomhead++, "Kec");
-	xlsWriteLabel($tablehead, $kolomhead++, "Desa");
-	xlsWriteLabel($tablehead, $kolomhead++, "Rt");
-	xlsWriteLabel($tablehead, $kolomhead++, "Rw");
-	xlsWriteLabel($tablehead, $kolomhead++, "Kode Pos");
-	xlsWriteLabel($tablehead, $kolomhead++, "Latitude");
-	xlsWriteLabel($tablehead, $kolomhead++, "Longitude");
+        xlsWriteLabel($tablehead, $kolomhead++, "No Keluarga");
+        xlsWriteLabel($tablehead, $kolomhead++, "Kepala Keluarga");
+        xlsWriteLabel($tablehead, $kolomhead++, "Alamat");
+        xlsWriteLabel($tablehead, $kolomhead++, "Provinsi");
+        xlsWriteLabel($tablehead, $kolomhead++, "Kab");
+        xlsWriteLabel($tablehead, $kolomhead++, "Kec");
+        xlsWriteLabel($tablehead, $kolomhead++, "Desa");
+        xlsWriteLabel($tablehead, $kolomhead++, "Rt");
+        xlsWriteLabel($tablehead, $kolomhead++, "Rw");
+        xlsWriteLabel($tablehead, $kolomhead++, "Kode Pos");
+        xlsWriteLabel($tablehead, $kolomhead++, "Latitude");
+        xlsWriteLabel($tablehead, $kolomhead++, "Longitude");
 
-	foreach ($this->Keluarga_model->get_all() as $data) {
+        foreach ($this->Keluarga_model->get_all() as $data) {
             $kolombody = 0;
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->no_keluarga);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->kepala_keluarga);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->alamat);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->provinsi);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->kab);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->kec);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->desa);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->rt);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->rw);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->kode_pos);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->latitude);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->longitude);
+            xlsWriteLabel($tablebody, $kolombody++, $data->no_keluarga);
+            xlsWriteLabel($tablebody, $kolombody++, $data->kepala_keluarga);
+            xlsWriteLabel($tablebody, $kolombody++, $data->alamat);
+            xlsWriteLabel($tablebody, $kolombody++, $data->provinsi);
+            xlsWriteLabel($tablebody, $kolombody++, $data->kab);
+            xlsWriteLabel($tablebody, $kolombody++, $data->kec);
+            xlsWriteLabel($tablebody, $kolombody++, $data->desa);
+            xlsWriteLabel($tablebody, $kolombody++, $data->rt);
+            xlsWriteLabel($tablebody, $kolombody++, $data->rw);
+            xlsWriteLabel($tablebody, $kolombody++, $data->kode_pos);
+            xlsWriteNumber($tablebody, $kolombody++, $data->latitude);
+            xlsWriteNumber($tablebody, $kolombody++, $data->longitude);
 
-	    $tablebody++;
+            $tablebody++;
             $nourut++;
         }
 

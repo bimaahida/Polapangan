@@ -8,7 +8,7 @@
 </div>
 <div class="col-md-6">
     <div class="card">
-        <div class="card-header" data-background-color="orange">
+        <div class="card-header" data-background-color="green">
             <h4 class="title">Grafik Pola Pangan Harapan Pertahun</h4>
             <p class="category"></p>
         </div>
@@ -19,7 +19,7 @@
 </div>
 <div class="col-md-6">
     <div class="card">
-        <div class="card-header" data-background-color="orange">
+        <div class="card-header" data-background-color="green">
             <h4 class="title">Grafik Pola Pangan Harapan Perdaerah</h4>
             <p class="category"></p>
         </div>
@@ -30,7 +30,7 @@
 </div>
 <div class="col-md-12 col-xs-12 ">
     <div class="card">
-        <div class="card-header" data-background-color="orange">
+        <div class="card-header" data-background-color="green">
             <h4 class="title">Grafik Pola Pangan Harapan Per Jenis</h4>
             <p class="category"></p>
         </div>

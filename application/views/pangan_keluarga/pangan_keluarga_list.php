@@ -6,8 +6,14 @@
             <span data-notify="message"> '.$this->session->userdata("message").' </span></div>';  
         }
     ?>
+    <div class="col-md-12 text-right">
+        <?php if ($this->session->userdata('auth')['status'] == 2) { ?>
+            <?php echo anchor(site_url('pangan_keluarga/create/'.$id), 'Create', 'class="btn btn-success"'); ?>
+        <?php } ?>
+        <a class="btn btn-warning" href="<?php echo site_url('pangan_keluarga/laporan/'.$id) ?>" target="_blank">Print</a>
+    </div>
     <div class="card">
-        <div class="card-header" data-background-color="orange">
+        <div class="card-header" data-background-color="green">
             <h4 class="title">Pangan List</h4>
         </div>
         <div class="card-content table-responsive">
@@ -24,12 +30,6 @@
                 </thead>
             </table>
         </div>
-    </div>
-    <div class="col-md-12 text-right">
-        <?php if ($this->session->userdata('auth')['status'] == 2) { ?>
-            <?php echo anchor(site_url('pangan_keluarga/create/'.$id), 'Create', 'class="btn btn-warning"'); ?>
-        <?php } ?>
-        <a class="btn btn-success" href="<?php echo site_url('pangan_keluarga/laporan/'.$id) ?>" target="_blank">Print</a>
     </div>
 </div>
 <script type="text/javascript">

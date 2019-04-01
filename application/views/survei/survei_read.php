@@ -1,6 +1,6 @@
 <div class="col-md-10">
     <div class="card">
-        <div class="card-header" data-background-color="orange">
+        <div class="card-header" data-background-color="green">
             <h4 class="title">Detail Survei</h4>
             <p class="category"><?= $keluarga_id ?></p>
         </div>

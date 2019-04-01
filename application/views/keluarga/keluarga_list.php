@@ -6,8 +6,14 @@
         <span data-notify="message"> '.$this->session->userdata("message").' </span></div>';  
     }
 ?>
+<div class="col-md-12 text-right">
+    <?php if ($this->session->userdata('auth')['status'] == 2) { ?>
+        <?php echo anchor(base_url('keluarga/create'), '<i class="material-icons">add_box</i> Create', 'class="btn btn-success"'); ?>
+    <?php } ?>
+    <?php echo anchor(base_url('keluarga/excel'), '<i class="material-icons">cloud_download</i> Excel', 'class="btn btn-info"'); ?>
+</div>
 <div class="card">
-    <div class="card-header" data-background-color="orange">
+    <div class="card-header" data-background-color="green">
         <h4 class="title">Keluarga List</h4>
     </div>
     <div class="card-content table-responsive">
@@ -23,12 +29,6 @@
             </thead>
         </table>
     </div>
-</div>
-<div class="col-md-12 text-right">
-    <?php if ($this->session->userdata('auth')['status'] == 2) { ?>
-        <?php echo anchor(base_url('keluarga/create'), ' <i class="material-icons">add_box</i> Create', 'class="btn btn-warning"'); ?>
-    <?php } ?>
-    <?php echo anchor(base_url('keluarga/excel'), '<i class="material-icons">cloud_download</i> Excel', 'class="btn btn-default"'); ?>
 </div>
 </div>
 <script type="text/javascript">

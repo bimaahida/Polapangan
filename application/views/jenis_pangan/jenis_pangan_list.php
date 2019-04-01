@@ -6,8 +6,12 @@
             <span data-notify="message"> '.$this->session->userdata("message").' </span></div>';  
         }
     ?>
+    <div class="col-md-12 text-right">
+        <?php echo anchor(site_url('jenis_pangan/create'), '<i class="material-icons">add_box</i> Create', 'class="btn btn-success"'); ?>
+        <?php echo anchor(site_url('jenis_pangan/excel'), '<i class="material-icons">cloud_download</i> Excel', 'class="btn btn-info"'); ?>
+    </div>
     <div class="card">
-        <div class="card-header" data-background-color="orange">
+        <div class="card-header" data-background-color="green">
             <h4 class="title">Jenis Pangan List</h4>
         </div>
         <div class="card-content table-responsive">
@@ -21,10 +25,6 @@
                 </thead>
             </table>
         </div>
-    </div>
-    <div class="col-md-12 text-right">
-        <?php echo anchor(site_url('jenis_pangan/create'), 'Create', 'class="btn btn-warning"'); ?>
-        <?php echo anchor(site_url('jenis_pangan/excel'), 'Excel', 'class="btn btn-default"'); ?>
     </div>
 </div>
 <script type="text/javascript">

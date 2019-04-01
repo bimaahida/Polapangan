@@ -2,7 +2,7 @@
 
 <div class="col-md-10">
 <div class="card">
-    <div class="card-header" data-background-color="orange">
+    <div class="card-header" data-background-color="green">
         <h4 class="title">Detail Keluarga</h4>
         <p class="category"><?= $kepala_keluarga ?></p>
     </div>

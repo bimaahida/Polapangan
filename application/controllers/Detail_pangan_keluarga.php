@@ -195,6 +195,73 @@ class Detail_pangan_keluarga extends CI_Controller
         }
     }
 
+    public function excel($tahun)
+    {
+        $this->load->helper('exportexcel');
+        $this->load->model('Pangan_model');
+
+        $tahun_awal = ($tahun+0) - 1;
+        $start = $tahun_awal."-01-01";
+        $end = $tahun."-12-31";
+
+        $dataParameter = $this->Detail_pangan_keluarga_model->pph($start,$end);
+        
+        $namaFile = "DAFTAR KONSUMSI PANGAN RUMAH TANGGA.xls";
+        $judul = "DAFTAR KONSUMSI PANGAN RUMAH TANGGA";
+        
+        $tablehead = 0;
+        $tablebody = 1;
+        $nourut = 1;
+        //penulisan header
+        header("Pragma: public");
+        header("Expires: 0");
+        header("Cache-Control: must-revalidate, post-check=0,pre-check=0");
+        header("Content-Type: application/force-download");
+        header("Content-Type: application/octet-stream");
+        header("Content-Type: application/download");
+        header("Content-Disposition: attachment;filename=" . $namaFile . "");
+        header("Content-Transfer-Encoding: binary ");
+
+        xlsBOF();
+
+        $kolomhead = 0;
+        xlsWriteLabel($tablehead, $kolomhead++, "No");
+        xlsWriteLabel($tablehead, $kolomhead++, "Kelompok Pangan");
+        xlsWriteLabel($tablehead, $kolomhead++, "Energi Aktual");
+        xlsWriteLabel($tablehead, $kolomhead++, "Persentase Aktual");
+        xlsWriteLabel($tablehead, $kolomhead++, "Persentase AKE");
+        xlsWriteLabel($tablehead, $kolomhead++, "Bobot");
+        xlsWriteLabel($tablehead, $kolomhead++, "Skor Aktual");
+        xlsWriteLabel($tablehead, $kolomhead++, "Skor AKE");
+        xlsWriteLabel($tablehead, $kolomhead++, "Maks Skor");
+        xlsWriteLabel($tablehead, $kolomhead++, "Skor PPH");
+
+        foreach ($dataParameter as $data) {
+            $kolombody = 0;
+            //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
+            xlsWriteNumber($tablebody, $kolombody++, $nourut);
+            xlsWriteLabel($tablebody, $kolombody++, $data->jenis_pangan);
+            xlsWriteNumber($tablebody, $kolombody++, round($data->EA,2));
+            xlsWriteNumber($tablebody, $kolombody++, round($data->EA_porsen,2));
+            xlsWriteNumber($tablebody, $kolombody++, round($data->AKE,2));
+            xlsWriteNumber($tablebody, $kolombody++, round($data->bobot,2));
+            xlsWriteNumber($tablebody, $kolombody++, round($data->sekor_aktual,2));
+            xlsWriteNumber($tablebody, $kolombody++, round($data->skor_ake,2));
+            xlsWriteNumber($tablebody, $kolombody++, round($data->skor_max,2));
+            if ($data->skor_max < $data->skor_ake) { 
+                xlsWriteNumber($tablebody, $kolombody++, round($data->skor_max,2)); 
+            } else { 
+                xlsWriteNumber($tablebody, $kolombody++, round($data->skor_ake,2)); 
+            }
+
+	        $tablebody++;
+            $nourut++;
+        }
+
+        xlsEOF();
+        exit();
+    }
+
     public function _rules() 
     {
 	$this->form_validation->set_rules('urt', 'urt', 'trim|required|numeric');

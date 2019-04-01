@@ -59,7 +59,7 @@
                 <td><?php if ($key->skor_max < $key->skor_ake) { echo round($key->skor_max,2); } else { echo round($key->skor_ake,2); }   ?></td>
             </tr>
         <?php
-            }
+            $no++;}
         ?>
     </table>
 </body>

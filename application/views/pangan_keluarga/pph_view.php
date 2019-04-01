@@ -1,7 +1,7 @@
 <div class="col-md-12">
     <div class="card">
-        <div class="card-header" data-background-color="orange">
-            <h4 class="title">DAFTAR KONSUMSI PANGAN RUMAH TANGGA</h4>
+        <div class="card-header" data-background-color="green">
+            <h4 class="title">DAFTAR KONSUMSI PANGAN RUMAH TANGGA TAHUN <?= $tahun?></h4>
         </div>
         <div class="card-content table-responsive">
         <table class="table" id="mytable">
@@ -37,13 +37,14 @@
                         <td><?php if ($key->skor_max < $key->skor_ake) { echo round($key->skor_max,2); } else { echo round($key->skor_ake,2); }   ?></td>
                     </tr>
                 <?php
-                    }
+                    $no++;}
                 ?>
             </tbody>
         </table>
     
     <div class="col-md-12 text-right">
         <a class="btn btn-success" href="<?php echo site_url('Detail_pangan_keluarga/index/'.$tahun ) ?>" target="_blank">Print</a>
+        <?php echo anchor(site_url('Detail_pangan_keluarga/excel/'.$tahun), '<i class="material-icons">cloud_download</i> Excel', 'class="btn btn-info"'); ?>
     </div>
     </div>
 </div>

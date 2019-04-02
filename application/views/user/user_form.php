@@ -60,6 +60,18 @@
                         <label for="varchar" class="control-label">Pekerjaan <?php echo form_error('pekerjaan') ?></label>
                         <input type="text" class="form-control" name="pekerjaan" id="pekerjaan" value="<?php echo $pekerjaan; ?>" />
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group label-floating">
+                            <label for="varchar">Hubungan <?php echo form_error('hubungan') ?></label>
+                            <select name="hubungan" id="hubungan" class="form-control" >
+                                <option value="Suami">Suami</option>
+                                <option value="Istri">Istri</option>
+                                <option value="Anak">Anak</option>
+                            </select>
+                            </div>
+                        </div>
+                    </div>
                     <?php if ($this->session->userdata('auth')['status'] == 1) { ?>
                         <div class="form-group label-floating">
                             <label for="int">Status<?php echo form_error('status_id') ?></label>
@@ -75,6 +87,9 @@
             <?php if ($button == 'Update' && $this->session->userdata('auth')['status'] != 1) { ?>
                 <input type="hidden" name="status_id" value="<?php echo $status_id; ?>" /> 
             <?php } ?>
+            <?php if($this->uri->segment(3)){ ?>
+                <input type="hidden" name="keluarga_id" value="<?php echo $this->uri->segment(3); ?>" /> 
+            <?php }?>
             <button type="submit" class="btn btn-warning pull-right"><?php echo $button ?></button> 
             <a href="<?php echo site_url('user') ?>" class="btn btn-danger pull-right"><i class="material-icons">arrow_back</i> Batal</a>
             <div class="clearfix"></div>

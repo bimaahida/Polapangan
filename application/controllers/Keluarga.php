@@ -140,7 +140,10 @@ class Keluarga extends CI_Controller
             'rw' => set_value('rw'),
             'kode_pos' => set_value('kode_pos'),
             'latitude' => set_value('latitude'),
-            'longitude' => set_value('longitude'),
+            'baru_menikah' => set_value('baru_menikah'),
+            'hamil' => set_value('hamil'),
+            'menyusui' => set_value('menyusui'),
+            'stunting' => set_value('stunting'),
             'penyuluh_id' =>set_value('penyuluh_id',$this->session->userdata('auth')['id'])
         );
         $this->render['content']= $this->load->view('keluarga/keluarga_form', $data, TRUE);
@@ -151,33 +154,66 @@ class Keluarga extends CI_Controller
     {
         $this->_rules();
 
-        $alamat = str_replace(' ', '+', $this->input->post('alamat',TRUE));
-        $geocode=file_get_contents("https://maps.google.com/maps/api/geocode/json?key=AIzaSyBmBY0nTDRelXLlNUei_0SVEuogGzhQrvE&address=$alamat&sensor=false");
+        // $alamat = str_replace(' ', '+', $this->input->post('alamat',TRUE));
+        // $geocode=file_get_contents("https://maps.google.com/maps/api/geocode/json?key=AIzaSyBmBY0nTDRelXLlNUei_0SVEuogGzhQrvE&address=$alamat&sensor=false");
         
-        $output= json_decode($geocode);
-        //var_dump($output);
+        // $output= json_decode($geocode);
+        // //var_dump($output);
         
-        $lat = $output->results[0]->geometry->location->lat;
-        $long = $output->results[0]->geometry->location->lng;
-        $kepala = explode('|',$this->input->post('kepala_keluarga',TRUE));
+        // $lat = $output->results[0]->geometry->location->lat;
+        // $long = $output->results[0]->geometry->location->lng;
+        // $kepala = explode('|',$this->input->post('kepala_keluarga',TRUE));
 
         if ($this->form_validation->run() == FALSE) {
             $this->create();
         } else {
+            // $data = array(
+            // 'no_keluarga' => $this->input->post('no_keluarga',TRUE),
+            // 'kepala_keluarga' => $kepala[0],
+            // 'alamat' => $this->input->post('alamat',TRUE),
+            // 'provinsi' => $this->input->post('provinsi',TRUE),
+            // 'kab' => $this->input->post('kab',TRUE),
+            // 'kec' => $this->input->post('kec',TRUE),
+            // 'desa' => $this->input->post('desa',TRUE),
+            // 'rt' => $this->input->post('rt',TRUE),
+            // 'rw' => $this->input->post('rw',TRUE),
+            // 'kode_pos' => $this->input->post('kode_pos',TRUE),
+            // 'latitude' => $lat,
+            // 'longitude' => $long,
+            // 'penyuluh_id' => $this->input->post('penyuluh_id',TRUE),
+            // );
+            if(empty($this->input->post('baru_menikah',TRUE))){
+                $sMenikah = 0;
+            }else{
+                $sMenikah = 1;
+            }
+            if(empty($this->input->post('hamil',TRUE))){
+                $sHamil = 0;
+            }else{
+                $sHamil = 1;
+            }
+            if(empty($this->input->post('menyusui',TRUE))){
+                $sMenyusui = 0;
+            }else{
+                $sMenyusui = 1;
+            }
+            if(empty($this->input->post('stunting',TRUE))){
+                $sStunting = 0;
+            }else{
+                $sStunting = 1;
+            }
+
+
             $data = array(
-            'no_keluarga' => $this->input->post('no_keluarga',TRUE),
-            'kepala_keluarga' => $kepala[0],
-            'alamat' => $this->input->post('alamat',TRUE),
-            'provinsi' => $this->input->post('provinsi',TRUE),
-            'kab' => $this->input->post('kab',TRUE),
-            'kec' => $this->input->post('kec',TRUE),
-            'desa' => $this->input->post('desa',TRUE),
-            'rt' => $this->input->post('rt',TRUE),
-            'rw' => $this->input->post('rw',TRUE),
-            'kode_pos' => $this->input->post('kode_pos',TRUE),
-            'latitude' => $lat,
-            'longitude' => $long,
-            'penyuluh_id' => $this->input->post('penyuluh_id',TRUE),
+                'no_keluarga' => $this->input->post('no_keluarga',TRUE),
+                'kepala_keluarga' => $this->input->post('kepala_keluarga',TRUE),
+                'kec' => $this->input->post('kec',TRUE),
+                'desa' => $this->input->post('desa',TRUE),
+                'baru_menikah' => $sMenikah,
+                'hamil' => $sHamil,
+                'menyusui' => $sMenyusui,
+                'stunting' => $sStunting,
+                'penyuluh_id' => $this->input->post('penyuluh_id',TRUE),
             );
 
             $this->Keluarga_model->insert($data);
@@ -207,6 +243,11 @@ class Keluarga extends CI_Controller
                 'kode_pos' => set_value('kode_pos', $row->kode_pos),
                 'latitude' => set_value('latitude', $row->latitude),
                 'longitude' => set_value('longitude', $row->longitude),
+                'penyuluh_id' => $this->input->post('penyuluh_id',$row->penyuluh_id),
+                'baru_menikah' => set_value('baru_menikah',$row->baru_menikah),
+                'hamil' => set_value('hamil',$row->hamil),
+                'menyusui' => set_value('menyusui',$row->menyusui),
+                'stunting' => set_value('stunting',$row->stunting),
                 );
             $this->render['content']= $this->load->view('keluarga/keluarga_form', $data, TRUE);
             $this->load->view('template', $this->render);
@@ -220,33 +261,64 @@ class Keluarga extends CI_Controller
     {
         $this->_rules();
 
-        $alamat = str_replace(' ', '+', $this->input->post('alamat',TRUE));
-        $geocode=file_get_contents("https://maps.google.com/maps/api/geocode/json?key=AIzaSyBmBY0nTDRelXLlNUei_0SVEuogGzhQrvE&address=$alamat&sensor=false");
+        // $alamat = str_replace(' ', '+', $this->input->post('alamat',TRUE));
+        // $geocode=file_get_contents("https://maps.google.com/maps/api/geocode/json?key=AIzaSyBmBY0nTDRelXLlNUei_0SVEuogGzhQrvE&address=$alamat&sensor=false");
         
-        $output= json_decode($geocode);
-        var_dump($output);
+        // $output= json_decode($geocode);
+        // var_dump($output);
         
-        $lat = $output->results[0]->geometry->location->lat;
-        $long = $output->results[0]->geometry->location->lng;
+        // $lat = $output->results[0]->geometry->location->lat;
+        // $long = $output->results[0]->geometry->location->lng;
 
 
         if ($this->form_validation->run() == FALSE) {
             $this->update($this->input->post('id', TRUE));
         } else {
+            // $data = array(
+            //     'no_keluarga' => $this->input->post('no_keluarga',TRUE),
+            //     'kepala_keluarga' => $this->input->post('kepala_keluarga',TRUE),
+            //     'alamat' => $this->input->post('alamat',TRUE),
+            //     'provinsi' => $this->input->post('provinsi',TRUE),
+            //     'kab' => $this->input->post('kab',TRUE),
+            //     'kec' => $this->input->post('kec',TRUE),
+            //     'desa' => $this->input->post('desa',TRUE),
+            //     'rt' => $this->input->post('rt',TRUE),
+            //     'rw' => $this->input->post('rw',TRUE),
+            //     'kode_pos' => $this->input->post('kode_pos',TRUE),
+            //     'latitude' =>  $lat,
+            //     'longitude' => $long,
+            // );
+            if(empty($this->input->post('baru_menikah',TRUE))){
+                $sMenikah = 0;
+            }else{
+                $sMenikah = 1;
+            }
+            if(empty($this->input->post('hamil',TRUE))){
+                $sHamil = 0;
+            }else{
+                $sHamil = 1;
+            }
+            if(empty($this->input->post('menyusui',TRUE))){
+                $sMenyusui = 0;
+            }else{
+                $sMenyusui = 1;
+            }
+            if(empty($this->input->post('stunting',TRUE))){
+                $sStunting = 0;
+            }else{
+                $sStunting = 1;
+            }
+
             $data = array(
-		'no_keluarga' => $this->input->post('no_keluarga',TRUE),
-		'kepala_keluarga' => $this->input->post('kepala_keluarga',TRUE),
-		'alamat' => $this->input->post('alamat',TRUE),
-		'provinsi' => $this->input->post('provinsi',TRUE),
-		'kab' => $this->input->post('kab',TRUE),
-		'kec' => $this->input->post('kec',TRUE),
-		'desa' => $this->input->post('desa',TRUE),
-		'rt' => $this->input->post('rt',TRUE),
-		'rw' => $this->input->post('rw',TRUE),
-		'kode_pos' => $this->input->post('kode_pos',TRUE),
-		'latitude' =>  $lat,
-		'longitude' => $long,
-	    );
+                'no_keluarga' => $this->input->post('no_keluarga',TRUE),
+                'kepala_keluarga' => $this->input->post('kepala_keluarga',TRUE),
+                'kec' => $this->input->post('kec',TRUE),
+                'desa' => $this->input->post('desa',TRUE),
+                'baru_menikah' => $sMenikah,
+                'hamil' => $sHamil,
+                'menyusui' => $sMenyusui,
+                'stunting' => $sStunting,
+            );
 
             $this->Keluarga_model->update($this->input->post('id', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
@@ -272,14 +344,14 @@ class Keluarga extends CI_Controller
     {
 	$this->form_validation->set_rules('no_keluarga', 'no keluarga', 'trim|required');
 	$this->form_validation->set_rules('kepala_keluarga', 'kepala keluarga', 'trim|required');
-	$this->form_validation->set_rules('alamat', 'alamat', 'trim|required');
-	$this->form_validation->set_rules('provinsi', 'provinsi', 'trim|required');
-	$this->form_validation->set_rules('kab', 'kab', 'trim|required');
+	// $this->form_validation->set_rules('alamat', 'alamat', 'trim|required');
+	// $this->form_validation->set_rules('provinsi', 'provinsi', 'trim|required');
+	// $this->form_validation->set_rules('kab', 'kab', 'trim|required');
 	$this->form_validation->set_rules('kec', 'kec', 'trim|required');
 	$this->form_validation->set_rules('desa', 'desa', 'trim|required');
-	$this->form_validation->set_rules('rt', 'rt', 'trim|required');
-	$this->form_validation->set_rules('rw', 'rw', 'trim|required');
-	$this->form_validation->set_rules('kode_pos', 'kode pos', 'trim|required');
+	// $this->form_validation->set_rules('rt', 'rt', 'trim|required');
+	// $this->form_validation->set_rules('rw', 'rw', 'trim|required');
+	// $this->form_validation->set_rules('kode_pos', 'kode pos', 'trim|required');
 
 	$this->form_validation->set_rules('id', 'id', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');

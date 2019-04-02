@@ -6,7 +6,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="<?= base_url() ?>assets/img/apple-icon.png" />
     <link rel="icon" type="image/png" href="<?= base_url() ?>assets/img/favicon.png" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Pola Pangan</title>
+    <title>RECALL PANGAN</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     <!-- Bootstrap core CSS     -->
@@ -46,7 +46,7 @@
     -->
             <div class="logo">
                 <a href="<?= base_url()?>" class="simple-text">
-                    Pola Pangan
+                    RECALL PANGAN
                 </a>
             </div>
             <div class="sidebar-wrapper">
@@ -58,13 +58,13 @@
                                 <p>Dashboard</p>
                             </a>
                         </li>
+                        <li <?php if ($menus == 'user') {echo 'class="active"';}?>>
+                            <a href="<?= base_url()?>user">
+                                <i class="material-icons">how_to_reg</i>
+                                <p>Masyarakat</p>
+                            </a>
+                        </li>
                     <?php }?>
-                    <li <?php if ($menus == 'user') {echo 'class="active"';}?>>
-                        <a href="<?= base_url()?>user">
-                            <i class="material-icons">how_to_reg</i>
-                            <p>Masyarakat</p>
-                        </a>
-                    </li>
                     <li <?php if ($menus == 'keluarga') {echo 'class="active"';}?>>
                         <a href="<?= base_url()?>keluarga">
                             <i class="material-icons">contacts</i>
@@ -138,7 +138,7 @@
                         <script>
                             document.write(new Date().getFullYear())
                         </script>
-                        <a href="#">Pola Pangan Harapan</a>, Sistem Informasi
+                        <a href="#">RECALL PANGAN</a>, Sistem Informasi
                     </p>
                 </div>
             </footer>

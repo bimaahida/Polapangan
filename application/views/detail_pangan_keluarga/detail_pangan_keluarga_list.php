@@ -6,14 +6,19 @@
             <span data-notify="message"> '.$this->session->userdata("message").' </span></div>';  
         }
     ?>
-    <div class="col-md-12 text-right">
-        <?php if ($this->session->userdata('auth')['status'] == 2) { ?>
-            <?php echo anchor(site_url('detail_pangan_keluarga/create/'.$id), 'Tambah Data', 'class="btn btn-success"'); ?>
-        <?php } ?>
+    <div class="row">
+        <div class="col-md-6 text-left">
+            <?php echo anchor(base_url('pangan_keluarga/data_pangan/'.$this->uri->segment(4)), ' <i class="material-icons">arrow_back</i> Kembali', 'class="btn btn-info"'); ?>
+        </div>
+        <div class="col-md-6 text-right">
+            <?php if ($this->session->userdata('auth')['status'] == 2) { ?>
+                <?php echo anchor(site_url('detail_pangan_keluarga/create/'.$id), 'Tambah Data', 'class="btn btn-success"'); ?>
+            <?php } ?>
+        </div>
     </div>
     <div class="card">
         <div class="card-header" data-background-color="green">
-            <h4 class="title">Pangan List</h4>
+            <h4 class="title">Daftar Pangan</h4>
         </div>
         <div class="card-content table-responsive">
             <table class="table" id="mytable">

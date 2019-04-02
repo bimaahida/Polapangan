@@ -14,7 +14,7 @@
     </div>
     <div class="card">
         <div class="card-header" data-background-color="green">
-            <h4 class="title">Pangan List</h4>
+            <h4 class="title">Daftar Pangan</h4>
         </div>
         <div class="card-content table-responsive">
             <table class="table" id="mytable">

@@ -14,7 +14,7 @@
 </div>
 <div class="card">
     <div class="card-header" data-background-color="green">
-        <h4 class="title">Keluarga List</h4>
+        <h4 class="title">Daftar Keluarga</h4>
     </div>
     <div class="card-content table-responsive">
         <table class="table" id="mytable">
@@ -23,7 +23,8 @@
                 <th width="80px">No</th>
                 <th>No Keluarga</th>
                 <th>Kepala Keluarga</th>
-                <th>Alamat</th>
+                <th>Kecamatan</th>
+                <th>Desa</th>
                 <th width="250px">Aksi</th>
             </tr>
             </thead>
@@ -67,7 +68,7 @@
                 {
                     "data": "id",
                     "orderable": false
-                },{"data": "no_keluarga"},{"data": "kepala_keluarga"},{"data": "alamat"},
+                },{"data": "no_keluarga"},{"data": "kepala_keluarga"},{"data": "kec"},{"data": "desa"},
                 {
                     "data" : "action",
                     "orderable": false,

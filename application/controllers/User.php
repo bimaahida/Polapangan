@@ -9,6 +9,7 @@ class User extends CI_Controller
     {
         parent::__construct();
         $this->load->model('User_model');
+        $this->load->model('User_keluarga_model');
         $this->load->library('form_validation');        
         $this->load->library('datatables');
         $this->render['page_title'] = 'User';
@@ -87,21 +88,33 @@ class User extends CI_Controller
             }
 
             $data = array(
-            'nik' => $this->input->post('nik',TRUE),
-            'nama' => $this->input->post('nama',TRUE),
-            'password' => md5($this->input->post('nik',TRUE)),
-            'tempat_lahir' => $this->input->post('tempat_lahir',TRUE),
-            'tgl_lahir' => $this->input->post('tgl_lahir',TRUE),
-            'jk' => $this->input->post('jk',TRUE),
-            'agama' => $this->input->post('agama',TRUE),
-            'pendidikan' => $this->input->post('pendidikan',TRUE),
-            'pekerjaan' => $this->input->post('pekerjaan',TRUE),
-            'status_id' => $status,
+                'nik' => $this->input->post('nik',TRUE),
+                'nama' => $this->input->post('nama',TRUE),
+                'password' => md5($this->input->post('nik',TRUE)),
+                'tempat_lahir' => $this->input->post('tempat_lahir',TRUE),
+                'tgl_lahir' => $this->input->post('tgl_lahir',TRUE),
+                'jk' => $this->input->post('jk',TRUE),
+                'agama' => $this->input->post('agama',TRUE),
+                'pendidikan' => $this->input->post('pendidikan',TRUE),
+                'pekerjaan' => $this->input->post('pekerjaan',TRUE),
+                'status_id' => $status,
             );
 
-            $this->User_model->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('user'));
+            $last_id = $this->User_model->insert($data);
+            // var_dump($last_id);
+            if(!empty($last_id)){
+                $data = array(
+                    'user_id' => $last_id,
+                    'keluarga_id' => $this->input->post('keluarga_id',TRUE),
+                    'hubungan' => $this->input->post('hubungan',TRUE),
+                );
+                $this->User_keluarga_model->insert($data);
+                $this->session->set_flashdata('message', 'Create Record Success');
+                redirect(site_url('user_keluarga/index/'.$this->input->post('keluarga_id',TRUE)));
+            }else{
+                $this->session->set_flashdata('message', 'Create Record Faild');
+                redirect(site_url('user_keluarga/index/'.$this->input->post('keluarga_id',TRUE)));
+            }
         }
     }
     

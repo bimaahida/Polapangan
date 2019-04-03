@@ -14,7 +14,7 @@
                     </div> -->
                     <div class="form-group label-floating">
                         <label for="varchar" class="control-label">Kepala Keluarga <?php echo form_error('kepala_keluarga') ?></label>
-                        <input type="text" class="form-control" name="kepala_keluarga" id="kepala_keluarga" value="<?php echo $kepala_keluarga; ?>" />
+                        <input type="text" class="form-control" name="kepala_keluarga" id="kepala_keluarga" value="<?php echo $kepala_keluarga; ?>" required/>
                     </div>
                     <!-- <div class="form-group ">
                         <label for="varchar" class="control-label">Alamat <?php echo form_error('alamat') ?></label>
@@ -30,11 +30,11 @@
                     </div> -->
                     <div class="form-group ">
                         <label for="varchar" class="control-label">Kecamatan <?php echo form_error('kec') ?></label>
-                        <input type="text" class="form-control" name="kec" id="kec"  value="<?php echo $kec; ?>" />
+                        <input type="text" class="form-control" name="kec" id="kec"  value="<?php echo $kec; ?>" required/>
                     </div>
                     <div class="form-group ">
                         <label for="varchar" class="control-label">Desa <?php echo form_error('desa') ?></label>
-                        <input type="text" class="form-control" name="desa" id="desa"  value="<?php echo $desa; ?>" />
+                        <input type="text" class="form-control" name="desa" id="desa"  value="<?php echo $desa; ?>" required/>
                     </div>
                     <!-- <div class="row">
                         <div class="col-md-4">
@@ -56,6 +56,34 @@
                             </div>
                         </div>
                     </div> -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="varchar" class="control-label">Minimal Gaji <?php echo form_error('min_gaji') ?></label>
+                                <input type="text" class="form-control" name="min_gaji" id="min_gaji" value="<?php echo $min_gaji; ?>" required/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="varchar" class="control-label">Maksimal Gaji <?php echo form_error('max_gaji') ?></label>
+                                <input type="text" class="form-control" name="max_gaji" id="max_gaji" value="<?php echo $max_gaji; ?>" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="varchar" class="control-label">Minimal Pengeluaran <?php echo form_error('min_pengeluaran') ?></label>
+                                <input type="text" class="form-control" name="min_pengeluaran" id="min_pengeluaran" value="<?php echo $min_pengeluaran; ?>" required/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="varchar" class="control-label">Maksimal Pengeluaran <?php echo form_error('max_pengeluaran') ?></label>
+                                <input type="text" class="form-control" name="max_pengeluaran" id="max_pengeluaran" value="<?php echo $max_pengeluaran; ?>" required/>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group ">
                         <label for="varchar" class="control-label">Responden</label>
                         <div class="checkbox">

@@ -36,6 +36,22 @@
             <td>Desa</td>
             <td><?php echo $desa; ?></td>
         </tr>
+        <tr>
+            <td>Minimal Gaji</td>
+            <td><?php echo $min_gaji; ?></td>
+        </tr>
+        <tr>
+            <td>Maksimal Gaji</td>
+            <td><?php echo $max_gaji; ?></td>
+        </tr>
+        <tr>
+            <td>Minimal Pengeluaran</td>
+            <td><?php echo $min_pengeluaran; ?></td>
+        </tr>
+        <tr>
+            <td>Maksimal Pengeluaran</td>
+            <td><?php echo $max_pengeluaran; ?></td>
+        </tr>
         <!-- <tr>
             <td>Rt</td>
             <td><?php echo $rt; ?></td>

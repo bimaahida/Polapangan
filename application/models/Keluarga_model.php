@@ -21,7 +21,7 @@ class Keluarga_model extends CI_Model
         $this->datatables->from('keluarga');
         //add this line for join
         //$this->datatables->join('table2', 'keluarga.field = table2.field');
-        $this->datatables->add_column('action', anchor(base_url('pangan_keluarga/data_pangan/$1'),'Pangan')." | ".anchor(base_url('user_keluarga/index/$1'),'Anggota')." | ".anchor(site_url('keluarga/update/$1'),'Perbarui')." | ".anchor(site_url('keluarga/delete/$1'),'Hapus','onclick="javasciprt: return confirm(\'Apakah anda yakin ?\')"'), 'id');
+        $this->datatables->add_column('action', anchor(base_url('pangan_keluarga/data_pangan/$1'),'Pangan')." | ".anchor(base_url('user_keluarga/index/$1'),'Anggota')." | ".anchor(base_url('keluarga/read/$1'),'Detail')." | ".anchor(site_url('keluarga/update/$1'),'Perbarui')." | ".anchor(site_url('keluarga/delete/$1'),'Hapus','onclick="javasciprt: return confirm(\'Apakah anda yakin ?\')"'), 'id');
         return $this->datatables->generate();
     }
     function json_penyuluh($penyuluh) {
@@ -30,7 +30,7 @@ class Keluarga_model extends CI_Model
         $this->datatables->where('penyuluh_id',$penyuluh);
         //add this line for join
         //$this->datatables->join('table2', 'keluarga.field = table2.field');
-        $this->datatables->add_column('action', anchor(base_url('pangan_keluarga/data_pangan/$1'),'Pangan')." | ".anchor(base_url('user_keluarga/index/$1'),'Anggota')." | ".anchor(site_url('keluarga/update/$1'),'Perbarui')." | ".anchor(site_url('keluarga/delete/$1'),'Hapus','onclick="javasciprt: return confirm(\'Apakah anda yakin ?\')"'), 'id');
+        $this->datatables->add_column('action', anchor(base_url('pangan_keluarga/data_pangan/$1'),'Pangan')." | ".anchor(base_url('user_keluarga/index/$1'),'Anggota')." | ".anchor(base_url('keluarga/read/$1'),'Detail')." | ".anchor(site_url('keluarga/update/$1'),'Perbarui')." | ".anchor(site_url('keluarga/delete/$1'),'Hapus','onclick="javasciprt: return confirm(\'Apakah anda yakin ?\')"'), 'id');
         return $this->datatables->generate();
     }
 

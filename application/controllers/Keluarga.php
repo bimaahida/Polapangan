@@ -115,6 +115,11 @@ class Keluarga extends CI_Controller
             'rt' => $row->rt,
             'rw' => $row->rw,
             'kode_pos' => $row->kode_pos,
+            'min_gaji' => $row->min_gaji,
+            'max_gaji' => $row->max_gaji,
+            'min_pengeluaran' => $row->min_pengluaran,
+            'max_pengeluaran' => $row->max_pengluaran,
+            
             );
             
             $config['center'] = "$row->latitude,$row->longitude";
@@ -155,6 +160,10 @@ class Keluarga extends CI_Controller
             'hamil' => set_value('hamil'),
             'menyusui' => set_value('menyusui'),
             'stunting' => set_value('stunting'),
+            'min_gaji' => set_value('min_gaji'),
+            'max_gaji' => set_value('max_gaji'),
+            'min_pengeluaran' => set_value('min_pengeluaran'),
+            'max_pengeluaran' => set_value('max_pengeluaran'),
             'penyuluh_id' =>set_value('penyuluh_id',$this->session->userdata('auth')['id'])
         );
         $this->render['content']= $this->load->view('keluarga/keluarga_form', $data, TRUE);
@@ -224,6 +233,10 @@ class Keluarga extends CI_Controller
                 'menyusui' => $sMenyusui,
                 'stunting' => $sStunting,
                 'penyuluh_id' => $this->input->post('penyuluh_id',TRUE),
+                'min_gaji' => $this->input->post('min_gaji',TRUE),
+                'max_gaji' => $this->input->post('max_gaji',TRUE),
+                'min_pengluaran' => $this->input->post('min_pengeluaran',TRUE),
+                'max_pengluaran' => $this->input->post('max_pengeluaran',TRUE),
             );
 
             $this->Keluarga_model->insert($data);
@@ -258,6 +271,10 @@ class Keluarga extends CI_Controller
                 'hamil' => set_value('hamil',$row->hamil),
                 'menyusui' => set_value('menyusui',$row->menyusui),
                 'stunting' => set_value('stunting',$row->stunting),
+                'min_gaji' => set_value('min_gaji',$row->min_gaji),
+                'max_gaji' => set_value('max_gaji',$row->max_gaji),
+                'min_pengeluaran' => set_value('min_pengeluaran',$row->min_pengluaran),
+                'max_pengeluaran' => set_value('max_pengeluaran',$row->max_pengluaran),
                 );
             $this->render['content']= $this->load->view('keluarga/keluarga_form', $data, TRUE);
             $this->load->view('template', $this->render);
@@ -327,6 +344,10 @@ class Keluarga extends CI_Controller
                 'hamil' => $sHamil,
                 'menyusui' => $sMenyusui,
                 'stunting' => $sStunting,
+                'min_gaji' => $this->input->post('min_gaji',TRUE),
+                'max_gaji' => $this->input->post('max_gaji',TRUE),
+                'min_pengluaran' => $this->input->post('min_pengeluaran',TRUE),
+                'max_pengluaran' => $this->input->post('max_pengeluaran',TRUE),
             );
 
             $this->Keluarga_model->update($this->input->post('id', TRUE), $data);

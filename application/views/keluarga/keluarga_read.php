@@ -8,10 +8,10 @@
     </div>
     <div class="card-content">
     <table class="table">
-        <tr>
+        <!-- <tr>
             <td>No Keluarga</td>
             <td><?php echo $no_keluarga; ?></td>
-        </tr>
+        </tr> -->
         <tr>
             <td>Kepala Keluarga</td>
             <td><?php echo $kepala_keluarga; ?></td>

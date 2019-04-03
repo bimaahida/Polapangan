@@ -66,7 +66,7 @@ class Detail_pangan_keluarga_model extends CI_Model
         $this->datatables->where('pangan_keluarga_id',$pangan);
         //add this line for join
         $this->datatables->join('pangan', 'detail_pangan_keluarga.pangan_id = pangan.id');
-        $this->datatables->add_column('action',anchor(site_url('detail_pangan_keluarga/update/$1/'.$pangan),'Perbarui')." | ".anchor(site_url('detail_pangan_keluarga/Hapus/$1/'.$pangan),'Delete','onclick="javasciprt: return confirm(\'Apakah Anda Yakin ?\')"'), 'id');
+        $this->datatables->add_column('action',anchor(site_url('detail_pangan_keluarga/update/$1/'.$pangan),'Perbarui')." | ".anchor(site_url('detail_pangan_keluarga/delete/$1/'.$pangan),'Hapus','onclick="javasciprt: return confirm(\'Apakah Anda Yakin ?\')"'), 'id');
         return $this->datatables->generate();
     }
 

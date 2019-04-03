@@ -170,8 +170,13 @@ class Detail_pangan_keluarga extends CI_Controller
     public function update_action($pangan) 
     {
         $this->load->model('Pangan_keluarga_model');
+        $this->load->model('Pangan_model');
         $pangan_detail = $this->Pangan_keluarga_model->get_by_id($this->input->post('pangan_keluarga_id',TRUE));
-        $rata =  $this->input->post('berat',TRUE) / $pangan_detail->jumlah_pemakan;
+        $pangan_data = $this->Pangan_model->get_by_id($this->input->post('pangan_id',TRUE));
+        $rata =  ( $pangan_data->gram * $this->input->post('urt',TRUE))  / $pangan_detail->jumlah_pemakan;
+
+        // $pangan_detail = $this->Pangan_keluarga_model->get_by_id($this->input->post('pangan_keluarga_id',TRUE));
+        // $rata =  $this->input->post('berat',TRUE) / $pangan_detail->jumlah_pemakan;
 
         $this->_rules();
 

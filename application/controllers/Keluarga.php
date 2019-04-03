@@ -216,7 +216,6 @@ class Keluarga extends CI_Controller
 
 
             $data = array(
-                'no_keluarga' => $this->input->post('no_keluarga',TRUE),
                 'kepala_keluarga' => $this->input->post('kepala_keluarga',TRUE),
                 'kec' => $this->input->post('kec',TRUE),
                 'desa' => $this->input->post('desa',TRUE),
@@ -321,7 +320,6 @@ class Keluarga extends CI_Controller
             }
 
             $data = array(
-                'no_keluarga' => $this->input->post('no_keluarga',TRUE),
                 'kepala_keluarga' => $this->input->post('kepala_keluarga',TRUE),
                 'kec' => $this->input->post('kec',TRUE),
                 'desa' => $this->input->post('desa',TRUE),
@@ -353,7 +351,7 @@ class Keluarga extends CI_Controller
 
     public function _rules() 
     {
-	$this->form_validation->set_rules('no_keluarga', 'no keluarga', 'trim|required');
+	// $this->form_validation->set_rules('no_keluarga', 'no keluarga', 'trim|required');
 	$this->form_validation->set_rules('kepala_keluarga', 'kepala keluarga', 'trim|required');
 	// $this->form_validation->set_rules('alamat', 'alamat', 'trim|required');
 	// $this->form_validation->set_rules('provinsi', 'provinsi', 'trim|required');

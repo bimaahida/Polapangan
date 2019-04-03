@@ -107,7 +107,7 @@ $acl = array(
     ),
     'user' => array(
 		'1'  => true,
-        '2' => false,
+        '2' => true,
         '3' => false,
     ),
 );

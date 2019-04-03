@@ -8,10 +8,10 @@
         <form action="<?php echo $action; ?>" method="post">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="form-group label-floating">
+                    <!-- <div class="form-group label-floating">
                         <label for="varchar" class="control-label">No Keluarga <?php echo form_error('no_keluarga') ?></label>
                         <input type="text" class="form-control" name="no_keluarga" id="no_keluarga" value="<?php echo $no_keluarga; ?>" />
-                    </div>
+                    </div> -->
                     <div class="form-group label-floating">
                         <label for="varchar" class="control-label">Kepala Keluarga <?php echo form_error('kepala_keluarga') ?></label>
                         <input type="text" class="form-control" name="kepala_keluarga" id="kepala_keluarga" value="<?php echo $kepala_keluarga; ?>" />

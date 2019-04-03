@@ -21,7 +21,6 @@
             <thead class="text-primary">
             <tr>
                 <th width="80px">No</th>
-                <th>No Keluarga</th>
                 <th>Kepala Keluarga</th>
                 <th>Kecamatan</th>
                 <th>Desa</th>
@@ -68,7 +67,7 @@
                 {
                     "data": "id",
                     "orderable": false
-                },{"data": "no_keluarga"},{"data": "kepala_keluarga"},{"data": "kec"},{"data": "desa"},
+                },{"data": "kepala_keluarga"},{"data": "kec"},{"data": "desa"},
                 {
                     "data" : "action",
                     "orderable": false,

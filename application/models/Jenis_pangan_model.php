@@ -21,7 +21,7 @@ class Jenis_pangan_model extends CI_Model
         $this->datatables->from('jenis_pangan');
         //add this line for join
         //$this->datatables->join('table2', 'jenis_pangan.field = table2.field');
-        $this->datatables->add_column('action', anchor(site_url('jenis_pangan/update/$1'),'Perbarui')." | ".anchor(site_url('jenis_pangan/Hapus/$1'),'Delete','onclick="javasciprt: return confirm(\'Apakah Anda Yakin ?\')"'), 'id');
+        $this->datatables->add_column('action', anchor(site_url('jenis_pangan/update/$1'),'Perbarui')." | ".anchor(site_url('jenis_pangan/delete/$1'),'Hapus','onclick="javasciprt: return confirm(\'Apakah Anda Yakin ?\')"'), 'id');
         return $this->datatables->generate();
     }
 

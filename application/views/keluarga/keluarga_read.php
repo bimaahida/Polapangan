@@ -1,4 +1,4 @@
-<?php echo $map['js']; ?>
+<!-- <?php echo $map['js']; ?> -->
 
 <div class="col-md-10">
 <div class="card">
@@ -16,7 +16,7 @@
             <td>Kepala Keluarga</td>
             <td><?php echo $kepala_keluarga; ?></td>
         </tr>
-        <tr>
+        <!-- <tr>
             <td>Alamat</td>
             <td><?php echo $alamat; ?></td>
         </tr>
@@ -27,7 +27,7 @@
         <tr>
             <td>Kab</td>
             <td><?php echo $kab; ?></td>
-        </tr>
+        </tr> -->
         <tr>
             <td>Kec</td>
             <td><?php echo $kec; ?></td>
@@ -36,7 +36,7 @@
             <td>Desa</td>
             <td><?php echo $desa; ?></td>
         </tr>
-        <tr>
+        <!-- <tr>
             <td>Rt</td>
             <td><?php echo $rt; ?></td>
         </tr>
@@ -47,15 +47,14 @@
         <tr>
             <td>Kode Pos</td>
             <td><?php echo $kode_pos; ?></td>
-        </tr>
-        <tr>
+        </tr> -->
+        <!-- <tr>
             <?php echo $map['html']; ?>
-        </tr>
+        </tr> -->
     </table>
     <div class="text-right">
         <a href="<?php echo site_url('keluarga') ?>" class="btn btn-danger"><i class="material-icons">arrow_back</i> Batal</a>
     </div>
-    
     </div>
 </div>
 </div>

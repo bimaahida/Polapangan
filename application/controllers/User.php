@@ -8,6 +8,17 @@ class User extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->library('acl');
+        
+        $data = $this->session->userdata('auth');
+        $status = $data['status'];
+        if (! $this->acl->is_public('user'))
+        {
+            if (! $this->acl->is_allowed('user', $status))
+            {
+                redirect('auth/logout','refresh');
+            }
+        }
         $this->load->model('User_model');
         $this->load->model('User_keluarga_model');
         $this->load->library('form_validation');        

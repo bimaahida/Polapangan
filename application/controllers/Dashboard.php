@@ -11,6 +11,19 @@ class Dashboard extends CI_Controller
     function __construct()
     {
         parent::__construct();
+
+        $this->load->library('acl');
+        
+        $data = $this->session->userdata('auth');
+        $status = $data['status'];
+        if (! $this->acl->is_public('dashboard'))
+        {
+            if (! $this->acl->is_allowed('dashboard', $status))
+            {
+                redirect('auth/logout','refresh');
+            }
+        }
+
         $this->load->model('Detail_pangan_keluarga_model');
         $this->render['page_title'] = 'Dashboard';
         $this->render['menus'] = 'Dashboard';

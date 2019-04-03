@@ -8,6 +8,17 @@ class User_keluarga extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->library('acl');
+        
+        $data = $this->session->userdata('auth');
+        $status = $data['status'];
+        if (! $this->acl->is_public('user_keluarga'))
+        {
+            if (! $this->acl->is_allowed('user_keluarga', $status))
+            {
+                redirect('auth/logout','refresh');
+            }
+        }
         $this->load->model('User_keluarga_model');
         $this->load->library('form_validation');        
         $this->load->library('datatables');

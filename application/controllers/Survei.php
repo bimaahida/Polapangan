@@ -8,6 +8,17 @@ class Survei extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->library('acl');
+        
+        $data = $this->session->userdata('auth');
+        $status = $data['status'];
+        if (! $this->acl->is_public('survei'))
+        {
+            if (! $this->acl->is_allowed('survei', $status))
+            {
+                redirect('auth/logout','refresh');
+            }
+        }
         $this->load->model('Survei_model');
         $this->load->library('form_validation');        
         $this->load->library('datatables');

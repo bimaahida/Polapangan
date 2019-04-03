@@ -8,6 +8,18 @@ class Detail_pangan_keluarga extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        
+        $this->load->library('acl');
+        
+        $data = $this->session->userdata('auth');
+        $status = $data['status'];
+        if (! $this->acl->is_public('detail_pangan_keluarga'))
+        {
+            if (! $this->acl->is_allowed('detail_pangan_keluarga', $status))
+            {
+                redirect('auth/logout','refresh');
+            }
+        }
         $this->load->model('Detail_pangan_keluarga_model');
         $this->load->library('form_validation');        
         $this->load->library('datatables');

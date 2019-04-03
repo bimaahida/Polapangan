@@ -8,6 +8,17 @@ class Keluarga extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->library('acl');
+        
+        $data = $this->session->userdata('auth');
+        $status = $data['status'];
+        if (! $this->acl->is_public('keluarga'))
+        {
+            if (! $this->acl->is_allowed('keluarga', $status))
+            {
+                redirect('auth/logout','refresh');
+            }
+        }
         $this->load->model('Keluarga_model');
         $this->load->library('form_validation');        
         $this->load->library('datatables');

@@ -9,6 +9,18 @@ class Jenis_pangan extends CI_Controller
     function __construct()
     {
         parent::__construct();
+
+        $this->load->library('acl');
+        
+        $data = $this->session->userdata('auth');
+        $status = $data['status'];
+        if (! $this->acl->is_public('jenis_pangan'))
+        {
+            if (! $this->acl->is_allowed('jenis_pangan', $status))
+            {
+                redirect('auth/logout','refresh');
+            }
+        }
         $this->load->model('Jenis_pangan_model');
         $this->load->library('form_validation');        
         $this->load->library('datatables');

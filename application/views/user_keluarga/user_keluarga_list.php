@@ -33,7 +33,7 @@
                 <th>Pendidikan</th>
                 <th>Pekerjaan</th>
                 <th>Hubungan</th>
-                <th width="200px">Action</th>
+                <th width="200px">Aksi</th>
             </tr>
             </thead>
         </table>

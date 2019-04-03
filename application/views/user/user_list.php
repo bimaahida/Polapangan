@@ -24,7 +24,7 @@
                     <th>Tempat Lahir</th>
                     <th>Tanggal Lahir</th>
                     <th>Jenis Kelamin</th>
-                    <th width="200px">Action</th>
+                    <th width="200px">Aksi</th>
                 </tr>
             </thead>
         </table>

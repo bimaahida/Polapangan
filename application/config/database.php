@@ -75,13 +75,13 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	// 'hostname' => '153.92.4.144',
-	// 'username' => 'pola_pangan',
-	// 'password' => 'pola_pangan',
 	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => '',
 	'database' => 'kabupatenmalang',
+	// 'username' => 'u5863052_repang',
+	// 'password' => 'repang123!',
+	// 'database' => 'u5863052_repang',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

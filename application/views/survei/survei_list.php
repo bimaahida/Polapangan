@@ -20,7 +20,7 @@
                 <tr>
                     <th width="80px">No</th>
                     <th>Keluarga</th>
-                    <th width="200px">Action</th>
+                    <th width="200px">Aksi</th>
                 </tr>
                 </thead>
             </table>

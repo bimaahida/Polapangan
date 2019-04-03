@@ -23,7 +23,7 @@ class Detail_pangan_keluarga extends CI_Controller
         $this->load->model('Detail_pangan_keluarga_model');
         $this->load->library('form_validation');        
         $this->load->library('datatables');
-        $this->render['page_title'] = 'Detail Pangan Keluarga';
+        $this->render['page_title'] = 'Detail Makanan & Minuman Keluarga';
         $this->render['menus'] = 'keluarga';
     }
 
@@ -137,7 +137,7 @@ class Detail_pangan_keluarga extends CI_Controller
             $this->Detail_pangan_keluarga_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
             var_dump($pangan);
-            redirect(site_url('detail_pangan_keluarga/detail_pangan/'.$pangan));
+            redirect(site_url('detail_pangan_keluarga/detail_pangan/'.$pangan.'/'.$this->input->post('id_pangan',TRUE)));
         }
     }
     
@@ -189,7 +189,7 @@ class Detail_pangan_keluarga extends CI_Controller
 
             $this->Detail_pangan_keluarga_model->update($this->input->post('id', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('detail_pangan_keluarga/detail_pangan/'.$pangan));
+            redirect(site_url('detail_pangan_keluarga/detail_pangan/'.$pangan.'/'.$this->input->post('id_pangan',TRUE)));
         }
     }
     

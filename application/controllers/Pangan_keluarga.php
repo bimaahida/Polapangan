@@ -22,7 +22,7 @@ class Pangan_keluarga extends CI_Controller
         $this->load->model('Pangan_keluarga_model');
         $this->load->library('form_validation');        
         $this->load->library('datatables');
-        $this->render['page_title'] = 'Pangan Keluarga';
+        $this->render['page_title'] = 'Makanan & Minuman Keluarga';
         $this->render['menus'] = 'keluarga';
     }
 

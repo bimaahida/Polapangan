@@ -1,7 +1,7 @@
 <div class="col-md-10">
     <div class="card">
         <div class="card-header" data-background-color="green">
-            <h4 class="title"><?php echo $button ?> Pangan</h4>
+            <h4 class="title"><?php echo $button ?> Makanan & Minuman</h4>
             <p class="category"><?= $id?></p>
         </div>
         <div class="card-content">
@@ -22,7 +22,7 @@
                         <div class="col-md-10">
                             <div class="form-group label-floating">
                                     <label for="double" >Urt <?php echo form_error('urt') ?></label>
-                                    <input type="text" class="form-control" name="urt" id="urt" value="<?php echo $urt; ?>" />
+                                    <input type="number" class="form-control" name="urt" id="urt" value="<?php echo $urt; ?>" />
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -47,8 +47,9 @@
                     </div>
                 <input type="hidden" name="id" value="<?php echo $id; ?>" /> 
                 <input type="hidden" name="pangan_keluarga_id" value="<?php echo $pangan_keluarga_id; ?>" /> 
+                <input type="hidden" name="id_pangan" value="<?php echo $this->uri->segment(4); ?>" /> 
                 <button type="submit" class="btn btn-warning pull-right"><?php echo $button ?></button> 
-                <a href="<?php echo site_url('detail_pangan_keluarga/list/'.$pangan_keluarga_id) ?>" class="btn btn-danger pull-right"><i class="material-icons">arrow_back</i> Batal</a>
+                <a href="<?php echo site_url('detail_pangan_keluarga/detail_pangan/'.$pangan_keluarga_id.'/'.$this->uri->segment(4)) ?>" class="btn btn-danger pull-right"><i class="material-icons">arrow_back</i> Batal</a>
                 <div class="clearfix"></div>
             </form>
         </div>

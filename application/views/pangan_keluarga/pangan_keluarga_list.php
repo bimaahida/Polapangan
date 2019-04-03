@@ -19,7 +19,7 @@
     </div>
     <div class="card">
         <div class="card-header" data-background-color="green">
-            <h4 class="title">Daftar Pangan</h4>
+            <h4 class="title">Daftar Makanan & Minuman Keluarga</h4>
         </div>
         <div class="card-content table-responsive">
             <table class="table" id="mytable">
@@ -30,7 +30,7 @@
                     <th>Tgl</th>
                     <th>Keterangan</th>
                     <th>Jumlah Pemakan</th>
-                    <th width="200px">Action</th>
+                    <th width="200px">Aksi</th>
                 </tr>
                 </thead>
             </table>

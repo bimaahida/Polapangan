@@ -24,7 +24,7 @@
                     <th>Nama</th>
                     <th>Takaran</th>
                     <th>Jenis Pangan</th>
-                    <th width="200px">Action</th>
+                    <th width="200px">Aksi</th>
                 </tr>
                 </thead>
             </table>

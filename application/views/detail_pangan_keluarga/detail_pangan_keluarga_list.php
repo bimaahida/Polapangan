@@ -12,13 +12,13 @@
         </div>
         <div class="col-md-6 text-right">
             <?php if ($this->session->userdata('auth')['status'] == 2) { ?>
-                <?php echo anchor(site_url('detail_pangan_keluarga/create/'.$id), 'Tambah Data', 'class="btn btn-success"'); ?>
+                <?php echo anchor(site_url('detail_pangan_keluarga/create/'.$id.'/'.$this->uri->segment(4)), '<i class="material-icons">add_box</i> Tambah Data', 'class="btn btn-success"'); ?>
             <?php } ?>
         </div>
     </div>
     <div class="card">
         <div class="card-header" data-background-color="green">
-            <h4 class="title">Daftar Pangan</h4>
+            <h4 class="title">Detail Makanan & Minuman</h4>
         </div>
         <div class="card-content table-responsive">
             <table class="table" id="mytable">

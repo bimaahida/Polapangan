@@ -22,7 +22,7 @@ class User_keluarga_model extends CI_Model
         $this->datatables->where('keluarga_id',$id);
         //add this line for join
         $this->datatables->join('user', 'user_keluarga.user_id = user.id');
-        $this->datatables->add_column('action', anchor(site_url('user_keluarga/delete/$1/'.$id),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
+        $this->datatables->add_column('action', anchor(site_url('user_keluarga/delete/$1/'.$id),'Hapus','onclick="javasciprt: return confirm(\'Apakah anda yakin ?\')"'), 'id');
         return $this->datatables->generate();
     }
 

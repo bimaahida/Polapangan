@@ -21,7 +21,7 @@ class User_model extends CI_Model
         $this->datatables->from('user');
         //add this line for join
         //$this->datatables->join('table2', 'user.field = table2.field');
-        $this->datatables->add_column('action', anchor(site_url('user/read/$1'),'Read')." | ".anchor(site_url('user/update/$1'),'Update')." | ".anchor(site_url('user/delete/$1'),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
+        $this->datatables->add_column('action', anchor(site_url('user/read/$1'),'Detail')." | ".anchor(site_url('user/update/$1'),'Perbarui')." | ".anchor(site_url('user/delete/$1'),'Hapus','onclick="javasciprt: return confirm(\'Apakah anda yakin ?\')"'), 'id');
         return $this->datatables->generate();
     }
     function json_penyuluh() {
@@ -30,7 +30,7 @@ class User_model extends CI_Model
         $this->datatables->where('status_id','3');
         //add this line for join
         //$this->datatables->join('table2', 'user.field = table2.field');
-        $this->datatables->add_column('action', anchor(site_url('user/read/$1'),'Read')." | ".anchor(site_url('user/update/$1'),'Update')." | ".anchor(site_url('user/delete/$1'),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
+        $this->datatables->add_column('action', anchor(site_url('user/read/$1'),'Detail')." | ".anchor(site_url('user/update/$1'),'Perbarui')." | ".anchor(site_url('user/delete/$1'),'Hapus','onclick="javasciprt: return confirm(\'Apakah anda yakin ?\')"'), 'id');
         return $this->datatables->generate();
     }
 

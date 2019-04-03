@@ -22,7 +22,7 @@ class Pangan_keluarga_model extends CI_Model
         $this->datatables->where('keluarga_id',$id);
         //add this line for join
         //$this->datatables->join('table2', 'pangan_keluarga.field = table2.field');
-        $this->datatables->add_column('action', anchor(site_url('detail_pangan_keluarga/detail_pangan/$1/'.$id),'Detail')." | ".anchor(site_url('pangan_keluarga/update/$1/'.$id),'Update')." | ".anchor(site_url('pangan_keluarga/delete/$1/'.$id),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
+        $this->datatables->add_column('action', anchor(site_url('detail_pangan_keluarga/detail_pangan/$1/'.$id),'Pangan')." | ".anchor(site_url('pangan_keluarga/update/$1/'.$id),'Perbarui')." | ".anchor(site_url('pangan_keluarga/delete/$1/'.$id),'Hapus','onclick="javasciprt: return confirm(\'Apakah anda yakin ?\')"'), 'id');
         return $this->datatables->generate();
     }
 

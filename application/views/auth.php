@@ -26,7 +26,7 @@
                 <!-- Login Form -->
                 <div class="loginForm">
                     <div class="title">
-                        <p>LOG INTO<br><span>SYSTEM</span></p>
+                        <p>LOG INTO<br><span>SIREPANG</span></p>
                         <hr>
                         <hr class="short">
                     </div>
@@ -40,8 +40,8 @@
                         </div>
                 </div>
                 <button class="enterButton">
-                        <i class="fa fa-lock fa-2x "></i><br>
-                        <span class="enterText ">Enter</span> </button>
+                    <i class="fa fa-lock fa-2x" style="color: white;"></i><br>
+                    <span class="enterText" style="color: white;">Masuk</span></button>
                 </form>
             </div>
         </div>

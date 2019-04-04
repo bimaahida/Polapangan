@@ -117,7 +117,8 @@
                             <li>
                                 <a href="<?= base_url()?>auth/logout" class="dropdown-toggle" >
                                     <i class="material-icons">person</i>
-                                    <p class="hidden-lg hidden-md">Profile</p>
+                                    <?php echo $this->session->userdata('auth')['nama']; ?>
+                                    <!-- <p class="hidden-lg hidden-md">Profile</p> -->
                                 </a>
                             </li>
                         </ul>

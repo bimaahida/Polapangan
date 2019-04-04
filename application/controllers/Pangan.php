@@ -32,6 +32,19 @@ class Pangan extends CI_Controller
         $this->render['content']= $this->load->view('pangan/pangan_list',array(), TRUE);
         $this->load->view('template', $this->render);
     } 
+    public function get_autocomplate(){
+        if (isset($_GET['term'])) {
+            $result = $this->Pangan_model->get_by_name($_GET['term']);
+            if (count($result) > 0) {
+                foreach ($result as $row)
+                    $arr_result[] = array(
+                        'label' => $row->nama,
+                        'id'   => $row->id,
+                 );
+                    echo json_encode($arr_result);
+            }
+        }
+    }
     
     public function json() {
         header('Content-Type: application/json');

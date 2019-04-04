@@ -23,7 +23,7 @@ class Detail_pangan_keluarga extends CI_Controller
         $this->load->model('Detail_pangan_keluarga_model');
         $this->load->library('form_validation');        
         $this->load->library('datatables');
-        $this->render['page_title'] = 'Detail Makanan & Minuman Keluarga';
+        $this->render['page_title'] = 'Detail Makanan / Minuman';
         $this->render['menus'] = 'keluarga';
     }
 
@@ -107,7 +107,7 @@ class Detail_pangan_keluarga extends CI_Controller
             'asal' => set_value('asal'),
             'pangan_keluarga_id' => set_value('pangan_keluarga_id',$pangan),
             'pangan_id' => set_value('pangan_id'),
-            'pangan' => $this->Pangan_model->get_all()
+            'pangan' => set_value('pangan')
         );
         $this->render['content']= $this->load->view('detail_pangan_keluarga/detail_pangan_keluarga_form', $data, TRUE);
         $this->load->view('template', $this->render);
@@ -157,7 +157,7 @@ class Detail_pangan_keluarga extends CI_Controller
                 'rata_rata_berat' => set_value('rata_rata_berat', $row->rata_rata_berat),
                 'pangan_keluarga_id' => set_value('pangan_keluarga_id', $row->pangan_keluarga_id),
                 'pangan_id' => set_value('pangan_id', $row->pangan_id),
-                'pangan' => $this->Pangan_model->get_all()
+                'pangan' => $this->Pangan_model->get_by_id($row->pangan_id)->nama,
                 );
                 $this->render['content']= $this->load->view('detail_pangan_keluarga/detail_pangan_keluarga_form', $data, TRUE);
                 $this->load->view('template', $this->render);
@@ -185,7 +185,7 @@ class Detail_pangan_keluarga extends CI_Controller
         } else {
             $data = array(
             'urt' => $this->input->post('urt',TRUE),
-            'berat' => $this->input->post('berat',TRUE),
+            'berat' => $pangan_data->gram * $this->input->post('urt',TRUE),
             'asal' => $this->input->post('asal',TRUE),
             'rata_rata_berat' => $rata,
             'pangan_keluarga_id' => $this->input->post('pangan_keluarga_id',TRUE),

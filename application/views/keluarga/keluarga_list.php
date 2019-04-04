@@ -8,9 +8,9 @@
 ?>
 <div class="col-md-12 text-right">
     <?php if ($this->session->userdata('auth')['status'] == 2) { ?>
-        <?php echo anchor(base_url('keluarga/create'), '<i class="material-icons">add_box</i> Tambah Data', 'class="btn btn-success"'); ?>
+        <?php echo anchor(base_url('keluarga/create'), '<i class="material-icons">add_box</i> Tambah Data Keluarga', 'class="btn btn-success"'); ?>
     <?php } ?>
-    <?php echo anchor(base_url('keluarga/excel'), '<i class="material-icons">cloud_download</i> Excel', 'class="btn btn-info"'); ?>
+    <?php echo anchor(base_url('keluarga/excel'), '<i class="material-icons">cloud_download</i> Excel', 'class="btn btn-warning"'); ?>
 </div>
 <div class="card">
     <div class="card-header" data-background-color="green">

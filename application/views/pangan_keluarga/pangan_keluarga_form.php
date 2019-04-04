@@ -1,7 +1,7 @@
 <div class="col-md-10">
     <div class="card">
         <div class="card-header" data-background-color="green">
-            <h4 class="title"><?php echo $button ?> Makanan & Minuman Keluarga</h4>
+            <h4 class="title"><?php echo $button ?> Makanan / Minuman Keluarga</h4>
             <p class="category"><?= $nama?></p>
         </div>
         <div class="card-content">
@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group label-floating">
-                            <label for="varchar"  class="control-label">Nama <?php echo form_error('nama') ?></label>
+                            <label for="varchar"  class="control-label">Nama Menu Makanan / Minuman <?php echo form_error('nama') ?></label>
                             <input type="text" class="form-control" name="nama" id="nama" value="<?php echo $nama; ?>" required/>
                         </div>
                     </div>
@@ -26,7 +26,7 @@
                     <div class="col-md-12">
                         <div class="form-group label-floating">
                             <label for="int" class="control-label">Jumlah Pemakan <?php echo form_error('jumlah_pemakan') ?></label>
-                            <input type="text" class="form-control" name="jumlah_pemakan" id="jumlah_pemakan" value="<?php echo $jumlah_pemakan; ?>" required/>
+                            <input type="number" class="form-control" name="jumlah_pemakan" id="jumlah_pemakan" value="<?php echo $jumlah_pemakan; ?>" required/>
                         </div>
                     </div>
                 </div>
@@ -45,8 +45,8 @@
                 <input type="hidden" name="id" value="<?php echo $id; ?>" /> 
                 <input type="hidden" name="jumlah_pemakan_lama" value="<?php echo $jumlah_pemakan; ?>" /> 
                 <input type="hidden" name="keluarga_id" value="<?php echo $keluarga_id; ?>" /> 
-                <button type="submit" class="btn btn-warning pull-right"><?php echo $button ?></button> 
-                <a href="<?php echo site_url('pangan_keluarga/data_pangan/'.$keluarga_id) ?>" class="btn btn-danger pull-right">Batal</a>
+                <button type="submit" class="btn btn-primary pull-right"><?php echo $button ?></button> 
+                <a href="<?php echo site_url('pangan_keluarga/data_pangan/'.$keluarga_id) ?>" class="btn btn-danger pull-right"><i class="material-icons">arrow_back</i>Batal</a>
                 <div class="clearfix"></div>
             </form>
         </div>

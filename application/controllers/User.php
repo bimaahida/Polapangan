@@ -80,6 +80,7 @@ class User extends CI_Controller
             'pendidikan' => set_value('pendidikan'),
             'pekerjaan' => set_value('pekerjaan'),
             'status_id' => set_value('status_id'),
+            'keterangan' => set_value('keterangan'),
         );
         $this->render['content']= $this->load->view('user/user_form', $data, TRUE);
         $this->load->view('template', $this->render);
@@ -98,18 +99,33 @@ class User extends CI_Controller
                 $status = 3;
             }
 
-            $data = array(
-                'nik' => $this->input->post('nik',TRUE),
-                'nama' => $this->input->post('nama',TRUE),
-                'password' => md5($this->input->post('nik',TRUE)),
-                'tempat_lahir' => $this->input->post('tempat_lahir',TRUE),
-                'tgl_lahir' => $this->input->post('tgl_lahir',TRUE),
-                'jk' => $this->input->post('jk',TRUE),
-                'agama' => $this->input->post('agama',TRUE),
-                'pendidikan' => $this->input->post('pendidikan',TRUE),
-                'pekerjaan' => $this->input->post('pekerjaan',TRUE),
-                'status_id' => $status,
-            );
+            if(!empty($this->input->post('keterangan',TRUE))){
+                $data = array(
+                    'nik' => $this->input->post('nik',TRUE),
+                    'nama' => $this->input->post('nama',TRUE),
+                    'password' => md5($this->input->post('nik',TRUE)),
+                    'tempat_lahir' => $this->input->post('tempat_lahir',TRUE),
+                    'tgl_lahir' => $this->input->post('tgl_lahir',TRUE),
+                    'jk' => $this->input->post('jk',TRUE),
+                    'pendidikan' => $this->input->post('pendidikan',TRUE),
+                    'pekerjaan' => $this->input->post('pekerjaan',TRUE),
+                    'status_id' => $status,
+                    'keterangan' => $this->input->post('keterangan',TRUE),
+                );
+            }else{
+                $data = array(
+                    'nik' => $this->input->post('nik',TRUE),
+                    'nama' => $this->input->post('nama',TRUE),
+                    'password' => md5($this->input->post('nik',TRUE)),
+                    'tempat_lahir' => $this->input->post('tempat_lahir',TRUE),
+                    'tgl_lahir' => $this->input->post('tgl_lahir',TRUE),
+                    'jk' => $this->input->post('jk',TRUE),
+                    'agama' => $this->input->post('agama',TRUE),
+                    'pendidikan' => $this->input->post('pendidikan',TRUE),
+                    'pekerjaan' => $this->input->post('pekerjaan',TRUE),
+                    'status_id' => $status,
+                );
+            }
 
             $last_id = $this->User_model->insert($data);
             // var_dump($last_id);
@@ -117,7 +133,6 @@ class User extends CI_Controller
                 $data = array(
                     'user_id' => $last_id,
                     'keluarga_id' => $this->input->post('keluarga_id',TRUE),
-                    'hubungan' => $this->input->post('hubungan',TRUE),
                 );
                 $this->User_keluarga_model->insert($data);
                 $this->session->set_flashdata('message', 'Create Record Success');
@@ -147,6 +162,7 @@ class User extends CI_Controller
                 'pendidikan' => set_value('pendidikan', $row->pendidikan),
                 'pekerjaan' => set_value('pekerjaan', $row->pekerjaan),
                 'status_id' => set_value('status_id',$row->status_id),
+                'keterangan' => set_value('keterangan',$row->keterangan),
             );
             $this->render['content']= $this->load->view('user/user_form', $data, TRUE);
         $this->load->view('template', $this->render);
@@ -198,14 +214,14 @@ class User extends CI_Controller
 
     public function _rules() 
     {
-	$this->form_validation->set_rules('nik', 'nik', 'trim|required');
+	// $this->form_validation->set_rules('nik', 'nik', 'trim|required');
 	$this->form_validation->set_rules('nama', 'nama', 'trim|required');
-	$this->form_validation->set_rules('tempat_lahir', 'tempat lahir', 'trim|required');
-	$this->form_validation->set_rules('tgl_lahir', 'tgl lahir', 'trim|required');
+	// $this->form_validation->set_rules('tempat_lahir', 'tempat lahir', 'trim|required');
+	// $this->form_validation->set_rules('tgl_lahir', 'tgl lahir', 'trim|required');
 	$this->form_validation->set_rules('jk', 'jk', 'trim|required');
-	$this->form_validation->set_rules('agama', 'agama', 'trim|required');
-	$this->form_validation->set_rules('pendidikan', 'pendidikan', 'trim|required');
-	$this->form_validation->set_rules('pekerjaan', 'pekerjaan', 'trim|required');
+	// $this->form_validation->set_rules('agama', 'agama', 'trim|required');
+	// $this->form_validation->set_rules('pendidikan', 'pendidikan', 'trim|required');
+	// $this->form_validation->set_rules('pekerjaan', 'pekerjaan', 'trim|required');
 	$this->form_validation->set_rules('id', 'id', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }

@@ -14,7 +14,7 @@
     </div>
     <div class="card">
         <div class="card-header" data-background-color="green">
-            <h4 class="title">Daftar Pangan</h4>
+            <h4 class="title">Daftar Konversi Pangan</h4>
         </div>
         <div class="card-content table-responsive">
             <table class="table" id="mytable">
@@ -22,9 +22,11 @@
                 <tr>
                     <th width="80px">No</th>
                     <th>Nama</th>
+                    <th>Urt</th>
                     <th>Takaran</th>
-                    <th>Jenis Pangan</th>
-                    <th width="200px">Aksi</th>
+                    <th>Berat (Gram)</th>
+                    <th>Kalori (Kkal)</th>
+                    <th>Jenis Makanan</th>
                 </tr>
                 </thead>
             </table>
@@ -67,12 +69,7 @@
                 {
                     "data": "id",
                     "orderable": false
-                },{"data": "nama"},{"data": "takaran"},{"data": "jenis_pangan"},
-                {
-                    "data" : "action",
-                    "orderable": false,
-                    "className" : "text-center"
-                }
+                },{"data": "nama"},{"data": "urt"},{"data": "takaran"},{"data": "gram"},{"data": "kalori"},{"data": "jenis_pangan"},
             ],
             order: [[0, 'desc']],
             rowCallback: function(row, data, iDisplayIndex) {

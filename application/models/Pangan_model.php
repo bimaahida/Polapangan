@@ -8,7 +8,7 @@ class Pangan_model extends CI_Model
 
     public $table = 'pangan';
     public $id = 'pangan.id';
-    public $order = 'DESC';
+    public $order = 'ASC';
 
     function __construct()
     {
@@ -36,7 +36,7 @@ class Pangan_model extends CI_Model
     // get all
     function get_all()
     {
-        $this->db->order_by($this->id, $this->order);
+        $this->db->order_by('nama', $this->order);
         return $this->db->get($this->table)->result();
     }
 
@@ -47,6 +47,11 @@ class Pangan_model extends CI_Model
         $this->db->where($this->id, $id);
         $this->db->join('jenis_pangan', 'pangan.jenis_pangan_id = jenis_pangan.id');
         return $this->db->get($this->table)->row();
+    }
+    function get_by_name($params){
+        $this->db->like('nama', $params);
+        $this->db->order_by($this->id, $this->order);
+        return $this->db->get($this->table)->result();
     }
     
     // get total rows

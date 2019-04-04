@@ -60,13 +60,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="varchar" class="control-label">Minimal Gaji <?php echo form_error('min_gaji') ?></label>
-                                <input type="text" class="form-control" name="min_gaji" id="min_gaji" value="<?php echo $min_gaji; ?>" required/>
+                                <input type="number" class="form-control" name="min_gaji" id="min_gaji" value="<?php echo $min_gaji; ?>" required/>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="varchar" class="control-label">Maksimal Gaji <?php echo form_error('max_gaji') ?></label>
-                                <input type="text" class="form-control" name="max_gaji" id="max_gaji" value="<?php echo $max_gaji; ?>" required/>
+                                <input type="number" class="form-control" name="max_gaji" id="max_gaji" value="<?php echo $max_gaji; ?>" required/>
                             </div>
                         </div>
                     </div>
@@ -74,13 +74,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="varchar" class="control-label">Minimal Pengeluaran <?php echo form_error('min_pengeluaran') ?></label>
-                                <input type="text" class="form-control" name="min_pengeluaran" id="min_pengeluaran" value="<?php echo $min_pengeluaran; ?>" required/>
+                                <input type="number" class="form-control" name="min_pengeluaran" id="min_pengeluaran" value="<?php echo $min_pengeluaran; ?>" required/>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="varchar" class="control-label">Maksimal Pengeluaran <?php echo form_error('max_pengeluaran') ?></label>
-                                <input type="text" class="form-control" name="max_pengeluaran" id="max_pengeluaran" value="<?php echo $max_pengeluaran; ?>" required/>
+                                <input type="number" class="form-control" name="max_pengeluaran" id="max_pengeluaran" value="<?php echo $max_pengeluaran; ?>" required/>
                             </div>
                         </div>
                     </div>

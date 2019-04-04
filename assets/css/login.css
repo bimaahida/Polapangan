@@ -52,10 +52,12 @@ body {
 }
 
 .enterButton{
+	background-color: #27ae60;
+	border-style: groove;
 	position: absolute;
 	top: 660px; 
 	left: 330px;
-	width: 70px;
+	width: 80px;
 	height: 70px;
 	text-align: center;
 }

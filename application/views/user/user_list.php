@@ -19,7 +19,6 @@
             <thead class="text-primary">
                 <tr>
                     <th width="80px">No</th>
-                    <th>Nik</th>
                     <th>Nama</th>
                     <th>Tempat Lahir</th>
                     <th>Tanggal Lahir</th>
@@ -67,7 +66,7 @@
                         {
                             "data": "id",
                             "orderable": false
-                        },{"data": "nik"},{"data": "nama"},{"data": "tempat_lahir"},{"data": "tgl_lahir"},{"data": "jk"},
+                        },{"data": "nama"},{"data": "tempat_lahir"},{"data": "tgl_lahir"},{"data": "jk"},
                         {
                             "data" : "action",
                             "orderable": false,

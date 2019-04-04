@@ -8,31 +8,29 @@
 ?>
 <div class="row">
 <div class="col-md-6 text-left">
-    <?php echo anchor(base_url('keluarga'), ' <i class="material-icons">arrow_back</i> Kembali', 'class="btn btn-info"'); ?>
+    <?php echo anchor(base_url('keluarga'), ' <i class="material-icons">arrow_back</i> Kembali ke Daftar keluarga', 'class="btn btn-info"'); ?>
 </div>
 <div class="col-md-6 text-right">
     <?php if ($this->session->userdata('auth')['status'] == 2) { ?>
-        <?php echo anchor(base_url('user/create/'.$id), ' <i class="material-icons">add_box</i> Tambah Data', 'class="btn btn-success"'); ?>
+        <?php echo anchor(base_url('user/create/'.$id), ' <i class="material-icons">add_box</i> Tambah Data Anggota Keluarga', 'class="btn btn-success"'); ?>
     <?php } ?>
 </div>
 </div>
 <div class="card">
     <div class="card-header" data-background-color="green">
-        <h4 class="title">Daftar Anggota</h4>
+        <h4 class="title">Daftar Anggota Keluarga</h4>
     </div>
     <div class="card-content table-responsive">
         <table class="table" id="mytable">
             <thead class="text-primary">
             <tr>
                 <th width="80px">No</th>
-                <th>Nik</th>
                 <th>Nama</th>
                 <th>Jenis Kelamin</th>
                 <th>Umur</th>
-                <th>Agama</th>
                 <th>Pendidikan</th>
                 <th>Pekerjaan</th>
-                <th>Hubungan</th>
+                <!-- <th>Hubungan</th> -->
                 <th width="200px">Aksi</th>
             </tr>
             </thead>
@@ -76,7 +74,7 @@
                 {
                     "data": "id",
                     "orderable": false
-                },{"data": "nik"},{"data": "nama"},{"data": "jk"},{"data": "age"},{"data": "agama"},{"data": "pendidikan"},{"data": "pekerjaan"},{"data": "hubungan"},
+                },{"data": "nama"},{"data": "jk"},{"data": "age"},{"data": "pendidikan"},{"data": "pekerjaan"},
                 {
                     "data" : "action",
                     "orderable": false,

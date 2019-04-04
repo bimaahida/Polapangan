@@ -14,7 +14,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-12">
                         <div class="form-group label-floating">
                         <label for="varchar">Hubungan <?php echo form_error('hubungan') ?></label>
@@ -25,7 +25,7 @@
                         </select>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <input type="hidden" name="user_id" id="user_id" value="<?php echo $user_id; ?>" />
                 <input type="hidden" name="keluarga_id" id="keluarga_id" value="<?php echo $keluarga_id; ?>" />
                 <button type="submit" class="btn btn-warning pull-right"><?php echo $button ?></button> 

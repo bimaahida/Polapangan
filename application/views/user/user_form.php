@@ -1,20 +1,20 @@
 <div class="col-md-10">
 <div class="card">
     <div class="card-header" data-background-color="green">
-        <h4 class="title"><?php echo $button ?> User</h4>
+        <h4 class="title"><?php echo $button ?> Anggota Keluarga</h4>
         <p class="category"><?= $nama?></p>
     </div>
     <div class="card-content">
         <form action="<?php echo $action; ?>" method="post">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="form-group label-floating">
+                    <!-- <div class="form-group label-floating">
                         <label for="varchar" class="control-label">Nik <?php echo form_error('nik') ?></label>
-                        <input type="text" class="form-control" name="nik" id="nik" value="<?php echo $nik; ?>" />
-                    </div>
+                        <input type="text" class="form-control" name="nik" id="nik" value="<?php echo $nik; ?>" required/>
+                    </div> -->
                     <div class="form-group label-floating">
                         <label for="varchar" class="control-label">Nama <?php echo form_error('nama') ?></label>
-                        <input type="text" class="form-control" name="nama" id="nama" value="<?php echo $nama; ?>" />
+                        <input type="text" class="form-control" name="nama" id="nama" value="<?php echo $nama; ?>" required/>
                     </div>
                     <div class="form-group label-floating">
                         <label for="varchar" class="control-label">Tempat Lahir <?php echo form_error('tempat_lahir') ?></label>
@@ -22,18 +22,18 @@
                     </div>
                     <div class="form-group label-floating">
                         <label for="date" >Tanggal Lahir <?php echo form_error('tgl_lahir') ?></label>
-                        <input type="date" class="form-control" name="tgl_lahir" id="tgl_lahir" value="<?php echo $tgl_lahir; ?>" />
+                        <input type="date" class="form-control" name="tgl_lahir" id="tgl_lahir" value="<?php echo $tgl_lahir;?>" />
                     </div>
                     <div class="form-group label-floating">
                         <label for="varchar" class="control-label">Jenis Kelamin <?php echo form_error('jk') ?></label>
-                        <select class="form-control" name="jk" id="jk">
+                        <select class="form-control" name="jk" id="jk" required>
                             <option value="Pria" <?php if($jk == 'Pria') echo 'selected';?>>Pria</option>
                             <option value="Wanita" <?php if($jk == 'Wanita') echo 'selected';?>>Wanita</option>
                         </select>
                     </div>
-                    <div class="form-group label-floating">
+                    <!-- <div class="form-group label-floating">
                         <label for="varchar" class="control-label">Agama <?php echo form_error('agama') ?></label>
-                        <select class="form-control" name="agama" id="agama" >
+                        <select class="form-control" name="agama" id="agama">
                             <option value="Islam" <?php if($agama == 'Islam') echo 'selected';?>>Islam</option>
                             <option value="Kristen Protestan" <?php if($agama == 'Kristen Protestan') echo 'selected';?>>Kristen Protestan</option>
                             <option value="Katolik" <?php if($agama == 'Katolik') echo 'selected';?>>Katolik</option>
@@ -41,7 +41,7 @@
                             <option value="Buddha" <?php if($agama == 'Buddha') echo 'selected';?>>Buddha</option>
                             <option value="Kong Hu Cu" <?php if($agama == 'Kong Hu Cu') echo 'selected';?>>Kong Hu Cu</option>
                         </select>
-                    </div>
+                    </div> -->
                     <div class="form-group label-floating">
                         <label for="varchar" class="control-label">Pendidikan <?php echo form_error('pendidikan') ?></label>
                         <select class="form-control" name="pendidikan" id="pendidikan">
@@ -60,17 +60,17 @@
                         <label for="varchar" class="control-label">Pekerjaan <?php echo form_error('pekerjaan') ?></label>
                         <input type="text" class="form-control" name="pekerjaan" id="pekerjaan" value="<?php echo $pekerjaan; ?>" />
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group label-floating">
-                            <label for="varchar">Hubungan <?php echo form_error('hubungan') ?></label>
-                            <select name="hubungan" id="hubungan" class="form-control" >
-                                <option value="Suami">Suami</option>
-                                <option value="Istri">Istri</option>
-                                <option value="Anak">Anak</option>
-                            </select>
-                            </div>
-                        </div>
+                    <!-- <div class="form-group label-floating">
+                        <label for="varchar">Hubungan <?php echo form_error('hubungan') ?></label>
+                        <select name="hubungan" id="hubungan" class="form-control" >
+                            <option value="Suami">Suami</option>
+                            <option value="Istri">Istri</option>
+                            <option value="Anak">Anak</option>
+                        </select>
+                    </div> -->
+                    <div class="form-group label-floating">
+                        <label for="varchar" class="control-label">Keterangan (Hasil Wawancara)<?php echo form_error('pekerjaan') ?></label>
+                        <textarea name="keterangan" class="form-control" id="keterangan" cols="30" rows="3"><?php echo $keterangan; ?></textarea>
                     </div>
                     <?php if ($this->session->userdata('auth')['status'] == 1) { ?>
                         <div class="form-group label-floating">
@@ -78,6 +78,7 @@
                             <select name="status_id" id="status_id"  class="form-control" >
                                 <option value="1" <?php if ($status_id == 1) echo 'selected'; ?>>ADMIN</option>
                                 <option value="2" <?php if ($status_id == 2) echo 'selected'; ?>>PENYULUH</option>
+                                <option value="3" <?php if ($status_id == 3) echo 'selected'; ?>>MASARAKAT</option>
                             </select>
                         </div>
                     <?php } ?>
@@ -90,8 +91,8 @@
             <?php if($this->uri->segment(3)){ ?>
                 <input type="hidden" name="keluarga_id" value="<?php echo $this->uri->segment(3); ?>" /> 
             <?php }?>
-            <button type="submit" class="btn btn-warning pull-right"><?php echo $button ?></button> 
-            <a href="<?php echo site_url('user') ?>" class="btn btn-danger pull-right"><i class="material-icons">arrow_back</i> Batal</a>
+            <button type="submit" class="btn btn-primary pull-right"><?php echo $button ?></button> 
+            <a href="<?php echo site_url('user_keluarga/index/'.$this->uri->segment(3)) ?>" class="btn btn-danger pull-right"><i class="material-icons">arrow_back</i> Batal</a>
             <div class="clearfix"></div>
         </form>
     </div>

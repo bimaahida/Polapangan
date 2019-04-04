@@ -8,27 +8,28 @@
     ?>
     <div class="row">
         <div class="col-md-6 text-left">
-            <?php echo anchor(base_url('pangan_keluarga/data_pangan/'.$this->uri->segment(4)), ' <i class="material-icons">arrow_back</i> Kembali', 'class="btn btn-info"'); ?>
+            <?php echo anchor(base_url('pangan_keluarga/data_pangan/'.$this->uri->segment(4)), ' <i class="material-icons">arrow_back</i> Kembali Ke Menu Makanan', 'class="btn btn-info"'); ?>
         </div>
         <div class="col-md-6 text-right">
             <?php if ($this->session->userdata('auth')['status'] == 2) { ?>
-                <?php echo anchor(site_url('detail_pangan_keluarga/create/'.$id.'/'.$this->uri->segment(4)), '<i class="material-icons">add_box</i> Tambah Data', 'class="btn btn-success"'); ?>
+                <?php echo anchor(site_url('detail_pangan_keluarga/create/'.$id.'/'.$this->uri->segment(4)), '<i class="material-icons">add_box</i> Tambah Data Detail Pangan', 'class="btn btn-success"'); ?>
             <?php } ?>
         </div>
     </div>
     <div class="card">
         <div class="card-header" data-background-color="green">
-            <h4 class="title">Detail Makanan & Minuman</h4>
+            <h4 class="title">Detail Makanan / Minuman</h4>
         </div>
         <div class="card-content table-responsive">
             <table class="table" id="mytable">
                 <thead class="text-primary">
                 <th width="80px">No</th>
-                    <th>Urt</th>
-                    <th>Berat</th>
-                    <th>Asal</th>
-                    <th>Rata Rata Berat</th>
                     <th>Pangan</th>
+                    <th>Urt</th>
+                    <th>Takaran</th>
+                    <th>Berat (Gram)</th>
+                    <th>Asal</th>
+                    <th>Berat Tiap Pemakan (Gram)</th>
                     <th width="200px">Aksi</th>
                 </tr>
                 </thead>
@@ -72,7 +73,7 @@
                 {
                     "data": "id",
                     "orderable": false
-                },{"data": "urt"},{"data": "berat"},{"data": "asal"},{"data": "rata_rata_berat"},{"data": "nama"},
+                },{"data": "nama"},{"data": "urt"},{"data": "takaran"},{"data": "berat"},{"data": "asal"},{"data": "rata_rata_berat"},
                 {
                     "data" : "action",
                     "orderable": false,

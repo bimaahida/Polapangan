@@ -63,7 +63,7 @@ class User_model extends CI_Model
     // get data by id
     function get_by_id($id)
     {
-        $this->db->select('id,nik,nama,tempat_lahir,DATE_FORMAT(tgl_lahir, "%a %D %M %Y") as tgl_lahir,jk,agama,pendidikan,pekerjaan,tgl_lahir as lahir,status_id');
+        $this->db->select('id,nik,nama,tempat_lahir,DATE_FORMAT(tgl_lahir, "%a %D %M %Y") as tgl_lahir,jk,agama,pendidikan,pekerjaan,tgl_lahir as lahir,status_id,keterangan');
         $this->db->where($this->id, $id);
         return $this->db->get($this->table)->row();
     }

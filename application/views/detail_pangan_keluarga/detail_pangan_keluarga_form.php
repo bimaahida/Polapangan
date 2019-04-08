@@ -10,13 +10,12 @@
                     <div class="col-md-4">
                         <div class="form-group label-floating">
                             <label for="varchar">Pangan <?php echo form_error('pangan_id') ?></label>
-                            <input type="text" class="form-control" name="pangan" id="pangan" value="<?=$pangan?>"  placeholder="---- Pilih Jenis Pangan ----" required/>
-                            <!-- <select class="form-control" name="pangan_id" id="pangan_id" required>
-                                <option value="">---- Pilih Jenis Pangan ----</option>
+                            <select class="form-control selectpicker" data-live-search="true" name="pangan_id" id="pangan_id" required>
+                                <option data-tokens="" value="">---- Pilih Jenis Pangan ----</option>
                                 <?php foreach ($pangan as $key) { ?>
                                     <option value="<?= $key->id?>" <?php if($pangan_id == $key->id ){echo 'selected';} ?>><?= $key->nama ?></option>
                                 <?php } ?>
-                            </select> -->
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -48,7 +47,6 @@
                         </div>
                     </div>
                 <input type="hidden" name="id" value="<?php echo $id; ?>" /> 
-                <input type="hidden" name="pangan_id" id="pangan_id" value="<?php echo $pangan_id; ?>" /> 
                 <input type="hidden" name="pangan_keluarga_id" value="<?php echo $pangan_keluarga_id; ?>" /> 
                 <input type="hidden" name="id_pangan" value="<?php echo $this->uri->segment(4); ?>" /> 
                 <button type="submit" class="btn btn-primary pull-right"><?php echo $button ?></button> 
@@ -59,20 +57,12 @@
     </div>
 </div>
 <script>
-    $(document).ready(function(){
-        $('#pangan').autocomplete({
-            source: "<?php echo base_url('pangan/get_autocomplate');?>",
-            select: function (event, ui) {
-                $('#pangan').val(ui.item.label); 
-                $('#pangan_id').val(ui.item.id); 
-                $.get( "<?php echo base_url('Detail_pangan_keluarga/get_urt/');?>"+ui.item.id, function( data ) {
-                var encode_data = JSON.parse(data)
-                // console.log(encode_data);
-                $('#urt_detail').empty()
-                $('#urt_detail').append(encode_data.takaran)
-            });
-            }
-        });
-
+    $('#pangan_id').on('change', function() {
+        $.get( "<?php echo base_url('Detail_pangan_keluarga/get_urt/');?>"+this.value, function( data ) {
+            var encode_data = JSON.parse(data)
+            // console.log(encode_data);
+            $('#urt_detail').empty()
+            $('#urt_detail').append(encode_data.takaran)
+        })
     });
 </script>

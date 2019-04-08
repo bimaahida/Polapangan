@@ -30,11 +30,27 @@
                     </div> -->
                     <div class="form-group ">
                         <label for="varchar" class="control-label">Kecamatan <?php echo form_error('kec') ?></label>
-                        <input type="text" class="form-control" name="kec" id="kec"  value="<?php echo $kec; ?>" required/>
+                        <select class="form-control selectpicker" data-live-search="true" name="kec" id="kec" required>
+                            <option data-tokens="" value="">---- Pilih Kecamatan ----</option>
+                            <?php foreach ($kecamatan as $key) { ?>
+                                <option value="<?= $key->kec_id?>" <?php if($kec == $key->kec_id ){echo 'selected';} ?>><?= $key->kec_nama ?></option>
+                            <?php } ?>
+                        </select>
+                        <!-- <input type="text" class="form-control" name="kec" id="kec"  value="<?php echo $kec; ?>" required/> -->
                     </div>
                     <div class="form-group ">
                         <label for="varchar" class="control-label">Desa <?php echo form_error('desa') ?></label>
-                        <input type="text" class="form-control" name="desa" id="desa"  value="<?php echo $desa; ?>" required/>
+                        <select class="form-control selectpicker" data-live-search="true" name="desa" id="desa" required>
+                            <option data-tokens="" value="">---- Pilih Desa ----</option>
+                            <?php if($button == 'Perbarui' && count($desa_data) > 0){ ?>
+                                <option value="<?= $desa_data->id_desa?>" selected><?= $desa_data->nama_desa ?></option>
+                            <?php } ?>
+                        </select>
+                        <!-- <input type="text" class="form-control" name="desa" id="desa"  value="<?php echo $desa; ?>" required/> -->
+                    </div>
+                    <div class="form-group ">
+                        <label for="varchar" class="control-label">Jumlah Keluarga <?php echo form_error('jumlah_anggota') ?></label>
+                        <input type="number" class="form-control" name="jumlah_anggota" id="jumlah_anggota"  value="<?php echo $jumlah_anggota; ?>" required/>
                     </div>
                     <!-- <div class="row">
                         <div class="col-md-4">
@@ -59,13 +75,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="varchar" class="control-label">Minimal Gaji <?php echo form_error('min_gaji') ?></label>
+                                <label for="varchar" class="control-label">Minimal Pendapatan <?php echo form_error('min_gaji') ?></label>
                                 <input type="number" class="form-control" name="min_gaji" id="min_gaji" value="<?php echo $min_gaji; ?>" required/>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="varchar" class="control-label">Maksimal Gaji <?php echo form_error('max_gaji') ?></label>
+                                <label for="varchar" class="control-label">Maksimal Pendapatan <?php echo form_error('max_gaji') ?></label>
                                 <input type="number" class="form-control" name="max_gaji" id="max_gaji" value="<?php echo $max_gaji; ?>" required/>
                             </div>
                         </div>
@@ -113,19 +129,26 @@
     </div>
 </div>
 </div>
-<script type="text/javascript">
-    // $(document).ready(function(){
-    //     $('#kepala_keluarga').autocomplete({
-    //         source: "<?php echo base_url('Keluarga/get_autocomplete');?>",
-    //         select: function (event, ui) {
-    //             $('#kepala_keluarga').val(ui.item.label); 
-    //             $('#kepala_id').val(ui.item.id); 
-    //         }
-    //     });
-
-    // });
+<script>
+    $(document).ready(function() {
+        // $('#desa').prop('disabled', true);
+        $('#kec').on('change', function() {
+            $("#desa option").remove();
+            $.get( "<?php echo base_url('desa/get_by_kecamatan/');?>"+this.value, function( data ) {
+                var encode_data = JSON.parse(data)
+                $.each(encode_data, function(key,val) {
+                    var newOption = new Option(val.nama_desa, val.id_desa, false, false);
+                    $('#desa').append(newOption);
+                    $("#desa").selectpicker("refresh");
+                    console.log(newOption);
+                    
+                });
+                console.log(encode_data); 
+            })
+        });
+    });
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmBY0nTDRelXLlNUei_0SVEuogGzhQrvE&libraries=places&callback=initAutocomplete" async defer></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmBY0nTDRelXLlNUei_0SVEuogGzhQrvE&libraries=places&callback=initAutocomplete" async defer></script> -->
 <script>
       // This example displays an address form, using the autocomplete feature
       // of the Google Places API to help users fill in the information.

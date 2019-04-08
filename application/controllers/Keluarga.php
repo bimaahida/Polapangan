@@ -19,7 +19,9 @@ class Keluarga extends CI_Controller
                 redirect('auth/logout','refresh');
             }
         }
+        $this->load->model('Desa_model');
         $this->load->model('Keluarga_model');
+        $this->load->model('Kecamatan_model');
         $this->load->library('form_validation');        
         $this->load->library('datatables');
         
@@ -162,9 +164,11 @@ class Keluarga extends CI_Controller
             'stunting' => set_value('stunting'),
             'min_gaji' => set_value('min_gaji'),
             'max_gaji' => set_value('max_gaji'),
+            'jumlah_anggota' => set_value('jumlah_anggota'),
             'min_pengeluaran' => set_value('min_pengeluaran'),
             'max_pengeluaran' => set_value('max_pengeluaran'),
-            'penyuluh_id' =>set_value('penyuluh_id',$this->session->userdata('auth')['id'])
+            'penyuluh_id' =>set_value('penyuluh_id',$this->session->userdata('auth')['id']),
+            'kecamatan' => $this->Kecamatan_model->get_all(),
         );
         $this->render['content']= $this->load->view('keluarga/keluarga_form', $data, TRUE);
         $this->load->view('template', $this->render);
@@ -235,6 +239,7 @@ class Keluarga extends CI_Controller
                 'penyuluh_id' => $this->input->post('penyuluh_id',TRUE),
                 'min_gaji' => $this->input->post('min_gaji',TRUE),
                 'max_gaji' => $this->input->post('max_gaji',TRUE),
+                'jumlah_anggota' => $this->input->post('jumlah_anggota',TRUE),
                 'min_pengluaran' => $this->input->post('min_pengeluaran',TRUE),
                 'max_pengluaran' => $this->input->post('max_pengeluaran',TRUE),
             );
@@ -273,8 +278,11 @@ class Keluarga extends CI_Controller
                 'stunting' => set_value('stunting',$row->stunting),
                 'min_gaji' => set_value('min_gaji',$row->min_gaji),
                 'max_gaji' => set_value('max_gaji',$row->max_gaji),
+                'jumlah_anggota' => set_value('jumlah_anggota',$row->jumlah_anggota),
                 'min_pengeluaran' => set_value('min_pengeluaran',$row->min_pengluaran),
                 'max_pengeluaran' => set_value('max_pengeluaran',$row->max_pengluaran),
+                'kecamatan' => $this->Kecamatan_model->get_all(),
+                'desa_data' => $this->Desa_model->get_by_id($row->desa),
                 );
             $this->render['content']= $this->load->view('keluarga/keluarga_form', $data, TRUE);
             $this->load->view('template', $this->render);
@@ -346,6 +354,7 @@ class Keluarga extends CI_Controller
                 'stunting' => $sStunting,
                 'min_gaji' => $this->input->post('min_gaji',TRUE),
                 'max_gaji' => $this->input->post('max_gaji',TRUE),
+                'jumlah_anggota' => $this->input->post('jumlah_anggota',TRUE),
                 'min_pengluaran' => $this->input->post('min_pengeluaran',TRUE),
                 'max_pengluaran' => $this->input->post('max_pengeluaran',TRUE),
             );
@@ -373,7 +382,9 @@ class Keluarga extends CI_Controller
     public function _rules() 
     {
 	// $this->form_validation->set_rules('no_keluarga', 'no keluarga', 'trim|required');
-	$this->form_validation->set_rules('kepala_keluarga', 'kepala keluarga', 'trim|required');
+    $this->form_validation->set_rules('kepala_keluarga', 'kepala keluarga', 'trim|required');
+    $this->form_validation->set_rules('jumlah_anggota', 'Jumlah Anggota', 'trim|required');
+    
 	// $this->form_validation->set_rules('alamat', 'alamat', 'trim|required');
 	// $this->form_validation->set_rules('provinsi', 'provinsi', 'trim|required');
 	// $this->form_validation->set_rules('kab', 'kab', 'trim|required');

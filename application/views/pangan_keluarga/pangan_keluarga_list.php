@@ -29,7 +29,6 @@
                     <th>Nama</th>
                     <th>Tgl</th>
                     <th>Keterangan</th>
-                    <th>Jumlah Pemakan</th>
                     <th width="200px">Aksi</th>
                 </tr>
                 </thead>
@@ -73,7 +72,7 @@
                 {
                     "data": "id",
                     "orderable": false
-                },{"data": "nama"},{"data": "tgl"},{"data": "keterangan"},{"data": "jumlah_pemakan"},
+                },{"data": "nama"},{"data": "tgl"},{"data": "keterangan"},
                 {
                     "data" : "action",
                     "orderable": false,

@@ -22,14 +22,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-12">
                         <div class="form-group label-floating">
                             <label for="int" class="control-label">Jumlah Pemakan <?php echo form_error('jumlah_pemakan') ?></label>
                             <input type="number" class="form-control" name="jumlah_pemakan" id="jumlah_pemakan" value="<?php echo $jumlah_pemakan; ?>" required/>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="row">
                 <div class="col-md-12">
                     <div class="form-group label-floating">
@@ -42,6 +42,7 @@
                         </div>
                     </div>
                 </div>
+                <input type="hidden" class="form-control" name="jumlah_pemakan" id="jumlah_pemakan" value="1" required/>
                 <input type="hidden" name="id" value="<?php echo $id; ?>" /> 
                 <input type="hidden" name="jumlah_pemakan_lama" value="<?php echo $jumlah_pemakan; ?>" /> 
                 <input type="hidden" name="keluarga_id" value="<?php echo $keluarga_id; ?>" /> 

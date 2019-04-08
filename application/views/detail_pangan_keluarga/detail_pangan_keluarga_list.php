@@ -29,7 +29,6 @@
                     <th>Takaran</th>
                     <th>Berat (Gram)</th>
                     <th>Asal</th>
-                    <th>Berat Tiap Pemakan (Gram)</th>
                     <th width="200px">Aksi</th>
                 </tr>
                 </thead>
@@ -73,7 +72,7 @@
                 {
                     "data": "id",
                     "orderable": false
-                },{"data": "nama"},{"data": "urt"},{"data": "takaran"},{"data": "berat"},{"data": "asal"},{"data": "rata_rata_berat"},
+                },{"data": "nama"},{"data": "urt"},{"data": "takaran"},{"data": "berat"},{"data": "asal"},
                 {
                     "data" : "action",
                     "orderable": false,

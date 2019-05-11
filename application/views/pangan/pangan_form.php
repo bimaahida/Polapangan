@@ -75,8 +75,8 @@
                     </div>
                 </div>
                 <input type="hidden" name="id" value="<?php echo $id; ?>" /> 
-                <button type="submit" class="btn btn-warning pull-right"><?php echo $button ?></button> 
-                <a href="<?php echo site_url('jenis_pangan') ?>" class="btn btn-danger pull-right"><i class="material-icons">arrow_back</i> Batal</a>
+                <button type="submit" class="btn btn-primary pull-right"><?php echo $button ?></button> 
+                <a href="<?php echo site_url('pangan') ?>" class="btn btn-danger pull-right"><i class="material-icons">arrow_back</i> Batal</a>
                 <div class="clearfix"></div>
             </form>
         </div>

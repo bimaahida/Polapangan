@@ -7,12 +7,12 @@
     }
 ?>
 <div class="col-md-12 text-right">
-    <?php echo anchor(base_url('user/create'), '<i class="material-icons">add_box</i> Tambah Data', 'class="btn btn-success"'); ?>
-    <?php echo anchor(base_url('user/excel'), '<i class="material-icons">cloud_download</i> Excel', 'class="btn btn-info"'); ?>
+    <?php echo anchor(base_url('user/create'), '<i class="material-icons">add_box</i> Tambah Data Masyarakat', 'class="btn btn-success"'); ?>
+    <?php echo anchor(base_url('user/excel'), '<i class="material-icons">cloud_download</i> Excel', 'class="btn btn-warning"'); ?>
 </div>
 <div class="card">
     <div class="card-header" data-background-color="green">
-        <h4 class="title">Daftar Pangan</h4>
+        <h4 class="title">Daftar Masyarakat</h4>
     </div>
     <div class="card-content table-responsive">
         <table class="table" id="mytable">

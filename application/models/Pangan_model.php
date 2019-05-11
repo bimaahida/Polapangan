@@ -21,7 +21,7 @@ class Pangan_model extends CI_Model
         $this->datatables->from('pangan');
         //add this line for join
         $this->datatables->join('jenis_pangan', 'pangan.jenis_pangan_id = jenis_pangan.id');
-        $this->datatables->add_column('action', anchor(site_url('pangan/read/$1'),'Detail')." | ".anchor(site_url('pangan/update/$1'),'Perbarui')." | ".anchor(site_url('pangan/delete/$1'),'Hapus','onclick="javasciprt: return confirm(\'Apakah anda yakin ?\')"'), 'id');
+        $this->datatables->add_column('action', anchor(site_url('pangan/read/$1'),'Detail')." | ".anchor(site_url('pangan/update/$1'),'Ubah')." | ".anchor(site_url('pangan/delete/$1'),'Hapus','onclick="javasciprt: return confirm(\'Apakah anda yakin ?\')"'), 'id');
         return $this->datatables->generate();
     }
     function json_penyuluh() {

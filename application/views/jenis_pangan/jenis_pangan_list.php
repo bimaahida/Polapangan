@@ -7,12 +7,12 @@
         }
     ?>
     <div class="col-md-12 text-right">
-        <?php echo anchor(site_url('jenis_pangan/create'), '<i class="material-icons">add_box</i> Tambah Data', 'class="btn btn-success"'); ?>
-        <?php echo anchor(site_url('jenis_pangan/excel'), '<i class="material-icons">cloud_download</i> Excel', 'class="btn btn-info"'); ?>
+        <?php echo anchor(site_url('jenis_pangan/create'), '<i class="material-icons">add_box</i> Tambah Data Jenis Makanan', 'class="btn btn-success"'); ?>
+        <?php echo anchor(site_url('jenis_pangan/excel'), '<i class="material-icons">cloud_download</i> Excel', 'class="btn btn-warning"'); ?>
     </div>
     <div class="card">
         <div class="card-header" data-background-color="green">
-            <h4 class="title">Daftar Jenis Pangan</h4>
+            <h4 class="title">Daftar Jenis Makanan</h4>
         </div>
         <div class="card-content table-responsive">
             <table class="table" id="mytable">

@@ -1,7 +1,7 @@
 <div class="col-md-10">
     <div class="card">
         <div class="card-header" data-background-color="green">
-            <h4 class="title">Detail User</h4>
+            <h4 class="title">Detail Masyarakat</h4>
             <p class="category"><?= $nama ?></p>
         </div>
         <div class="card-content">

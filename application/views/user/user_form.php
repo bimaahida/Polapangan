@@ -72,7 +72,7 @@
                         <label for="varchar" class="control-label">Keterangan (Hasil Wawancara)<?php echo form_error('pekerjaan') ?></label>
                         <textarea name="keterangan" class="form-control" id="keterangan" cols="30" rows="3"><?php echo $keterangan; ?></textarea>
                     </div>
-                    <?php if ($this->session->userdata('auth')['status'] == 1) { ?>
+                    <!-- <?php if ($this->session->userdata('auth')['status'] == 1) { ?>
                         <div class="form-group label-floating">
                             <label for="int">Status<?php echo form_error('status_id') ?></label>
                             <select name="status_id" id="status_id"  class="form-control" >
@@ -81,7 +81,7 @@
                                 <option value="3" <?php if ($status_id == 3) echo 'selected'; ?>>MASARAKAT</option>
                             </select>
                         </div>
-                    <?php } ?>
+                    <?php } ?> -->
                 </div>
             </div>
             <input type="hidden" name="id" value="<?php echo $id; ?>" /> 

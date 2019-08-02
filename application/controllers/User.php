@@ -93,11 +93,11 @@ class User extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->create();
         } else {
-            if ($this->session->userdata('auth')['status'] == 1) {
-                $status = $this->input->post('status_id',TRUE);
-            }else{
-                $status = 3;
-            }
+            // if ($this->session->userdata('auth')['status'] == 1) {
+            //     $status = $this->input->post('status_id',TRUE);
+            // }else{
+            //     $status = 3;
+            // }
 
             if(!empty($this->input->post('keterangan',TRUE))){
                 $data = array(
@@ -109,7 +109,7 @@ class User extends CI_Controller
                     'jk' => $this->input->post('jk',TRUE),
                     'pendidikan' => $this->input->post('pendidikan',TRUE),
                     'pekerjaan' => $this->input->post('pekerjaan',TRUE),
-                    'status_id' => $status,
+                    'status_id' => '3',
                     'keterangan' => $this->input->post('keterangan',TRUE),
                 );
             }else{
@@ -123,7 +123,7 @@ class User extends CI_Controller
                     'agama' => $this->input->post('agama',TRUE),
                     'pendidikan' => $this->input->post('pendidikan',TRUE),
                     'pekerjaan' => $this->input->post('pekerjaan',TRUE),
-                    'status_id' => $status,
+                    'status_id' => '3',
                 );
             }
 

@@ -70,6 +70,12 @@
                                 <p>Masyarakat</p>
                             </a>
                         </li>
+                        <li <?php if ($menus == 'admin') {echo 'class="active"';}?>>
+                            <a href="<?= base_url()?>admin">
+                                <i class="material-icons">how_to_reg</i>
+                                <p>User</p>
+                            </a>
+                        </li>
                     <?php }?>
                     <li <?php if ($menus == 'keluarga') {echo 'class="active"';}?>>
                         <a href="<?= base_url()?>keluarga">

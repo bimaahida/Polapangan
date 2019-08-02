@@ -21,6 +21,7 @@ class Detail_pangan_keluarga extends CI_Controller
             }
         }
         $this->load->model('Detail_pangan_keluarga_model');
+        $this->load->model('Kecamatan_model');
         $this->load->library('form_validation');        
         $this->load->library('datatables');
         $this->render['page_title'] = 'Detail Makanan / Minuman';
@@ -45,8 +46,9 @@ class Detail_pangan_keluarga extends CI_Controller
         $tahun_awal = ($tahun+0) - 1;
         $start = $tahun_awal."-01-01";
         $end = $tahun."-12-31";
-        // var_dump($start);
-        $data = $this->Detail_pangan_keluarga_model->pph($start,$end);
+        $kec = $this->input->post('kec',TRUE);
+        $data = $this->Detail_pangan_keluarga_model->pph($start,$end,$kec);
+        // var_dump($data);
         $this->render['page_title'] = 'Pangan Harapan';
         $this->render['menus'] = 'pangan_harapan';
         $this->render['content']= $this->load->view('pangan_keluarga/pph_view',array('data'=> $data,'tahun' => $tahun), TRUE);
@@ -58,6 +60,7 @@ class Detail_pangan_keluarga extends CI_Controller
             'button' => 'Cari',
             'action' => site_url('Detail_pangan_keluarga/detail_view'),
             'id' => set_value('id'),
+            'kecamatan' => $this->Kecamatan_model->get_all(),
         );
         $this->render['page_title'] = 'Pangan Harapan';
         $this->render['menus'] = 'pangan_harapan';

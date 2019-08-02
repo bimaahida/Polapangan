@@ -19,6 +19,7 @@ class User_model extends CI_Model
     function json() {
         $this->datatables->select('id,nik,nama,password,tempat_lahir,DATE_FORMAT(tgl_lahir, "%a %D %M %Y") as tgl_lahir,jk,agama,pendidikan,pekerjaan,status_id');
         $this->datatables->from('user');
+        $this->datatables->where('status_id','3');
         //add this line for join
         //$this->datatables->join('table2', 'user.field = table2.field');
         $this->datatables->add_column('action', anchor(site_url('user/read/$1'),'Detail')." | ".anchor(site_url('user/update/$1'),'Ubah')." | ".anchor(site_url('user/delete/$1'),'Hapus','onclick="javasciprt: return confirm(\'Apakah anda yakin ?\')"'), 'id');
@@ -31,6 +32,16 @@ class User_model extends CI_Model
         //add this line for join
         //$this->datatables->join('table2', 'user.field = table2.field');
         $this->datatables->add_column('action', anchor(site_url('user/read/$1'),'Detail')." | ".anchor(site_url('user/update/$1'),'Ubah')." | ".anchor(site_url('user/delete/$1'),'Hapus','onclick="javasciprt: return confirm(\'Apakah anda yakin ?\')"'), 'id');
+        return $this->datatables->generate();
+    }
+    function jsonAdmin() {
+        $this->datatables->select('user.id,nik,user.nama,status_id,status.nama as status');
+        $this->datatables->from('user');
+        $this->datatables->where('status_id','2');
+        $this->datatables->or_where('status_id','1');
+        //add this line for join
+        $this->datatables->join('status', 'user.status_id = status.id');
+        $this->datatables->add_column('action', anchor(site_url('admin/update/$1'),'Ubah')." | ".anchor(site_url('admin/delete/$1'),'Hapus','onclick="javasciprt: return confirm(\'Apakah anda yakin ?\')"'), 'id');
         return $this->datatables->generate();
     }
 

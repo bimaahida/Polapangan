@@ -62,8 +62,12 @@ $acl = array(
 
 	'auth' => array(
 		'public'
-	),
-
+    ),
+    'admin'=> array(
+        '1'  => true,
+        '2' => false,
+        '3' => false,
+    ),
 	//transaksi
 	'dashboard' => array(
 		'1'  => true,

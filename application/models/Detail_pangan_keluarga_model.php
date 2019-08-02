@@ -15,18 +15,23 @@ class Detail_pangan_keluarga_model extends CI_Model
         parent::__construct();
     }
 
-    function pph($start,$end){
-        $this->db->select("pangan_keluarga.tgl,jenis_pangan.nama as jenis_pangan,jenis_pangan.bobot,jenis_pangan.skor_max,
+    function pph($start,$end,$kelurahan){
+        $this->db->select("pangan_keluarga.tgl,kec,jenis_pangan.nama as jenis_pangan,jenis_pangan.bobot,jenis_pangan.skor_max,
         SUM(pangan.kalori * detail_pangan_keluarga.urt /360) as EA,
         SUM(pangan.kalori * detail_pangan_keluarga.urt /360) * 100 /SUM(pangan.kalori * detail_pangan_keluarga.urt) as EA_porsen,
         SUM(pangan.kalori * detail_pangan_keluarga.urt /360) * 100/2400 as AKE,
         SUM(pangan.kalori * detail_pangan_keluarga.urt /360) * 100 /SUM(pangan.kalori * detail_pangan_keluarga.urt) * jenis_pangan.bobot AS sekor_aktual,
-        SUM(pangan.kalori * detail_pangan_keluarga.urt /360) * 100/2400 * jenis_pangan.bobot as skor_ake");
-        //$this->db->where('asal',$status);
+        SUM(pangan.kalori * detail_pangan_keluarga.urt /360) * 100/2400 * jenis_pangan.bobot as skor_ake,
+        SUM(pangan.protein * detail_pangan_keluarga.urt /360) * 100/2400 * jenis_pangan.bobot as skor_protein");
         $this->db->join('pangan ','pangan.id= detail_pangan_keluarga.pangan_id');
-        $this->db->join('jenis_pangan  ','pangan.jenis_pangan_id = jenis_pangan.id ');
-        $this->db->join('pangan_keluarga  ','pangan_keluarga.id = detail_pangan_keluarga.pangan_keluarga_id ');
+        $this->db->join('jenis_pangan  ','pangan.jenis_pangan_id = jenis_pangan.id');
+        $this->db->join('pangan_keluarga  ','pangan_keluarga.id = detail_pangan_keluarga.pangan_keluarga_id');
+        $this->db->join('keluarga  ','keluarga.id = pangan_keluarga.keluarga_id');
         $this->db->group_by('jenis_pangan.id');
+        if($kelurahan != 'all'){
+            $this->db->where('keluarga.kec',$kelurahan);
+        }
+        // $this->db->where('asal',$status);
         $this->db->where('pangan_keluarga.tgl >=',$start);
         $this->db->where('pangan_keluarga.tgl <=',$end);
         return $this->db->get($this->table)->result();
@@ -37,7 +42,9 @@ class Detail_pangan_keluarga_model extends CI_Model
         SUM(pangan.kalori * detail_pangan_keluarga.urt /360) * 100 /SUM(pangan.kalori * detail_pangan_keluarga.urt) as EA_porsen,
         SUM(pangan.kalori * detail_pangan_keluarga.urt /360) * 100/2400 as AKE,
         SUM(pangan.kalori * detail_pangan_keluarga.urt /360) * 100 /SUM(pangan.kalori * detail_pangan_keluarga.urt) * jenis_pangan.bobot AS sekor_aktual,
-        SUM(pangan.kalori * detail_pangan_keluarga.urt /360) * 100/2400 * jenis_pangan.bobot as skor_ake");
+        SUM(pangan.kalori * detail_pangan_keluarga.urt /360) * 100/2400 * jenis_pangan.bobot as skor_ake,
+        SUM(pangan.protein * detail_pangan_keluarga.urt /360) * 100/2400 * jenis_pangan.bobot as skor_protein");
+        
         $this->db->join('pangan ','pangan.id= detail_pangan_keluarga.pangan_id');
         $this->db->join('jenis_pangan  ','pangan.jenis_pangan_id = jenis_pangan.id');
         $this->db->join('pangan_keluarga  ','pangan_keluarga.id = detail_pangan_keluarga.pangan_keluarga_id');

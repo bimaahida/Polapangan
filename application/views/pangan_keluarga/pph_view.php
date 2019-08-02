@@ -20,10 +20,8 @@
                 </tr>
             </thead>
             <tbody>
-                <?php
-                $no = 1;
-                    foreach ($data as $key) {
-                ?>
+                <?php if(!empty($data)){$no = 1;
+                    foreach ($data as $key) {?>
                     <tr>
                         <td><?= $no?></td>
                         <td><?= $key->jenis_pangan?></td>
@@ -36,9 +34,11 @@
                         <td><?= round($key->skor_max,2)?></td>   
                         <td><?php if ($key->skor_max < $key->skor_ake) { echo round($key->skor_max,2); } else { echo round($key->skor_ake,2); }   ?></td>
                     </tr>
-                <?php
-                    $no++;}
-                ?>
+                <?php $no++;}}else{?>
+                    <tr>
+                        <td colspan="9" align="center">Data Tidak Ada</td>
+                    </tr>
+                <?php }?>
             </tbody>
         </table>
     

@@ -37,7 +37,7 @@ class Detail_pangan_keluarga extends CI_Controller
         $tahun_awal = ($tahun+0) - 1;
         $start = $tahun_awal."-01-01";
         $end = $tahun."-12-31";
-        $data = $this->Detail_pangan_keluarga_model->pph($start,$end);
+        $data = $this->Detail_pangan_keluarga_model->pph($start,$end,'all');
         $this->load->view('pangan_keluarga/pph', array('data'=> $data));
         
     }
